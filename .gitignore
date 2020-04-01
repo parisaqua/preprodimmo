@@ -11,6 +11,7 @@ public/media
 /.rsyncignore
 /update-preprod
 /connect
+/fbupdate
 /post-receive
 /config/secrets/prod/prod.decrypt.private.php
 /public/bundles/

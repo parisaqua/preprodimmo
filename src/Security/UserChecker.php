@@ -25,13 +25,8 @@ class UserChecker implements UserCheckerInterface
         // membre inactif
         if (!$user->getIsActive(true)) {
 
-          
             throw new AccountNotActivatedException("Votre compte n'est pas activé.");  
-        
-        
             // throw new \Exception("Ce compte est inactif");
-        
-    
          }
     }
    
