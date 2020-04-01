@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription au site{% endblock %}
+
+
+{% block body %}
+
+<div class="container">
+    <h2 class="my-5 text-secondary"><i class="fas fa-user-plus"></i>&nbsp;&nbsp;Inscrivez-vous sur notre site !</h2>
+
+    {{ form_start(form) }}
+
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col">
+                        <div class="alert alert-light"> 
+                            <div class="row align-items-center">
+                                <div class="col-md-2">{{ form_row(form.gender) }}</div>
+                                <div class="col-md-5">{{ form_row(form.firstName) }}</div>
+                                <div class="col-md-5">{{ form_row(form.lastName) }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    {{ form_row(form.email) }}
+                                </div>
+                            </div>
+                            <div class="row align-items-end">
+                                <div class="col-md-6"> {{ form_row(form.hash) }}</div>
+                                <div class="col-md-6"> {{ form_row(form.passwordConfirm) }}</div>
+                            </div>
+                            <div class="row align-items-center">
+                                <div class="col-md-7">{{ form_row(form.termsAccepted) }}</div>
+                                <div class="col-md-5"> <a class="btn btn-secondary" style="margin-left: -15px" href="{{ path('conditions.generales')}}">Voir les conditons</a></div>
+                            </div>
+                            <hr>
+                            <p class="text-center">Vous y êtes presque, confirmez votre inscription<br/> et rejoignez nous !</p>
+                            <button type="submit" class="btn btn-success btn-center"> <i class="fas fa-check"></i> Confirmer l'inscription</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+
+    {{ form_end(form) }}
+ 
+</div>
+
+{% endblock %}

@@ -1,0 +1,56 @@
+<div class="card border-primary mb-3" style="max-width: 30rem; display:block; margin:0 auto;">
+    <div class="card-header"> {{user.genderType}} {{user.firstName}} {{user.lastName|upper}}</div>
+    <div class="card-body">
+    <div class="row  text-center">
+        <div class="col-md-4">
+            {% if user.profile %}
+                {% if user.profile.imageName %}
+                <img alt="photo de {{ user.username }}" class="avatar" src=" {{  vich_uploader_asset(user.profile, 'imageFile') | imagine_filter('avatar') }}">
+                {% else %}
+                    {% if user.gender == 0 %}
+                        <img alt="photo de {{ user.fullName }}" class="avatar" src=" {{  '/images/male-avatar.png' | imagine_filter('avatar') }}" alt="Avatar du gestionnaire" title="{{ user.fullName }}">
+                    {% else %}
+                        <img alt="photo de {{ user.fullName }}" class="avatar" src=" {{  '/images/woman-avatar.png' | imagine_filter('avatar') }}" alt="Avatar du gestionnaire" title="{{ user.fullName }}">
+                    {% endif %}
+                {% endif %}
+            {% else %}
+            {% if user.gender == 0 %}
+                <img alt="photo de {{ user.fullName }}" class="avatar" src=" {{  '/images/male-avatar.png' | imagine_filter('avatar') }}" alt="Avatar du gestionnaire" title="{{ user.fullName }}">
+                {% else %}
+                    <img alt="photo de {{ user.fullName }}" class="avatar" src=" {{  '/images/woman-avatar.png' | imagine_filter('avatar') }}" alt="Avatar du gestionnaire" title="{{ user.fullName }}">
+                {% endif %}
+            {% endif %}
+            <hr>
+            {% for role in user.roles %}
+                {% if role == 'ROLE_ADMIN' %}
+                    <p><div class="role">Administrateur</div></p>
+                {% endif %}
+                {% if role == 'ROLE_PROPERTYMANAGER' %}
+                    <p><div class="role">Gestionnaire</div></p>
+                {% endif %}
+                {% if role == 'ROLE_PROPERTYOWNER' %}
+                    <p><div class="role">Propriétaire</div></p>
+                {% endif %}  
+            {% endfor %}
+        </div>
+        <div class="col-md-8 text-left">
+            <p class="card-title"><i class="fas fa-envelope text-info"></i>&nbsp;&nbsp;{{user.email}}</p>
+            <p class="card-title"><i class="fas fa-phone text-info"></i>&nbsp;&nbsp;{% if user.profile %} {% if user.profile.telephone %} {{user.profile.telephone}} {% else %} <span class="text-warning">Non renseigné</span> {% endif %} {% else %} <span class="text-warning">Non renseigné</span> {% endif %}</p>
+            <p class="card-title"><i class="fas fa-home text-info"></i>&nbsp;&nbsp;{% if user.profile %} {% if user.profile.city %} {{user.profile.city}} {% else %} <span class="text-warning">Non renseigné</span> {% endif %} {% else %} <span class="text-warning">Non renseigné</span> {% endif %}</p>
+          
+            <p class="card-text mt-2">
+                {% if user.profile %}
+                    {% if user.profile.description %}
+                        <p class="text-left text-info"><i class="fas fa-user text-info pr-2"></i>{{user.profile.description|nl2br }}</p> 
+                    {% else %}
+                        <p class="text-info">Présentez-vous en quelques mots. Cliquez sur " Modifier mon profil " !</p>
+                        <p class="text-center text-info h3"><i class="fas fa-angle-double-down"></i></p>
+                    {% endif %}
+                {% else %}
+                <span class="text-warning">Non renseigné</span>
+                {% endif %}
+            </p>
+        </div>
+    </div>
+    </div>
+</div>
