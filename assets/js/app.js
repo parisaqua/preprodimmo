@@ -160,4 +160,4 @@ window.previewFile  = function ()
 // Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
 // import $ from 'jquery';
 
-console.log('Connexion ok, Fred !');
+// console.log('Connexion ok, Fred !');
