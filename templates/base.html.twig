@@ -15,17 +15,18 @@
     <body class="bodyimmo">
         <div class="containerfb">
             {% include 'partials/header.html.twig' %}
-            {% for label, messages in app.flashes %} {# affichage des message success ou danger#}
-                    <div style="display: block; margin: 0px auto; max-width : 800px; ">
-                        <div id="alert1" class="alert alert-dismissible alert-{{ label }} m-4 ">
-                            {% for message in messages %}
-                                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                {{ message | raw }} {# filtre raw permet la prise en comte du code html documentation dans twig#}
-                            {% endfor %}
+            
+                {% for label, messages in app.flashes %} {# affichage des message success ou danger#}
+                        <div style="display: block; margin: 0px auto; max-width : 800px; ">
+                            <div id="alert1" class="alert alert-dismissible alert-{{ label }} m-4 ">
+                                {% for message in messages %}
+                                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                    {{ message | raw }} {# filtre raw permet la prise en comte du code html documentation dans twig#}
+                                {% endfor %}
+                            </div>
                         </div>
-                    </div>
-            {% endfor %}
-
+                {% endfor %}
+          
             {% block body %}
             
             
@@ -34,7 +35,6 @@
         </div>
         {% include 'partials/footer.html.twig' %}
 
-        {# <script src="/js/jquery.min.js"></script> #}
 
         <script
             src="https://code.jquery.com/jquery-3.4.1.js"
@@ -42,14 +42,9 @@
             crossorigin="anonymous">
         </script>
 
-
         <script src="/js/popper.min.js"></script>
         <script src="/js/bootstrap.min.js"></script>
         
-        {# <script src="/js/select2.min.js"></script> #}
-        {# <script>
-        $('select').select2();
-        </script> #}
 
         {% block javascripts %}
 
@@ -59,7 +54,7 @@
         $("document").ready(function(){
         setTimeout(function(){
         $("div#alert1").remove();
-        }, 4000 ); // 4 secs
+        }, 40000 ); // 4 secs
         });
         </script>
         

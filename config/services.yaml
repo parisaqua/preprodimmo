@@ -5,6 +5,8 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
         avatar_directory: '%kernel.project_dir%/public/media/users'
+
+
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -28,5 +30,10 @@ services:
     
     App\Listener\ImageCacheSubscriber:
         arguments: ['@vich_uploader.storage.file_system', '@liip_imagine.cache.manager']
+        tags:
+            - { name: kernel.event_subscriber }
+
+    App\Listener\DocumentSubscriber:
+        arguments: ['@vich_uploader.storage.file_system']
         tags:
             - { name: kernel.event_subscriber }

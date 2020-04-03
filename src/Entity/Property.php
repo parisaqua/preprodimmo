@@ -147,6 +147,19 @@ class Property
      */
     private $pictureFiles;
 
+     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Document", mappedBy="property", orphanRemoval=true, cascade={"persist"})
+     */
+    private $documents;
+
+    /**
+     *
+     * @Assert\All({
+     *  @Assert\Image(mimeTypes={ "application/pdf"  , "application/msword" , "application/vnd.openxmlformats-officedocument.wordprocessingml.document "})
+     * })
+     */
+    private $documentFiles;
+
     /**
      * @ORM\Column(type="float", scale=6, precision=8)
      */
@@ -162,6 +175,13 @@ class Property
      * @ORM\JoinColumn(nullable=false)
      */
     private $manager;
+
+    /**
+    * @ORM\Column(type="string", length=255, nullable=true)
+    * @var string|null
+    */
+    private $documentName;
+
 
 
     public function __construct() {
@@ -499,6 +519,75 @@ class Property
         return $this;
     }
 
+    /**
+     * @return Collection|Document[]
+     */
+    public function getDocuments(): Collection
+    {
+        return $this->documents;
+    }
+
+    public function getDocument(): ?Document {
+        
+        if($this->documents->isEmpty()) {
+            return null;
+        } 
+
+        return $this->documents->first();
+    }
+
+    public function addDocument(Document $document): self
+    {
+        if (!$this->documents->contains($document)) {
+            $this->documents[] = $document;
+            $document->setProperty($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDocument(Document $document): self
+    {
+        if ($this->documents->contains($document)) {
+            $this->documents->removeElement($document);
+            // set the owning side to null (unless already changed)
+            if ($document->getProperty() === $this) {
+                $document->setProperty(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     *
+     * @return mixed
+     */
+    public function getDocumentFiles() {
+        return $this->documentFiles;
+    }
+
+    /**
+     *
+     * @param mixed $documentFiles
+     * 
+     * @return Property
+     * 
+     */
+    public function setDocumentFiles($documentFiles): self {
+        
+        foreach($documentFiles as $documentFile) {
+            $document = new Document();
+            $document->setDocumentFile($documentFile);
+            $this->addDocument($document);
+            $this->updated_at = new \DateTime('now'); //test pour la mise à jour
+        }
+        
+        $this->documentFiles = $documentFiles;
+
+        return $this;
+    }
+
     public function getLat(): ?float
     {
         return $this->lat;
@@ -543,6 +632,18 @@ class Property
     public function isManager(User $user = null)
     {
         return $user && $user->getId() === $this->getManager()->getId();
+    }
+
+    public function getDocumentName(): ?string
+    {
+        return $this->documentName;
+    }
+
+    public function setDocumentName(?string $documentName): self
+    {
+        $this->documentName = $documentName;
+
+        return $this;
     }
 
 

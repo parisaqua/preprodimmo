@@ -50,15 +50,31 @@
         </div>
     </div>
     <div class="row align-items-end mb-5">
-        <div class="col-md-4">
+        <div class="col-md-3">
             {{ form_row(form.pictureFiles) }}
         </div>
-        <div class="col-md-8">
+        <div class="col-md-9">
             <div class="row flex justify-content-start flex-wrap">
                 {% for picture in property.pictures %}
                     <div class="col" style="width: 100px; flex: none; margin: 5px;">
                         <img src="{{ vich_uploader_asset(picture, 'imageFile') | imagine_filter('thumb') }}" width="100" alt="">
                         <a href="{{ path('picture.manager.delete', {id: picture.id}) }}" data-delete data-token="{{ csrf_token('delete' ~ picture.id )}}" class="btn btn-danger" style="display: block; width: 100px;" title="Supprimer"><i class="fas fa-times-circle"></i></a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="row align-items-end mb-5">
+        <div class="col-md-3">
+            {{ form_row(form.documentFiles) }}
+        </div>
+        <div class="col-md-9">
+            <div class="row flex justify-content-start flex-wrap">
+                {% for document in property.documents %}
+                    <div class="col" style="width: 100px; flex: none; margin: 5px;">
+                        <a href="{{ vich_uploader_asset(document, 'documentFile')}}" target="_blank"><i class="fas fa-file h4"></i></a>
+                        {# <img src="{{ vich_uploader_asset(picture, 'imageFile') | imagine_filter('thumb') }}" width="100" alt=""> #}
+                        <a href="{{ path('document.manager.delete', {id: document.id}) }}" data-delete data-token="{{ csrf_token('delete' ~ document.id )}}" class="btn btn-danger" style="display: block; width: 100px;" title="Supprimer"><i class="fas fa-times-circle"></i></a>
                     </div>
                 {% endfor %}
             </div>

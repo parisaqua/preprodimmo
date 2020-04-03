@@ -1,14 +1,14 @@
 {
-  "build/0.c33eb98f.css": "/build/0.c33eb98f.css",
-  "build/0.c9d40796.js": "/build/0.c9d40796.js",
-  "build/app.js": "/build/app.af3abb6e.js",
-  "build/runtime.js": "/build/runtime.af19f1f9.js",
-  "build/fonts/slick.woff": "/build/fonts/slick.b7c9e1e4.woff",
-  "build/fonts/slick.eot": "/build/fonts/slick.ced611da.eot",
-  "build/fonts/slick.ttf": "/build/fonts/slick.d41f55a7.ttf",
-  "build/images/ajax-loader.gif": "/build/images/ajax-loader.c5cd7f53.gif",
-  "build/images/layers-2x.png": "/build/images/layers-2x.4f0283c6.png",
-  "build/images/layers.png": "/build/images/layers.a6137456.png",
-  "build/images/marker-icon.png": "/build/images/marker-icon.2273e3d8.png",
-  "build/images/slick.svg": "/build/images/slick.f97e3bbf.svg"
+  "build/app.js": "http://localhost:8080/build/app.js",
+  "build/runtime.js": "http://localhost:8080/build/runtime.js",
+  "build/vendors~app.css": "http://localhost:8080/build/vendors~app.css",
+  "build/vendors~app.js": "http://localhost:8080/build/vendors~app.js",
+  "build/fonts/slick.woff": "http://localhost:8080/build/fonts/slick.b7c9e1e4.woff",
+  "build/fonts/slick.eot": "http://localhost:8080/build/fonts/slick.ced611da.eot",
+  "build/fonts/slick.ttf": "http://localhost:8080/build/fonts/slick.d41f55a7.ttf",
+  "build/images/ajax-loader.gif": "http://localhost:8080/build/images/ajax-loader.c5cd7f53.gif",
+  "build/images/layers-2x.png": "http://localhost:8080/build/images/layers-2x.4f0283c6.png",
+  "build/images/layers.png": "http://localhost:8080/build/images/layers.a6137456.png",
+  "build/images/marker-icon.png": "http://localhost:8080/build/images/marker-icon.2273e3d8.png",
+  "build/images/slick.svg": "http://localhost:8080/build/images/slick.f97e3bbf.svg"
 }

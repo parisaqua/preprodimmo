@@ -131,7 +131,11 @@
     </div>
 
     <div style="width: 100%; text-align: center;">
-       <a class="btn btn-success btn-center" href="{{ path('account.register')}}">Ok, je m'inscrit ...</a>
+        {% if app.user %}
+            <a class="btn btn-success btn-center" href="{{ path('home')}}">Retour à l'accueil</a>
+        {% else %}
+            <a class="btn btn-success btn-center" href="{{ path('account.register')}}">Ok, je m'inscrit ...</a>
+        {% endif %}
     </div>
     
 </div>

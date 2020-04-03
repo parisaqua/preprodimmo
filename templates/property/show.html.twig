@@ -52,7 +52,14 @@
         </div>
         <hr>
         <div class="row mt-2 text-center">
-            <div class="col-md-8 h6"> {{ property.address }}</div>
+            <div class="col-md-8 h6">
+            <p>{{ property.address }}</p>
+            {% if property.documentName %}
+                {# {% for documentName in documentNames %} #}
+                    
+                {# {% endfor %} #}
+            {% endif %}
+            </div>
             <div class="col-md-4 h6 text-info font-weight-bold"> Gestionnaire : {{ property.manager.genderType}} {{ property.manager.fullName}}</div>
         </div> 
     </div>

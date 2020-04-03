@@ -48,7 +48,7 @@ class ResettingController extends AbstractController
             
             // aucun email associé à ce compte.
             if (!$user) {
-                $request->getSession()->getFlashBag()->add('warning', "Cet email n'existe pas.");
+                $request->getSession()->getFlashBag()->add('warning', "Cet email est inconnu.");
                 return $this->redirectToRoute("request_resetting");
             } 
 
@@ -62,8 +62,20 @@ class ResettingController extends AbstractController
             $bodyMail = $mailer->createBodyMail('resetting/mail.html.twig', [
                 'user' => $user
             ]);
-            $mailer->sendMessage('ne-pas-repondre@immobilier.digital', $user->getEmail(), 'Immobilier Digital - Renouvellement du mot de passe', $bodyMail);
-            $request->getSession()->getFlashBag()->add('success', "Un email va vous être envoyé afin que vous puissiez renouveller votre mot de passe. Le lien que vous recevrez sera valide 10mn.");
+
+            $mailer->sendMessage(
+                'ne-pas-repondre@immobilier.digital', 
+                $user->getEmail(), 
+                'Immobilier Digital - Renouvellement du mot de passe', 
+                $bodyMail
+                );
+
+            $request
+                ->getSession()
+                ->getFlashBag()
+                ->add('success',
+                "Un email va vous être envoyé afin que vous puissiez renouveller votre mot de passe. Le lien que vous recevrez sera valide 10mn."
+                );
 
             return $this->redirectToRoute("account.login");
         }

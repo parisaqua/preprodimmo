@@ -9,6 +9,7 @@ use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -45,6 +46,10 @@ class AdminPropertyType extends AbstractType
                 'required' => false,
                 'multiple' => true
             ])
+            ->add('documentFiles', FileType::class, [
+                'required' => false,
+                'multiple' => true
+            ])
 
             ->add('manager', EntityType::class, array(
                 'class' => User::class,
@@ -58,6 +63,7 @@ class AdminPropertyType extends AbstractType
                         ->orderBy('u.lastName', 'ASC');   
                 },     
             ))
+            
 
         ;
     }
