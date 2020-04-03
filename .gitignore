@@ -29,6 +29,7 @@ public/media
 ###> liip/imagine-bundle ###
 /public/media/cache/
 /public/media/properties/
+/public/media/documents/
 /public/media/users/
 ###< liip/imagine-bundle ###
 

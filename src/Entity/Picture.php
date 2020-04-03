@@ -4,8 +4,8 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PictureRepository")
@@ -27,14 +27,6 @@ class Picture
 
     /**
      * @var File|null
-     * @Assert\File(
-     *     maxSize = "4M",
-     *     maxSizeMessage="L'image est trop volumineuse, limite à 4 Mo.",
-     *     mimeTypes = {"image/jpeg", "image/gif", "image/png"},
-     *     mimeTypesMessage = "Seuls les JPEG, GIF ou PNG sont accéptés !",
-     *     notFoundMessage = "Le fichier n'a pas été trouvé sur le disque",
-     *     uploadErrorMessage = "Erreur dans l'upload du fichier"
-     * )
      * 
      * @Vich\UploadableField(mapping="property_image", fileNameProperty="filename")
      */

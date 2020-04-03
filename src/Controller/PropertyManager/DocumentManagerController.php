@@ -23,6 +23,8 @@ class DocumentManagerController extends AbstractController {
 
         if ($this->isCsrfTokenValid('delete'.$document->getId(), $data['_token'])) {
 
+            // consolelog($document);
+            
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($document);
             $entityManager->flush();

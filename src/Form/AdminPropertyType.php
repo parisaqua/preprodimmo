@@ -9,7 +9,6 @@ use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -44,7 +43,7 @@ class AdminPropertyType extends AbstractType
             ->add('sold')
             ->add('pictureFiles', FileType::class, [
                 'required' => false,
-                'multiple' => true
+                'multiple' => true,
             ])
             ->add('documentFiles', FileType::class, [
                 'required' => false,

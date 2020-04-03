@@ -124,7 +124,10 @@ class PropertyManagerController extends AbstractController {
      * 
      * @Security("property.isManager(user)")
      * 
-     * @return Response
+     * @param Property $property
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     * 
      */
     public function edit(Property $property, Request $request): Response {
 

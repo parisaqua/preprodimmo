@@ -27,14 +27,6 @@ class Document
 
     /**
      * @var File|null
-     * @Assert\File(
-     *     maxSize = "5M",
-     *     maxSizeMessage="Le document est trop volumineuse, limite à 5 Mo.",
-     *     mimeTypes={ "application/pdf"  , "application/msword" , "application/vnd.openxmlformats-officedocument.wordprocessingml.document "},
-     *     mimeTypesMessage = "Seuls les docuements PDF, Word ou Excel sont accéptés !",
-     *     notFoundMessage = "Le fichier n'a pas été trouvé sur le disque",
-     *     uploadErrorMessage = "Erreur dans l'upload du fichier"
-     * )
      * 
      * @Vich\UploadableField(mapping="property_document", fileNameProperty="filename")
      */

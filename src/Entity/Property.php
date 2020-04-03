@@ -136,13 +136,21 @@ class Property
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Picture", mappedBy="property", orphanRemoval=true, cascade={"persist"})
+     * 
      */
     private $pictures;
 
     /**
-     *
+     * 
      * @Assert\All({
-     *  @Assert\Image(mimeTypes={"image/jpeg", "image/png"})
+     *  @Assert\Image(
+     *     maxSize = "4M",
+     *     maxSizeMessage="L'image est trop volumineuse, limite à 4 Mo.",
+     *     mimeTypes = {"image/jpeg", "image/gif", "image/png"},
+     *     mimeTypesMessage = "Seuls les JPEG, GIF ou PNG sont accéptés !",
+     *     notFoundMessage = "Le fichier n'a pas été trouvé sur le disque",
+     *     uploadErrorMessage = "Erreur dans l'upload du fichier"
+     *  )
      * })
      */
     private $pictureFiles;
@@ -155,7 +163,26 @@ class Property
     /**
      *
      * @Assert\All({
-     *  @Assert\Image(mimeTypes={ "application/pdf"  , "application/msword" , "application/vnd.openxmlformats-officedocument.wordprocessingml.document "})
+     *  @Assert\Image(
+     *     maxSize = "5M",
+     *     maxSizeMessage="Le document est trop volumineuse, limite à 5 Mo.",
+     *     mimeTypes={ 
+     *      "application/pdf", 
+     *      "application/x-pdf",
+     *      "application/msword", 
+     *      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+     *      "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+     *      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+     *      "application/vnd.oasis.opendocument.text",
+     *      "application/vnd.ms-excel",
+     *      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+     *      "application/vnd.oasis.opendocument.spreadsheet",
+     *      "application/vnd.ms-powerpoint"
+     *      },
+     *     mimeTypesMessage = "Seuls les documents PDF, Word, Excel ou PowerPoint sont acceptés !",
+     *     notFoundMessage = "Le fichier n'a pas été trouvé sur le disque",
+     *     uploadErrorMessage = "Erreur dans l'upload du fichier"
+     *  )
      * })
      */
     private $documentFiles;
@@ -176,13 +203,7 @@ class Property
      */
     private $manager;
 
-    /**
-    * @ORM\Column(type="string", length=255, nullable=true)
-    * @var string|null
-    */
-    private $documentName;
-
-
+    
 
     public function __construct() {
         $this->createdAt = new \DateTime();
@@ -634,18 +655,6 @@ class Property
         return $user && $user->getId() === $this->getManager()->getId();
     }
 
-    public function getDocumentName(): ?string
-    {
-        return $this->documentName;
-    }
-
-    public function setDocumentName(?string $documentName): self
-    {
-        $this->documentName = $documentName;
-
-        return $this;
-    }
-
-
+    
 
 }
