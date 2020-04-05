@@ -45,10 +45,10 @@ class AdminPropertyType extends AbstractType
                 'required' => false,
                 'multiple' => true,
             ])
-            ->add('documentFiles', FileType::class, [
-                'required' => false,
-                'multiple' => true
-            ])
+            // ->add('documentFiles', FileType::class, [
+            //     'required' => false,
+            //     'multiple' => true
+            // ])
 
             ->add('manager', EntityType::class, array(
                 'class' => User::class,

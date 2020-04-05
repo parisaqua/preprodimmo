@@ -51,16 +51,9 @@
             </div>
         </div>
         <hr>
-        <div class="row mt-2 text-center">
+        <div class="row mt-2">
             <div class="col-md-8 h6">
-            <p>{{ property.address }}</p>
-            {% if property.document %}
-                {% for document in property.documents %}
-                    <div class="col" style="width: 100px; flex: none; margin: 5px;">
-                        <a href="{{ vich_uploader_asset(document, 'documentFile')}}" title=" {{property.document.filename}} " target="_blank"><i class="fas fa-file h4"></i></a>
-                    </div>
-                {% endfor %}
-            {% endif %}
+            <p class="text-center">{{ property.address }}</p>
             </div>
             <div class="col-md-4 h6 text-info font-weight-bold"> Gestionnaire : {{ property.manager.genderType}} {{ property.manager.fullName}}</div>
         </div> 
