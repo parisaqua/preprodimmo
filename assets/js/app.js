@@ -157,6 +157,33 @@ window.previewFile  = function ()
 }
 
 
+// Formulaire document dans le formulaire property
+
+$(document).ready(function() {
+  var $container = $ ('#property_documents');
+  var index = $container.find(':input').length;
+
+  if(index == 0) {
+    addDocument($container);
+  }
+
+  $('.addDocument').click(function(e){
+      e.preventDefault();
+      addDocument($container);
+  })
+
+  function addDocument($container) {
+      var template = $container.attr('data-prototype')
+      .replace(/__name__label__/g, 'Document n°' + (index + 1))
+      .replace(/__name/g, index)
+      ;
+      var $prototype = $(template);
+      $container.append($prototype);
+      index ++;
+  }
+})
+
+
 // Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
 // import $ from 'jquery';
 

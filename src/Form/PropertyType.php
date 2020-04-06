@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Option;
 use App\Entity\Property;
+use App\Form\DocumentType;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -12,6 +13,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class PropertyType extends AbstractType
 {
@@ -43,7 +45,13 @@ class PropertyType extends AbstractType
             ->add('pictureFiles', FileType::class, [
                 'required' => false,
                 'multiple' => true
-            ])      
+            ])  
+            ->add('documents', CollectionType::class, [
+                'entry_type' => DocumentType::class,
+                'allow_add' => true,
+                'by_reference' => false,
+                'required' => false,
+            ])    
             
         ;
     }

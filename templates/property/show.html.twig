@@ -54,6 +54,18 @@
         <div class="row mt-2">
             <div class="col-md-8 h6">
             <p class="text-center">{{ property.address }}</p>
+            {% if property.documents %}
+                 <a href="{{ path('document.manager.index', {id: property.id}) }}">Document(s)</a>  : {{ property.documents|length }} :
+                {% for document in property.documents %}
+                   <li>{{ document.name }} {% if not loop.last %},{% endif %} </li> 
+                {% endfor %}
+            {% else %}
+                 <p>Pas de document associé à ce bien. </p> 
+            {% endif %}
+            {% if app.user and app.user == property.manager or is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('document.manager.new', {id: property.id}) }}">Ajouter un document</a>
+            {% endif %}
+
             </div>
             <div class="col-md-4 h6 text-info font-weight-bold"> Gestionnaire : {{ property.manager.genderType}} {{ property.manager.fullName}}</div>
         </div> 

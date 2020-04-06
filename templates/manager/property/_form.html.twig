@@ -1,3 +1,5 @@
+
+
 {{ form_start(form) }}
     <div class="row align-items-end">
         <div class="col-md-4">
@@ -61,7 +63,18 @@
             </div>
         </div>
     </div>
-   
+    <div class="row align-items-end mb-5">
+        <div class="col-md-5">
+            {{ form_row(form.documents) }}
+            <button type="button" class="addDocument btn btn-info">Ajouter un document</button>
+        </div>
+    </div>
+    
+
+
+    
+  
     {{ form_rest(form) }}
     <button class="btn btn-success btn-center"> {{ button|default('Enregistrer') }} </button>
-    {{ form_end(form) }}
+{{ form_end(form) }}
+

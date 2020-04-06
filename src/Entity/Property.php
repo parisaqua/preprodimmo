@@ -171,12 +171,18 @@ class Property
      */
     private $manager;
 
-    
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Document", mappedBy="property", cascade={"persist", "remove"}, orphanRemoval=true) 
+     */
+    private $documents;
+
+    //cascade={"presist", "remove"} A ajouter dans le OneToMany ?
 
     public function __construct() {
         $this->createdAt = new \DateTime();
         $this->options = new ArrayCollection();
         $this->pictures = new ArrayCollection();
+        $this->documents = new ArrayCollection();
     }
 
     /**
@@ -552,6 +558,37 @@ class Property
     public function isManager(User $user = null)
     {
         return $user && $user->getId() === $this->getManager()->getId();
+    }
+
+    /**
+     * @return Collection|Document[]
+     */
+    public function getDocuments(): Collection
+    {
+        return $this->documents;
+    }
+
+    public function addDocument(Document $document): self
+    {
+        if (!$this->documents->contains($document)) {
+            $this->documents[] = $document;
+            $document->setProperty($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDocument(Document $document): self
+    {
+        if ($this->documents->contains($document)) {
+            $this->documents->removeElement($document);
+            // set the owning side to null (unless already changed)
+            if ($document->getProperty() === $this) {
+                $document->setProperty(null);
+            }
+        }
+
+        return $this;
     }
 
     
