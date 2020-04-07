@@ -4,7 +4,7 @@ namespace App\Controller\PropertyManager;
 
 use App\Entity\Option;
 use App\Entity\Property;
-use App\Entity\Document;
+// use App\Entity\Document;
 use App\Form\PropertyType;
 use App\Form\AdminPropertyType;
 use App\Repository\PropertyRepository;
@@ -132,23 +132,11 @@ class PropertyManagerController extends AbstractController {
      */
     public function edit(Property $property, Request $request): Response {
 
-        // $document1 = new Document();
-        // $document1->setName('doc 1');
-
-        // $document2 = new Document();
-        // $document2->setName('doc 2');
-
-        // $property->addDocument($document1)
-        //          ->addDocument($document2);
-
-
-
         $form = $this->createForm(PropertyType::class, $property);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
 
-            
             $this->em->flush();
             $this->addFlash('success', 'Bien modifié avec succès !');
             return $this->redirectToRoute('myproperty.manager.index'); 

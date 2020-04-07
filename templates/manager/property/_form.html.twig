@@ -63,16 +63,21 @@
             </div>
         </div>
     </div>
-    <div class="row align-items-end mb-5">
-        <div class="col-md-5">
-            {{ form_row(form.documents) }}
-            <button type="button" class="addDocument btn btn-info">Ajouter un document</button>
-        </div>
-    </div>
-    
 
-
-    
+    <h3>Documents</h3>
+    <ul class="row align-items-center documents" data-prototype="{{ form_widget(form.documents.vars.prototype)|e('html_attr') }}">
+        {% for document in form.documents %}
+            <div class="col-md-5">
+                {{ form_row(document.name) }}
+            </div>
+            <div class="col-md-5">
+                {{ form_row(document.kind) }}
+            </div>
+            <div class="col-md-2">
+            X
+            </div>
+        {% endfor %}
+    </ul>
   
     {{ form_rest(form) }}
     <button class="btn btn-success btn-center"> {{ button|default('Enregistrer') }} </button>

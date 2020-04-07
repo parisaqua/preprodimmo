@@ -176,8 +176,6 @@ class Property
      */
     private $documents;
 
-    //cascade={"presist", "remove"} A ajouter dans le OneToMany ?
-
     public function __construct() {
         $this->createdAt = new \DateTime();
         $this->options = new ArrayCollection();

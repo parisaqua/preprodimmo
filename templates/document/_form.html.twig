@@ -1,6 +1,6 @@
 {{ form_start(form) }}
     
     {{ form_row(form.name) }}
-    <div style="display: none;">{{ form_row(form.property) }}</div> 
+    {{ form_row(form.kind) }}
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

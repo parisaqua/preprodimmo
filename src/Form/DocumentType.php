@@ -15,7 +15,7 @@ class DocumentType extends AbstractType
     {
         $builder
             ->add('name')
-           
+            ->add('kind')
         ;
     }
 

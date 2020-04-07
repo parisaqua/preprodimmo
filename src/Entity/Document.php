@@ -41,6 +41,11 @@ class Document
      */
     private $property;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $kind;
+
     public function __construct() {
         $this->createdAt = new \DateTime();
     }
@@ -118,6 +123,18 @@ class Document
     public function setProperty(?Property $property): self
     {
         $this->property = $property;
+
+        return $this;
+    }
+
+    public function getKind(): ?string
+    {
+        return $this->kind;
+    }
+
+    public function setKind(?string $kind): self
+    {
+        $this->kind = $kind;
 
         return $this;
     }

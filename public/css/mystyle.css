@@ -299,3 +299,8 @@ a.noUnderLigned:hover {
 .form-check {
     margin-top: 15px;
 }
+
+.doc {
+display: inline-block;
+
+}

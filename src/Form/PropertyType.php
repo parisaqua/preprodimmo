@@ -48,9 +48,12 @@ class PropertyType extends AbstractType
             ])  
             ->add('documents', CollectionType::class, [
                 'entry_type' => DocumentType::class,
+                'entry_options' =>  ['label' => false],
                 'allow_add' => true,
                 'by_reference' => false,
-                'required' => false,
+                // 'required' => false,
+                'allow_delete' => true,
+                // 'prototype' => true,
             ])    
             
         ;
