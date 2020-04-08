@@ -36,9 +36,11 @@
                 <div class="row">
                     <div class="col">
                         {{ form_widget(form.name) }}
+                        {{ form_errors(form.name) }}
                     </div>
                     <div class="col">
                         {{ form_widget(form.kind) }}
+                        {{ form_errors(form.kind) }}
                     </div>
                 </div>
             </div>

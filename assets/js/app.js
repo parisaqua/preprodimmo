@@ -113,27 +113,27 @@ $annulButton.click(e => {
 
 
 // Suppression des éléments
-document.querySelectorAll('[data-delete]').forEach(a => {
-  a.addEventListener('click', e => {
-    e.preventDefault()
-    fetch(a.getAttribute('href'), {
-      method: 'DELETE',
-      headers: {
-        'X-Requested-With': 'XMLHttpRequest',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({'_token': a.dataset.token})
-    }).then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          a.parentNode.parentNode.removeChild(a.parentNode)
-        } else {
-          alert(data.error)
-        }
-      })
-      .catch(e => alert(e))
-  })
-})
+// document.querySelectorAll('[data-delete]').forEach(a => {
+//   a.addEventListener('click', e => {
+//     e.preventDefault()
+//     fetch(a.getAttribute('href'), {
+//       method: 'DELETE',
+//       headers: {
+//         'X-Requested-With': 'XMLHttpRequest',
+//         'Content-Type': 'application/json'
+//       },
+//       body: JSON.stringify({'_token': a.dataset.token})
+//     }).then(response => response.json())
+//       .then(data => {
+//         if (data.success) {
+//           a.parentNode.parentNode.removeChild(a.parentNode)
+//         } else {
+//           alert(data.error)
+//         }
+//       })
+//       .catch(e => alert(e))
+//   })
+// })
 
 //Image preview onload inputAddress
 
@@ -183,6 +183,13 @@ function handleDeleteButton() {
     $(target).remove();
   })
 }
+
+function updateCounter() {
+  const count = +$('#property_documents div.form-group').length;
+  $('#widgets-counter').val(count);
+}
+
+updateCounter();
 
 handleDeleteButton();
 

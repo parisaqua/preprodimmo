@@ -21,6 +21,7 @@ class DocumentType extends AbstractType
                 ]
             ])
             ->add('kind', TextType::class, [
+                'required' => false,
                 'attr' => [
                     'placeholder' => 'Nature du document'
                 ]

@@ -136,13 +136,18 @@ class PropertyManagerController extends AbstractController {
      * @return \Symfony\Component\HttpFoundation\Response
      * 
      */
-    public function edit(Property $property, Request $request): Response {
+    public function edit(Property $property, Request $request, EntityManagerInterface $manager): Response {
         
         $form = $this->createForm(PropertyType::class, $property);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
 
+            foreach($property->getDocuments() as $document) {
+                $document->setProperty($property);
+                $manager->persist($document);
+            }
+            
             $this->em->flush();
             $this->addFlash('success', 'Bien modifié avec succès !');
             return $this->redirectToRoute('myproperty.manager.index'); 
@@ -163,13 +168,18 @@ class PropertyManagerController extends AbstractController {
      * 
      * @return Response
      */
-    public function adminEdit(Property $property, Request $request): Response {
+    public function adminEdit(Property $property, Request $request, EntityManagerInterface $manager): Response {
         
         $form = $this->createForm(AdminPropertyType::class, $property);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
    
+            foreach($property->getDocuments() as $document) {
+                $document->setProperty($property);
+                $manager->persist($document);
+            }
+            
             $this->em->flush();
             $this->addFlash('success', 'Bien modifié avec succès !');
 
