@@ -64,20 +64,22 @@
         </div>
     </div>
 
-    <h3>Documents</h3>
+    
+    
+    {# <h3>Documents</h3>
     <ul class="row align-items-center documents" data-prototype="{{ form_widget(form.documents.vars.prototype)|e('html_attr') }}">
         {% for document in form.documents %}
-            <div class="col-md-5">
+            <div class="col-md-4">
                 {{ form_row(document.name) }}
             </div>
-            <div class="col-md-5">
+            <div class="col-md-4">
                 {{ form_row(document.kind) }}
             </div>
             <div class="col-md-2">
-            X
+                <a href="{{ path('document.manager.delete', {id: document.id}) }}" data-delete data-token="{{ csrf_token('delete' ~ document.id )}}" class="btn btn-danger" title="supprimer"> <i class="fas fa-trash-alt"></i></a>
             </div>
         {% endfor %}
-    </ul>
+    </ul> #}
   
     {{ form_rest(form) }}
     <button class="btn btn-success btn-center"> {{ button|default('Enregistrer') }} </button>

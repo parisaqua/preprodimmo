@@ -8,14 +8,24 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class DocumentType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('kind')
+            ->add('name', TextType::class, [
+                'attr' => [
+                    'placeholder' => 'Nom du document'
+                ]
+            ])
+            ->add('kind', TextType::class, [
+                'attr' => [
+                    'placeholder' => 'Nature du document'
+                ]
+            ])
+            
         ;
     }
 

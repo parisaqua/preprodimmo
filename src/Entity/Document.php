@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\PreUpdate;
 use Doctrine\ORM\Mapping\PrePersist;
+use Symfony\Component\Validator\Constraints as Assert;
 use DateTimeInterface;
 
 /**
@@ -22,6 +23,12 @@ class Document
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *      min = 4,
+     *      max = 100,
+     *      minMessage = "Le nom ne peut contenir moins de {{ limit }} caractères",
+     *      maxMessage = "Le nom ne peut excéder {{ limit }} caractères"
+     * )
      */
     private $name;
 
@@ -138,4 +145,6 @@ class Document
 
         return $this;
     }
+
+
 }

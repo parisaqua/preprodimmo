@@ -173,6 +173,7 @@ class Property
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Document", mappedBy="property", cascade={"persist", "remove"}, orphanRemoval=true) 
+     * @Assert\Valid()
      */
     private $documents;
 

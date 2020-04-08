@@ -157,115 +157,80 @@ window.previewFile  = function ()
 }
 
 
-// Formulaire document dans property
 
-// var $collectionHolder;
+// Gestion des documents dans l'entité des biens (property)
 
-// setup an "add a tag" link
-// var $addDocumentButton = $('<button type="button" class="add_document_link">Ajouter un document</button>');
-// var $newLinkLi = $('<div.row></div>').append($addDocumentButton);
+$('#property-document').click(function() {
+  // récupération des numéros des champs
+  const index = +$('#widgets-counter').val();
+
+  // récupération du prototype des entrées
+  const tmpl = $('#property_documents').data('prototype').replace(/__name__/g, index);
+
+  // injection de ce code dans la div
+  $('#property_documents').append(tmpl);
+
+  $('#widgets-counter').val(index + 1);
+
+  // gestion du boutton supprimer
+  handleDeleteButton();
+
+});
+
+function handleDeleteButton() {
+  $('button[data-action="delete"]').click(function() {
+    const target = this.dataset.target;
+    $(target).remove();
+  })
+}
+
+handleDeleteButton();
+
+
+// Gestion des documents dans le bien
+
+// var $addDocumentLink = $('<button type="button" class="btn btn-info add_document_link">Ajouter un document</button>');
+// var $newLinkLi = $('<div></div>').append($addDocumentLink);
 
 // jQuery(document).ready(function() {
 //     // Get the ul that holds the collection of tags
-//     $collectionHolder = $('div.documents');
-
+//    var $collectionHolder = $('ul.documents');
 //     // add the "add a tag" anchor and li to the tags ul
 //     $collectionHolder.append($newLinkLi);
-
 //     // count the current form inputs we have (e.g. 2), use that as the new
 //     // index when inserting a new item (e.g. 2)
-//     $collectionHolder.data('index', $collectionHolder.find('input').length);
+//     $collectionHolder.data('index', $collectionHolder.find(':input').length);
 
-//     $addDocumentButton.on('click', function(e) {
-//         // add a new tag form (see next code block)
+//     $addDocumentLink.on('click', function(e) {
+//         // prevent the link from creating a "#" on the URL
+//         e.preventDefault();
+//         // add a new tag form (see code block below)
 //         addDocumentForm($collectionHolder, $newLinkLi);
 //     });
 // });
 
 // function addDocumentForm($collectionHolder, $newLinkLi) {
-//   // Get the data-prototype explained earlier
-//   var prototype = $collectionHolder.data('prototype');
-
-//   // get the new index
-//   var index = $collectionHolder.data('index');
-
-//   var newForm = prototype;
-//   // You need this only if you didn't set 'label' => false in your tags field in TaskType
-//   // Replace '__name__label__' in the prototype's HTML to
-//   // instead be a number based on how many items we have
-//   // newForm = newForm.replace(/__name__label__/g, index);
-
-//   // Replace '__name__' in the prototype's HTML to
-//   // instead be a number based on how many items we have
-//   newForm = newForm.replace(/__name__/g, index);
-
-//   // increase the index with one for the next item
-//   $collectionHolder.data('index', index + 1);
-
-//   // Display the form in the page in an li, before the "Add a tag" link li
-//   var $newFormLi = $('<div.row></div>').append(newForm);
-//   $newLinkLi.before($newFormLi);
+//     // Get the data-prototype explained earlier
+//     var prototype = $collectionHolder.data('prototype');
+//     // get the new index
+//     var index = $collectionHolder.data('index');
+//     // Replace '$$name$$' in the prototype's HTML to
+//     // instead be a number based on how many items we have
+//     var newForm = prototype.replace(/__name__/g, index);
+//     // increase the index with one for the next item
+//     $collectionHolder.data('index', index + 1);
+//     // Display the form in the page in an li, before the "Add a tag" link li
+//     var $newFormLi = $('<li class="doc"></li>').append(newForm);
+//     // also add a remove button, just for this example
+//     $newFormLi.append('<a href="#" class="btn btn-danger remove-document" title="supprimer"> <i class="fas fa-trash-alt"></i></a>');
+//     $newLinkLi.before($newFormLi);
+//     // handle the removal, just for this example
+//     $('.remove-document').click(function(e) {
+//         e.preventDefault();
+//         $(this).parent().remove();
+//         return false;
+//     });
 // }
-
-// new test documents in property
-
-// setup an "add a tag" link
-var $addDocumentLink = $('<button type="button" class="btn btn-info add_document_link">Ajouter un document</button>');
-var $newLinkLi = $('<div></div>').append($addDocumentLink);
-
-jQuery(document).ready(function() {
-    // Get the ul that holds the collection of tags
-   var $collectionHolder = $('ul.documents');
-    
-    // add the "add a tag" anchor and li to the tags ul
-    $collectionHolder.append($newLinkLi);
-    
-    // count the current form inputs we have (e.g. 2), use that as the new
-    // index when inserting a new item (e.g. 2)
-    $collectionHolder.data('index', $collectionHolder.find(':input').length);
-    
-    $addDocumentLink.on('click', function(e) {
-        // prevent the link from creating a "#" on the URL
-        e.preventDefault();
-        
-        // add a new tag form (see code block below)
-        addDocumentForm($collectionHolder, $newLinkLi);
-    });
-    
-    
-});
-
-function addDocumentForm($collectionHolder, $newLinkLi) {
-    // Get the data-prototype explained earlier
-    var prototype = $collectionHolder.data('prototype');
-    
-    // get the new index
-    var index = $collectionHolder.data('index');
-    
-    // Replace '$$name$$' in the prototype's HTML to
-    // instead be a number based on how many items we have
-    var newForm = prototype.replace(/__name__/g, index);
-    
-    // increase the index with one for the next item
-    $collectionHolder.data('index', index + 1);
-    
-    // Display the form in the page in an li, before the "Add a tag" link li
-    var $newFormLi = $('<li class="doc"></li>').append(newForm);
-    
-    // also add a remove button, just for this example
-    $newFormLi.append('<a href="#" class="btn btn-danger remove-document" title="supprimer"> <i class="fas fa-trash-alt"></i></a>');
-    
-    $newLinkLi.before($newFormLi);
-    
-    // handle the removal, just for this example
-    $('.remove-document').click(function(e) {
-        e.preventDefault();
-        
-        $(this).parent().remove();
-        
-        return false;
-    });
-}
 
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to import it.

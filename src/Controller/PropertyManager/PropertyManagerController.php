@@ -3,16 +3,18 @@
 namespace App\Controller\PropertyManager;
 
 use App\Entity\Option;
+use App\Entity\Document;
 use App\Entity\Property;
-// use App\Entity\Document;
 use App\Form\PropertyType;
 use App\Form\AdminPropertyType;
+use Doctrine\ORM\EntityManager;
 use App\Repository\PropertyRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -90,7 +92,7 @@ class PropertyManagerController extends AbstractController {
      * @Route("/gestion/biens/nouveau", name="property.manager.new")
      * 
      */
-    public function new(Request $request) {
+    public function new(Request $request, EntityManagerInterface $manager) {
 
         $property= new Property();
 
@@ -98,6 +100,11 @@ class PropertyManagerController extends AbstractController {
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
+
+            foreach($property->getDocuments() as $document) {
+                $document->setProperty($property);
+                $manager->persist($document);
+            }
  
             $property->setAuthor($this->getUser());
             $property->setManager($this->getUser());
@@ -116,7 +123,6 @@ class PropertyManagerController extends AbstractController {
         ]);
     }
 
-    
 
     /**
      * Edition d'un bien
@@ -131,7 +137,7 @@ class PropertyManagerController extends AbstractController {
      * 
      */
     public function edit(Property $property, Request $request): Response {
-
+        
         $form = $this->createForm(PropertyType::class, $property);
         $form->handleRequest($request);
 
@@ -145,7 +151,8 @@ class PropertyManagerController extends AbstractController {
         return $this->render('manager/property/edit.html.twig', [
             'property' => $property,
             'current_menu' => 'manager',
-            'form' => $form->createView()
+            'form' => $form->createView(),
+           
         ]);
     }
 
@@ -157,12 +164,12 @@ class PropertyManagerController extends AbstractController {
      * @return Response
      */
     public function adminEdit(Property $property, Request $request): Response {
-
+        
         $form = $this->createForm(AdminPropertyType::class, $property);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
-
+   
             $this->em->flush();
             $this->addFlash('success', 'Bien modifié avec succès !');
 
