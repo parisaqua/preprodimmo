@@ -2,7 +2,7 @@
 
 {% block title %}- Edition d'un bien{% endblock %}
 
-{% form_theme form _self %}
+{% form_theme form 'manager/property/_collection.html.twig' %}
 
 {% block body %}
 
@@ -28,44 +28,10 @@
 
 </div> 
 
-{% endblock %}
 
-{% block _property_documents_widget %}
-    <p>Ici, ajoutez les documents du bien</p>
-    {{ form_widget(form) }}
-    <input type="hidden" id="widgets-counter" value="0"></input>
-    <div class="form-group">
-        <button type="button" id="property-document" class="btn btn-primary">Ajouter un document</button>
-    </div>
 
 {% endblock %}
 
-{% block _property_documents_entry_row %}
-    {{ form_widget(form) }}
-{% endblock %}
-
-{% block _property_documents_entry_widget %}
-
-    <div class="form-group" id="block_{{id}}">
-        <div class="row">
-            <div class="col-10">
-                <div class="row">
-                    <div class="col">
-                        {{ form_widget(form.name) }}
-                    </div>
-                    <div class="col">
-                        {{ form_widget(form.kind) }}
-                    </div>
-                </div>
-            </div>
-            <div class="col-2">
-                <button type="button" data-action="delete" data-target="#block_{{id}}" class="btn btn-danger" title="Supprimer"><i class="fas fa-trash-alt"></i></button>
-            </div>
-        </div>
-        
-    </div>
-
-{% endblock %}
 
 
 
