@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * @Route("/document")
+ * @Route("/admin/document")
  */
 class DocumentController extends AbstractController
 {
@@ -21,7 +21,7 @@ class DocumentController extends AbstractController
      */
     public function index(DocumentRepository $documentRepository): Response
     {
-        return $this->render('document/index.html.twig', [
+        return $this->render('admin/document/index.html.twig', [
             'documents' => $documentRepository->findAll(),
         ]);
     }
@@ -43,7 +43,7 @@ class DocumentController extends AbstractController
             return $this->redirectToRoute('document.manager.index');
         }
 
-        return $this->render('document/new.html.twig', [
+        return $this->render('admin/document/new.html.twig', [
             'document' => $document,
             'form' => $form->createView(),
         ]);
@@ -54,7 +54,7 @@ class DocumentController extends AbstractController
      */
     public function show(Document $document): Response
     {
-        return $this->render('document/show.html.twig', [
+        return $this->render('admin/document/show.html.twig', [
             'document' => $document,
         ]);
     }
@@ -73,7 +73,7 @@ class DocumentController extends AbstractController
             return $this->redirectToRoute('document.manager.index');
         }
 
-        return $this->render('document/edit.html.twig', [
+        return $this->render('admin/document/edit.html.twig', [
             'document' => $document,
             'form' => $form->createView(),
         ]);

@@ -59,7 +59,7 @@
                 Gestionnaire : {{ property.manager.genderType}} {{ property.manager.fullName}}
                 <hr>
                 {% if property.documents|length > 0 %}
-                    <a href="{{ path('document.manager.index', {id: property.id}) }}">Document(s)</a>  : {{ property.documents|length }} 
+                    <p>Document(s)  : {{ property.documents|length }} </p>
                     {% for document in property.documents %}
                     <li>{{ document.name }} {% if not loop.last %},{% endif %} </li> 
                     {% endfor %}
