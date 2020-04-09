@@ -83,6 +83,7 @@ class User implements UserInterface
     private $properties;
 
     /**
+     * @var array
      *
      * @ORM\Column(type="json")
      */

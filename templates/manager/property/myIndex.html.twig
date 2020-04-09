@@ -44,7 +44,7 @@
                 
                 <td>
                     {% if app.user and is_granted('ROLE_ADMIN') %}
-                    <a href=" {{ path('admin.property.manager.edit', {id: property.id}) }} " class="btn btn-info">Editer</a>
+                    <a href=" {{ path('property.manager.edit', {id: property.id}) }} " class="btn btn-info">Editer</a>
                     {% elseif app.user and app.user == property.manager %}
                     <a href=" {{ path('property.manager.edit', {id: property.id}) }} " class="btn btn-info">Editer</a>
                     {% endif %}

@@ -58,7 +58,7 @@ class AdminPropertyType extends AbstractType
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('u')
                         ->andWhere('u.roles LIKE :role')
-                        ->setParameter('role', '['.'%'."ROLE_PROPERTYMANAGER".'%'.']')
+                        ->setParameter('role', '%'."ROLE_PROPERTYMANAGER".'%')
                         ->orderBy('u.lastName', 'ASC');   
                 },     
             ))
