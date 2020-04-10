@@ -300,3 +300,74 @@ a.noUnderLigned:hover {
     margin-top: 15px;
 }
 
+.backhome {
+    background:url(/images/back.png) 0 0 no-repeat;
+    background-size: cover; /* Resize the background image to cover the entire container */
+
+}
+
+hr {
+    border: none;
+    border-top: 5px solid white;
+    color: white;
+    overflow: visible;
+    text-align: center;
+}
+
+.middle {
+    padding : -25px 0px;
+}
+
+.teasing {
+    /* padding: 35px 0px;
+    background-color: rgba(255,255,255,0.6);
+    margin: 5% auto;
+    width: 80%; */
+}
+
+a.buttonsub {
+    border-radius: 4px;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 28px;
+    padding: 20px;
+    width: 200px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+  }
+
+  a.buttonsub.sub {
+    background-color: #36a41e;
+  }
+
+  a.buttonsub.test {
+    background-color: #2e96f1;
+  }
+  
+  a.buttonsub span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  
+  a.buttonsub span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+  
+  a.buttonsub:hover span {
+    padding-right: 25px;
+  }
+  
+  a.buttonsub:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+

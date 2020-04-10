@@ -53,6 +53,8 @@ class Document
      */
     private $kind;
 
+    
+
     public function __construct() {
         $this->createdAt = new \DateTime();
     }

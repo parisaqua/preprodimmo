@@ -4,35 +4,67 @@
 
 {% block body %}
 
-    <div class="jumbotron">
-        <div class="container"> 
-            <div class="row">
-                <div class="col-md-6">
-                    <h1><i class="fas fa-home text-primary"></i> IMMOBILIER</h1>
-                    <h1 class="mb-3"><i class="fas fa-hand-point-right text-primary"></i> DIGITAL</h2>
-                    
-                    <p class="h5 mt-2 mb-2">Tout pour la gestion de vos biens au bout des doigts.</p>
-                    
-                    <div class="row text-center mt-5 mb-4">
-                        <div class="col">
-                            <i class="fas fa-file-signature text-secondary h1" style="font-size: 5em;"></i>
-                            <h4>Baux</h4>
-                        </div>
-                        <div class="col">
-                            <i class="fas fa-briefcase text-warning h1" style="font-size: 5em;"></i>
-                            <h4>Tavaux</h4>
-                        </div>
-                        <div class="col">
-                            <i class="fas fa-chart-line text-success h1" style="font-size: 5em;"></i>
-                            <h4>Suivi</h4>
+    <div class="jumbotron backhome">
+        <div class="middle">
+            <div class="container"> 
+                <div class="row text-white align-items-center">
+                    <div class="col-md-7">
+                        <h1 class="text-white font-weight-bold""> IMMOBILIER Digital</h1>
+                        
+                        <p class="h4 mt-2 mb-2 font-italic" style="color:#9ed2ff;">Tout pour la gestion de vos biens au bout des doigts.</p>
+
+                        <hr>
+                        
+                        <div class="row text-center mt-5 mb-4">
+                            <div class="col">
+                                <i class="fas fa-file-signature h1 " style="font-size: 5em; color:#9ed2ff"></i>
+                                <h4 class="text-white">Baux</h4>
+                                <ul class="text-left">
+                                    <li>Modèle de baux</li>
+                                    <li>Consultation des baux en ligne</li>
+                                    <li>Alertes sur les échéances</li>
+                                </ul>
+                            
+                            </div>
+                            <div class="col">
+                                <i class="fas fa-briefcase h1 " style="font-size: 5em; color:#9ed2ff;"></i>
+                                <h4 class="text-white">Tavaux</h4>
+                                <ul class="text-left">
+                                    <li>Demande de devis en ligne</li>
+                                    <li>Ordre de service en un click</li>
+                                    <li>Suivi des factures</li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <i class="fas fa-chart-line  h1 " style="font-size: 5em; color:#9ed2ff"></i>
+                                <h4 class="text-white">Suivi</h4>
+                                <ul class="text-left">
+                                    <li>Etat locatif</li>
+                                    <li>Quittancement</li>
+                                    <li>Mise en location</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6 text-center">
-                    {# <img style="margin-top: 20px;" width=550 height=auto src="{{  '/images/home2.png' }}" alt=""> #}
+                    <div class="col-md-5 text-center">
+                        <div class="teasing">
+                            <div class="row text-center">
+                                <div class="col-12 mb-4">
+                                    <a href="#" class="buttonsub test"><span><i class="fas fa-question-circle"></i>&nbsp;Démo Live</span></a>
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <a href="{{ path('account.register')}}" class="buttonsub sub"><span><i class="fas fa-hand-point-right"></i>&nbsp;Inscription</span></a>
+                                </div>
+                            </div>
+                            
+                           
+                        </div>
+                        {# <img style="margin-top: 20px;" width=550 height=auto src="{{  '/images/home2.png' }}" alt=""> #}
+                    </div>
                 </div>
             </div>
         </div>
+       
     </div>
 <div class="container">
     <h2 class="mb-4">Les derniers biens disponibles à la location</h2>
