@@ -117,11 +117,23 @@ class User implements UserInterface
      */
     private $isActive;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Lease", mappedBy="owner")
+     */
+    private $ownerLeases;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Lease", mappedBy="tenant")
+     */
+    private $tenantLeases;
+
     public function __construct()
     {
         $this->properties = new ArrayCollection();
         $this->propertiesManaged = new ArrayCollection();
         $this->isActive = false;
+        $this->ownerLeases = new ArrayCollection();
+        $this->tenantLeases = new ArrayCollection();
     }
 
     /**
@@ -375,6 +387,65 @@ class User implements UserInterface
 
     function setIsActive($isActive) {
         $this->isActive = $isActive;
+    }
+
+    /**
+     * @return Collection|Lease[]
+     */
+    public function getOwnerLeases(): Collection
+    {
+        return $this->ownerLeases;
+    }
+
+    public function addOwnerLease(Lease $ownerLease): self
+    {
+        if (!$this->ownerLeases->contains($ownerLease)) {
+            $this->ownerLeases[] = $ownerLease;
+            $ownerLease->setOwner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOwnerLease(Lease $ownerLease): self
+    {
+        if ($this->ownerLeases->contains($ownerLease)) {
+            $this->ownerLeases->removeElement($ownerLease);
+            // set the owning side to null (unless already changed)
+            if ($ownerLease->getOwner() === $this) {
+                $ownerLease->setOwner(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Lease[]
+     */
+    public function getTenantLeases(): Collection
+    {
+        return $this->tenantLeases;
+    }
+
+    public function addTenantLease(Lease $tenantLease): self
+    {
+        if (!$this->tenantLeases->contains($tenantLease)) {
+            $this->tenantLeases[] = $tenantLease;
+            $tenantLease->addTenant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTenantLease(Lease $tenantLease): self
+    {
+        if ($this->tenantLeases->contains($tenantLease)) {
+            $this->tenantLeases->removeElement($tenantLease);
+            $tenantLease->removeTenant($this);
+        }
+
+        return $this;
     }
 
 

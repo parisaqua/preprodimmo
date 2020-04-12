@@ -177,11 +177,17 @@ class Property
      */
     private $documents;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Lease", mappedBy="property")
+     */
+    private $leases;
+
     public function __construct() {
         $this->createdAt = new \DateTime();
         $this->options = new ArrayCollection();
         $this->pictures = new ArrayCollection();
         $this->documents = new ArrayCollection();
+        $this->leases = new ArrayCollection();
     }
 
     /**
@@ -584,6 +590,37 @@ class Property
             // set the owning side to null (unless already changed)
             if ($document->getProperty() === $this) {
                 $document->setProperty(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Lease[]
+     */
+    public function getLeases(): Collection
+    {
+        return $this->leases;
+    }
+
+    public function addLease(Lease $lease): self
+    {
+        if (!$this->leases->contains($lease)) {
+            $this->leases[] = $lease;
+            $lease->setProperty($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLease(Lease $lease): self
+    {
+        if ($this->leases->contains($lease)) {
+            $this->leases->removeElement($lease);
+            // set the owning side to null (unless already changed)
+            if ($lease->getProperty() === $this) {
+                $lease->setProperty(null);
             }
         }
 
