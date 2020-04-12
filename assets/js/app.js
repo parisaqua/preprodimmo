@@ -13,7 +13,7 @@ import 'select2';
 import 'slick-carousel';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';  
-import Inputmask from "inputmask/dist/inputmask";                  
+import Inputmask from "inputmask/dist/inputmask";     
 
 //Numero de telephone
 var selector = document.getElementById("telephone");
@@ -172,6 +172,8 @@ $('#property-document').click(function() {
 
   $('#widgets-counter').val(index + 1);
 
+  showDoc();
+
   // gestion du boutton supprimer
   handleDeleteButton();
 
@@ -189,7 +191,15 @@ function updateCounter() {
   $('#widgets-counter').val(count);
 }
 
+function showDoc() {
+  $(document).ready(function () {
+    bsCustomFileInput.init()
+  })
+}
+
 updateCounter();
+
+showDoc();
 
 handleDeleteButton();
 

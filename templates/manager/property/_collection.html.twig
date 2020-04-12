@@ -19,11 +19,18 @@
         <div class="row">
             <div class="col-10">
                 <div class="row">
-                    <div class="col">
+                    <div class="col-md-5">
+                        {{ form_widget(form.documentFile) }}
+                        {{ form_errors(form.documentFile) }}
+                    </div>
+                    <div class="col-md-2" id="currentDoc">
+                        
+                    </div>
+                    <div class="col-md-3">
                         {{ form_widget(form.name) }}
                         {{ form_errors(form.name) }}
                     </div>
-                    <div class="col">
+                    <div class="col-md-2">
                         {{ form_widget(form.kind) }}
                         {{ form_errors(form.kind) }}
                     </div>

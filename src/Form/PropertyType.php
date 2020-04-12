@@ -51,10 +51,10 @@ class PropertyType extends AbstractType
                 'entry_type' => DocumentType::class,
                 // 'entry_options' =>  ['label' => false],
                 'allow_add' => true,
-                // 'by_reference' => false,
+                'by_reference' => false,
                 'allow_delete' => true,
-                // 'prototype' => true,
-                 // 'required' => false,
+                'prototype' => true,
+                'required' => true,
             ])    
 
           

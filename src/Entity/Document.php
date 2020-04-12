@@ -5,12 +5,15 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\PreUpdate;
 use Doctrine\ORM\Mapping\PrePersist;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
 use DateTimeInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DocumentRepository")
  * @ORM\HasLifecycleCallbacks
+ * @Vich\Uploadable()
  */
 class Document
 {
@@ -53,8 +56,25 @@ class Document
      */
     private $kind;
 
-    
+     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $filename;
 
+    /**
+     * @var File|null
+     * 
+     * @Assert\File(
+     *     maxSize = "1024k",
+     *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     *     mimeTypesMessage = "Document PDF uniquement"
+     * )
+     * 
+     * @Vich\UploadableField(mapping="property_document", fileNameProperty="filename")
+     */
+    private $documentFile;
+
+    
     public function __construct() {
         $this->createdAt = new \DateTime();
     }
@@ -147,6 +167,34 @@ class Document
 
         return $this;
     }
+
+    public function setDocumentFile(?File $documentFile = null): void
+    {
+        $this->documentFile = $documentFile;
+
+        if (null !== $documentFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getDocumentFile(): ?File
+    {
+        return $this->documentFile;
+    }
+
+    public function setFilename(?string $filename): void
+    {
+        $this->filename = $filename;
+    }
+
+    public function getFilename(): ?string
+    {
+        return $this->filename;
+    }
+
+
 
 
 }
