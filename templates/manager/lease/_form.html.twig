@@ -1,0 +1,20 @@
+{{ form_start(form) }}
+    
+   
+
+    <div class="row align-items-end">
+        <div class="col-md-6">
+            {{ form_row(form.property) }}
+        </div>
+        <div class="col-md-3">
+            {{ form_row(form.effectDate) }}
+        </div>
+        <div class="col-md-3">
+            {{ form_row(form.type) }}
+        </div>
+    </div>
+
+    {{ form_rest(form) }}
+    <button class="btn btn-success btn-center"> {{ button|default('Enregistrer') }} </button>
+    
+{{ form_end(form) }}

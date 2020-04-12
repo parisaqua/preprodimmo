@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Leases index{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+    
+        <div class="row align-items-center mb-3">
+            <div class="col-md-8">
+                <h1>Les baux</h1>
+            </div>
+            <div class="col-md-4">
+                <a href="{{ path('lease.manager.new')}}" class="btn btn-info btn-right mb-2">Ajouter un bail</a>
+            </div>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Bien</th>
+                    <th>Date d'effet</th>
+                    <th>Type</th>
+                    <th>Durée</th>
+                    <th>Bailleur</th>
+                    <th>Preneur</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for lease in leases %}
+                <tr>
+                    <td>{{ lease.id }}</td>
+                    <td>   
+                        {{ lease.property.city }}
+                    </td>
+                    <td>{{ lease.effectDate ? lease.effectDate|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ lease.type }}</td>
+                    <td>{{ lease.length }}</td>
+                    <td>
+                        {{ lease.owner.fullName }}
+                    </td>
+                    <td>
+                        {% if lease.tenant|length > 0  %}
+                            {% for user in lease.tenant %}
+                                {{ user.fullName }}
+                            {% endfor %}
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{{ path('lease.manager.show', {'id': lease.id}) }}">show</a>
+                        <a href="{{ path('lease.manager.edit', {'id': lease.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">Aucun bail d'enregistrer</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{{ path('document.manager.new') }}">Create new</a>
+    </div>
+{% endblock %}

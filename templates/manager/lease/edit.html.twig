@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Bail{% endblock %}
+
+{% block body %}
+    <h1>Edit Bail</h1>
+
+    {{ include('manager/lease/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('lease.manager.index') }}">back to list</a>
+
+    {{ include('manager/lease/_delete_form.html.twig') }}
+{% endblock %}

@@ -13,7 +13,9 @@ import 'select2';
 import 'slick-carousel';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';  
-import Inputmask from "inputmask/dist/inputmask";     
+import Inputmask from "inputmask/dist/inputmask";
+
+
 
 //Numero de telephone
 var selector = document.getElementById("telephone");

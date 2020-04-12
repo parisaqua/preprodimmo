@@ -45,7 +45,8 @@
         <script src="/js/popper.min.js"></script>
         <script src="/js/bootstrap.min.js"></script>
         <script src="/js/bs-custom-file-input.min.js"></script>
-
+        <script src="/js/bootstrap-datepicker.min.js" ></script>
+        <script src="/js/bootstrap-datepicker.fr.min.js" ></script>
         
 
         {% block javascripts %}
@@ -59,7 +60,27 @@
         }, 4000 ); // 4 secs
         });
         </script>
+
         
+        <script>
+            $(document).ready(function() {
+                $('.js-datepicker').datepicker({
+                    format: "dd/mm/yyyy",
+                    maxViewMode: 3,
+                    todayBtn: "linked",
+                    language: "fr",
+                    calendarWeeks: true,
+                    autoclose: true,
+                    datesDisable: [],
+                    todayHighlight: true,
+
+                });
+            })
+        </script>
+        
+        {% endblock %}
+
+        {% block javascript %}
         {% endblock %}
       
     </body>

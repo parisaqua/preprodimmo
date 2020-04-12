@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Lease{% endblock %}
+
+{% block stylesheets %}
+    {# <link rel="stylesheet" href="/css/bootstrap-datepicker.min.css" /> #}
+    <link rel="stylesheet" href="/css/bootstrap-datepicker.standalone.min.css" />
+
+{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>Créer un nouveau bail</h1>
+        <hr>
+        {{ include('manager/lease/_form.html.twig', {form: form, button: 'Enregistrer le bien' }) }}
+    </div>  
+{% endblock %}
