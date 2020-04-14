@@ -64,9 +64,10 @@ class ConfirmationController extends AbstractController
             throw new AccessDeniedHttpException();
         }
 
-        // mettre en place la logique de pass isActive à true ...
+        // mettre en place la logique de pass isActive à true et donner le role de gestionnaire aux nouveaux connectés ...
 
         $user->setIsActive(true);
+        $user->setRoles(['ROLE_PROPERTYMANAGER']);
         
         // réinitialisation du token et la date d'enregistrement à null pour qu'il ne soit plus réutilisable
         $user->setToken(null);
