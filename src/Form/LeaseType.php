@@ -5,12 +5,14 @@ namespace App\Form;
 use App\Entity\User;
 use App\Entity\Lease;
 use App\Entity\Property;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use App\Form\DataTransformer\FrenchToDateTimeTransformer;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class LeaseType extends AbstractType
@@ -44,28 +46,47 @@ class LeaseType extends AbstractType
                     'commerce' => '3',
                 ], 
                 ])
-            ->add('rent')
-            ->add('charges')
+            ->add('rent', MoneyType::class)
+            ->add('charges', MoneyType::class)
             ->add('vat')
-            ->add('paymentTerm')
+            ->add('paymentTerm', ChoiceType::class, [
+                'choices'  => [
+                    'mensuelle' => '12',
+                    'trimestrielle' => '4',
+                    'semestrielle' => '2',
+                    'annuelle' => '1'
+                ], 
+                ])
             ->add('owner', EntityType::class, array(
                 'class' => User::class,
                 'label' => 'Bailleur',
                 'required' => true,
-                'choice_label' => 'fullName',     
+                'choice_label' => 'fullName',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->andWhere('u.roles LIKE :role')
+                        ->setParameter('role', '%'."ROLE_PROPERTYOWNER".'%')
+                        ->orderBy('u.lastName', 'ASC');   
+                },          
             ))
             ->add('tenant', EntityType::class, array(
                 'class' => User::class,
                 'label' => 'Preneur',
                 'required' => true,
                 'choice_label' => 'fullName', 
-                'multiple' => true,    
+                'multiple' => true,  
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->andWhere('u.roles LIKE :role')
+                        ->setParameter('role', '%'."ROLE_PROPERTYTENANT".'%')
+                        ->orderBy('u.lastName', 'ASC');   
+                },       
             ))
             ->add('property', EntityType::class, array(
                 'class' => Property::class,
                 'label' => 'Bien',
                 'required' => true,
-                'choice_label' => 'address',     
+                'choice_label' => 'detailedProperty',     
             ))
         ;
 
@@ -78,6 +99,7 @@ class LeaseType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Lease::class,
+            'translation_domain' => "forms"
         ]);
     }
 }

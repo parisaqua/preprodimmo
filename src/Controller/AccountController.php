@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Services\Mailer;
 use App\Form\AccountType;
 use App\Entity\PasswordUpdate;
 use App\Form\RegistrationType;
@@ -15,6 +16,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 
 class AccountController extends AbstractController
 {
@@ -44,11 +46,30 @@ class AccountController extends AbstractController
     }
 
     /**
+     * 
+     * @Route("/bienvenue", name="account.bienvenue")
+     * @return void
+     */
+    public function bienvenue() {
+        return $this->render('confirmation/afterRegistrated.html.twig');
+    }
+
+
+    // /**
+    //  * Undocumented function
+    //  *
+    //  * @return void
+    //  */
+    // public function afterRegistrated() {
+
+    // }
+
+    /**
      * Permet d'afficher le formulaire d'inscription
      * @Route("/register", name="account.register")
      * @return response
      */
-    public function register(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder){
+    public function register(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder, Mailer $mailer, TokenGeneratorInterface $tokenGenerator){
         $user = new User();
 
         $form = $this->createForm(RegistrationType::class, $user);
@@ -59,15 +80,41 @@ class AccountController extends AbstractController
             $hash = $encoder->encodePassword($user, $user->getHash());
             $user->setHash($hash);
 
+            // création du token
+            $user->setToken($tokenGenerator->generateToken());
+            // enregistrement de la date de création du token
+            $user->setUserRegistratedAt(new \Datetime());
+            
             $manager->persist($user);
             $manager->flush();
 
-            $this->addFlash(
-                'success',
-                "Votre compte a bien été créé. Vous pouvez maintenant vous connecter."
-            );
+             // on utilise le service Mailer créé précédemment
+             $bodyMail = $mailer->createBodyMail('confirmation/mail.html.twig', [
+                'user' => $user
+            ]);
 
-            return $this->redirectToRoute('account.login');
+            $mailer->sendMessage(
+                'ne-pas-repondre@immobilier.digital', 
+                $user->getEmail(), 
+                'Immobilier Digital - Nouveau membre - confirmation d\'adresse e-mail. ', 
+                $bodyMail
+                );
+
+            $request
+                ->getSession()
+                ->getFlashBag()
+                ->add('success',
+                "Votre compte a bien été créé."
+                );
+
+            return $this->redirectToRoute("account.bienvenue");
+
+            // $this->addFlash(
+            //     'success',
+            //     "Votre compte a bien été créé. Vous allez recevoir un e-mail afin d'activer votre compte."
+            // );
+
+            // return $this->redirectToRoute('account.login');
         }
 
         return $this->render('account/registration.html.twig', [

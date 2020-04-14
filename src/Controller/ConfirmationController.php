@@ -21,52 +21,68 @@ use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
  */
 class ConfirmationController extends AbstractController
 {
-    // /**
-    //  * @Route("/account/confirm/{token}/{username}", name="confirm_account")
-    //  * @param $token
-    //  * @param $username
-    //  * @return Response
-    //  */
-    // public function confirmAccount($token, $username): Response
-    // {
-    //     $em = $this->getDoctrine()->getManager();
-    //     $user = $em->getRepository(User::class)->findOneBy(['username' => $username]);
-    //     $tokenExist = $user->getConfirmationToken();
-    //     if($token === $tokenExist) {
-    //        $user->setConfirmationToken(null);
-    //        $user->setEnabled(true);
-    //        $em->persist($user);
-    //        $em->flush();
-    //        return $this->redirectToRoute('app_login');
-    //     } else {
-    //         return $this->render('registration/token-expire.html.twig');
-    //     }
-    // }
-    // /**
-    //  * @Route("/send-token-confirmation", name="send_confirmation_token")
-    //  * @param Request $request
-    //  * @param MailerService $mailerService
-    //  * @param \Swift_Mailer $mailer
-    //  * @return \Symfony\Component\HttpFoundation\RedirectResponse
-    //  * @throws \Exception
-    //  */
-    // public function sendConfirmationToken(Request $request, MailerService $mailerService, \Swift_Mailer $mailer): RedirectResponse
-    // {
-    //     $em = $this->getDoctrine()->getManager();
-    //     $email = $request->request->get('email');
-    //     $user = $this->getDoctrine()->getRepository(User::class)->findOneBy(['email' => $email]);
-    //     if($user === null) {
-    //         $this->addFlash('not-user-exist', 'utilisateur non trouvé');
-    //         return $this->redirectToRoute('app_register');
-    //     }
-    //     $user->setConfirmationToken($this->generateToken());
-    //     $em->persist($user);
-    //     $em->flush();
-    //     $token = $user->getConfirmationToken();
-    //     $email = $user->getEmail();
-    //     $username = $user->getUsername();
-    //     $mailerService->sendToken($mailer, $token, $email, $username, 'registration.html.twig');
-    //     return $this->redirectToRoute('app_login');
-    // }
+    // si supérieur à 24 heures, retourne false
+    // sinon retourne false
+    private function isRequestInTime(\Datetime $userRegistratedAt = null)
+    {
+        if ($userRegistratedAt === null)
+        {
+            return false;        
+        }
+        
+        $now = new \DateTime();
+        $interval = $now->getTimestamp() - $userRegistratedAt->getTimestamp();
+
+        $daySeconds = 60 * 60 * 24; // sec * min * heures
+        $response = $interval > $daySeconds ? false : $reponse = true;
+        return $response;
+    }
+
+   
+
+    /**
+     * 
+     * @Route("/confirmation", name="account.confirmation")
+     * 
+     */
+    public function activationConfirmed() {
+        return $this->render('confirmation/confirmation.html.twig');
+    }
+
+
+    /**
+     * @Route("/{id}/{token}", name="confirming")
+     */
+    public function confirming(User $user, $token, Request $request)
+    {
+        // interdit l'accès à la page si:
+        // le token associé au membre est null
+        // le token enregistré en base et le token présent dans l'url ne sont pas égaux
+        // le token date de plus de 24 heures
+        if ($user->getToken() === null || $token !== $user->getToken() || !$this->isRequestInTime($user->getUserRegistratedAt()))
+        {
+            throw new AccessDeniedHttpException();
+        }
+
+        // mettre en place la logique de pass isActive à true ...
+
+        $user->setIsActive(true);
+        
+        // réinitialisation du token et la date d'enregistrement à null pour qu'il ne soit plus réutilisable
+        $user->setToken(null);
+        $user->setUserRegistratedAt(null);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($user);
+        $em->flush();
+
+        $request->getSession()->getFlashBag()->add('success', "Votre compte est maintenant actif.");
+
+        return $this->redirectToRoute('account.confirmation');
+
+        //return $this->render('resetting/index.html.twig');
+        
+    }
+
 
 }

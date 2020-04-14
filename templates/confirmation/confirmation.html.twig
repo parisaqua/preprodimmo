@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    
+    <div class="container">
+    
+    <h1 class="my-4">Bienvenue sur Immobilier Digital !</h1>
+
+    <div class="alert alert-success mt-2 mb-4">
+        <h4 class="alert-heading">Compte activé !</h4>
+        <p class="mb-0">  Merci de votre confirmation d'adresse e-mail.</p>
+        <p class="mb-0 mt-2"> 
+        Vous pouvez maintenant vous connecter.
+        </p>
+
+    </div>
+    <div class="clearfix my-4 text-center mt-3">
+    <a href="{{ path('account.login') }}" class="btn btn-info">Connection</a>
+    </div>
+    
+    </div>
+{% endblock %}

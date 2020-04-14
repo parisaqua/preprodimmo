@@ -6,7 +6,7 @@
 
     <div class="container">
     
-        <div class="row align-items-center mb-3">
+        <div class="row align-items-center mb-3 pt-4">
             <div class="col-md-8">
                 <h1>Les baux</h1>
             </div>
@@ -15,14 +15,14 @@
             </div>
         </div>
 
-        <table class="table">
+        <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Id</th>
                     <th>Bien</th>
                     <th>Date d'effet</th>
                     <th>Type</th>
                     <th>Durée</th>
+                    <th>Loyer annuel CC</th>
                     <th>Bailleur</th>
                     <th>Preneur</th>
                     <th>Actions</th>
@@ -31,13 +31,21 @@
             <tbody>
             {% for lease in leases %}
                 <tr>
-                    <td>{{ lease.id }}</td>
                     <td>   
-                        {{ lease.property.city }}
+                        {{ lease.property.rooms }} pièces à {{ lease.property.city }}
                     </td>
-                    <td>{{ lease.effectDate ? lease.effectDate|date('Y-m-d H:i:s') : '' }}</td>
-                    <td>{{ lease.type }}</td>
-                    <td>{{ lease.length }}</td>
+                    <td>{{ lease.effectDate|date("d/m/Y") }}</td>
+                    <td>
+                        {% if lease.type == 1 %}Habitation{% endif %}
+                        {% if lease.type == 2 %}Bureau{% endif %}
+                        {% if lease.type == 3 %}Commercial{% endif %}
+
+                   
+                    </td>
+                    <td>{{ lease.length }} ans</td>
+                    <td>
+                       {{lease.annualRentCharged|number_format(2, ',', '.')}} &euro; en {{ lease.paymentTerm }} fois
+                    </td>
                     <td>
                         {{ lease.owner.fullName }}
                     </td>
@@ -61,6 +69,6 @@
             </tbody>
         </table>
 
-        <a href="{{ path('document.manager.new') }}">Create new</a>
+    
     </div>
 {% endblock %}

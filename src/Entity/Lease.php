@@ -241,6 +241,10 @@ class Lease
         return $this;
     }
 
+    public function getAnnualRentCharged() {
+        return ("{$this->rent}" + "{$this->charges}") * "{$this->paymentTerm}"; 
+    }
+
     public function getOwner(): ?User
     {
         return $this->owner;

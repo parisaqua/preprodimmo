@@ -127,6 +127,11 @@ class User implements UserInterface
      */
     private $tenantLeases;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $UserRegistratedAt;
+
     public function __construct()
     {
         $this->properties = new ArrayCollection();
@@ -269,7 +274,7 @@ class User implements UserInterface
 
     public function getRoles(): array   {
         $roles = $this->roles;    
-        $roles[] = 'ROLE_USER';
+        $roles[] = 'ROLE_PROPERTYMANAGER';
         return array_unique($roles); 
     }
 
@@ -444,6 +449,18 @@ class User implements UserInterface
             $this->tenantLeases->removeElement($tenantLease);
             $tenantLease->removeTenant($this);
         }
+
+        return $this;
+    }
+
+    public function getUserRegistratedAt(): ?\DateTimeInterface
+    {
+        return $this->UserRegistratedAt;
+    }
+
+    public function setUserRegistratedAt(?\DateTimeInterface $UserRegistratedAt): self
+    {
+        $this->UserRegistratedAt = $UserRegistratedAt;
 
         return $this;
     }

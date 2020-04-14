@@ -2,12 +2,14 @@
 
 {% block title %}Edit Bail{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="/css/bootstrap-datepicker.standalone.min.css" />
+{% endblock %}
+
 {% block body %}
-    <h1>Edit Bail</h1>
-
-    {{ include('manager/lease/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('lease.manager.index') }}">back to list</a>
-
-    {{ include('manager/lease/_delete_form.html.twig') }}
+    <div class="container mt-4">
+        <h1>Edition du bail</h1>
+        <hr>
+        {{ include('manager/lease/_form.html.twig', {form: form, button: 'Enregistrer les modifications' }) }}
+    </div>  
 {% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    
+    <div class="container">
+    
+    <h1 class="my-4">Bienvenue sur Immobilier Digital !</h1>
+
+    <div class="alert alert-warning mt-2 mb-4">
+        <h4 class="alert-heading">Attention !</h4>
+        <p class="mb-0">  Vous devez confirmer votre adresse e-mail avant de pourvoir vous connecter.</p>
+        <p class="mb-0 mt-2"> 
+        Cliquez sur le message que vous avez reçu suite à l'inscription. Ce lien est valable 24 heures seulement. Passé ce délai, votre nouveau compte sera supprimé.
+        </p>
+
+    </div>
+    <div class="clearfix my-4 text-center mt-3">
+    <a href="{{ path('home') }}" class="btn btn-info">Revenir à la page d'accueuil</a>
+    </div>
+    
+    </div>
+{% endblock %}

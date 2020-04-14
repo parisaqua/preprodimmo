@@ -3,14 +3,44 @@
    
 
     <div class="row align-items-end">
-        <div class="col-md-6">
+        <div class="col-md-3">
+            {{ form_row(form.type) }}
+        </div>
+        <div class="col-md-9">
             {{ form_row(form.property) }}
+        </div>
+    </div>
+    <div class="row align-items-end">
+         <div class="col-md-4">
+            {{ form_row(form.owner) }}
+        </div>
+        <div class="col-md-8">
+            {{ form_row(form.tenant) }}
+        </div>
+    </div>
+    <div class="row align-items-end">
+        <div class="col-md-3">
+            {{ form_row(form.signatureDate) }}
         </div>
         <div class="col-md-3">
             {{ form_row(form.effectDate) }}
         </div>
+        <div class="col-md-2">
+            {{ form_row(form.rent) }}
+        </div>
+        <div class="col-md-2">
+            {{ form_row(form.charges) }}
+        </div>
+         <div class="col-md-2">
+            {{ form_row(form.vat) }}
+        </div>
+    </div>
+    <div class="row align-items-end">
         <div class="col-md-3">
-            {{ form_row(form.type) }}
+            {{ form_row(form.length) }}
+        </div>
+        <div class="col-md-3">
+            
         </div>
     </div>
 

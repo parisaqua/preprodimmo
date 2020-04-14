@@ -284,6 +284,11 @@ class Property
         return $this;
     }
 
+    
+    public function getDetailedProperty() {
+        return "B00"."{$this->id}"."-"."{$this->address}"."-"."{$this->postalCode}"."-"."{$this->city}"; 
+    }
+
     public function getFloor(): ?int
     {
         return $this->floor;
