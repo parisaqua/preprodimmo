@@ -11,11 +11,17 @@
         <div class="col-md-3">&nbsp;</div>
         <div class="col-md-6">
             {% if hasError %}
+                <div class="alert alert-dismissible alert-{% if hasError.classAlert is defined %}{{hasError.classAlert}}{% else %}danger{% endif %}" >
+                    <button type="button" class="close" data-dismiss="alert">&#9888;</button>
+                    {{ hasError.messageKey|trans(hasError.messageData, 'security') }}
+                </div>
+            {% endif %}
+            {# {% if hasError %}
                 <div class="alert alert-dismissible alert-danger">
                     <button type="button" class="close" data-dismiss="alert">&#9888;</button>
                     Une erreur est survenue, l'email ou le mot de passe est invalide <br/>
                 </div> 
-            {% endif %}
+            {% endif %} #}
             
             <div class="alert alert-light py-3 px-3">
                 <form action=" {{ path('account.login') }} " method="POST">
