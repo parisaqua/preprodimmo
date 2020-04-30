@@ -82,7 +82,7 @@ class Property
     private $floor;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $price;
 
@@ -111,6 +111,11 @@ class Property
      * @ORM\Column(type="boolean", options={"default":false})
      */
     private $sold = false;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default":false})
+     */
+    private $rented = true;
 
     /**
      * @ORM\Column(type="datetime")
@@ -182,12 +187,28 @@ class Property
      */
     private $leases;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="propertiesOwned")
+     */
+    private $owner;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $landing;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $access;
+
     public function __construct() {
         $this->createdAt = new \DateTime();
         $this->options = new ArrayCollection();
         $this->pictures = new ArrayCollection();
         $this->documents = new ArrayCollection();
         $this->leases = new ArrayCollection();
+        $this->owner = new ArrayCollection();
     }
 
     /**
@@ -248,6 +269,23 @@ class Property
         return $this;
     }
 
+    public function getAccess(): ?string
+    {
+        return $this->access;
+    }
+
+    public function setAccess(?string $access): self
+    {
+        $this->access = $access;
+
+        return $this;
+    }
+
+
+
+
+
+
     public function getSurface(): ?float
     {
         return $this->surface;
@@ -286,7 +324,21 @@ class Property
 
     
     public function getDetailedProperty() {
-        return "B00"."{$this->id}"."-"."{$this->address}"."-"."{$this->postalCode}"."-"."{$this->city}"; 
+        if($this->id < 10) {
+            return "B0000"."{$this->id}"."-"."{$this->address}"."-"."{$this->postalCode}"."-"."{$this->city}"; 
+        }
+        elseif($this->id >=10 and $this->id <100) {
+            return "B000"."{$this->id}"."-"."{$this->address}"."-"."{$this->postalCode}"."-"."{$this->city}";
+        }
+        elseif($this->id >=100 and $this->id <1000) {
+            return "B00"."{$this->id}"."-"."{$this->address}"."-"."{$this->postalCode}"."-"."{$this->city}";
+        }
+        elseif($this->id >=1000 and $this->id <10000) {
+            return "B0"."{$this->id}"."-"."{$this->address}"."-"."{$this->postalCode}"."-"."{$this->city}";
+        }
+        else {
+            return "B"."{$this->id}"."-"."{$this->address}"."-"."{$this->postalCode}"."-"."{$this->city}";
+        }
     }
 
     public function getFloor(): ?int
@@ -387,6 +439,18 @@ class Property
     public function setSold(bool $sold): self
     {
         $this->sold = $sold;
+
+        return $this;
+    }
+
+    public function getRented(): ?bool
+    {
+        return $this->rented;
+    }
+
+    public function setRented(bool $rented): self
+    {
+        $this->rented = $rented;
 
         return $this;
     }
@@ -631,6 +695,46 @@ class Property
 
         return $this;
     }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getOwner(): Collection
+    {
+        return $this->owner;
+    }
+
+    public function addOwner(User $owner): self
+    {
+        if (!$this->owner->contains($owner)) {
+            $this->owner[] = $owner;
+        }
+
+        return $this;
+    }
+
+    public function removeOwner(User $owner): self
+    {
+        if ($this->owner->contains($owner)) {
+            $this->owner->removeElement($owner);
+        }
+
+        return $this;
+    }
+
+    public function getLanding(): ?string
+    {
+        return $this->landing;
+    }
+
+    public function setLanding(?string $landing): self
+    {
+        $this->landing = $landing;
+
+        return $this;
+    }
+
+   
 
     
 

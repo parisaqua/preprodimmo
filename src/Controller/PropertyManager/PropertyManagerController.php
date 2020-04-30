@@ -108,6 +108,7 @@ class PropertyManagerController extends AbstractController {
  
             $property->setAuthor($this->getUser());
             $property->setManager($this->getUser());
+            $property->addOwner($this->getUser());
 
             $this->em->persist($property);
             $this->em->flush();
@@ -147,6 +148,8 @@ class PropertyManagerController extends AbstractController {
                 $document->setProperty($property);
                 $manager->persist($document);
             }
+
+            $property->addOwner($this->getUser());
             
             $this->em->flush();
             $this->addFlash('success', 'Bien modifié avec succès !');

@@ -13,30 +13,35 @@
     {{ form_widget(form) }}
 {% endblock %}
 
+
 {% block _property_documents_entry_widget %}
 
     <div class="form-group" id="block_{{id}}">
         <div class="row">
-            <div class="col-10">
+            <div class="col-11">
                 <div class="row">
-                    <div class="col-md-5">
+                    <div class="col-md-3">
                         {{ form_widget(form.documentFile) }}
                         {{ form_errors(form.documentFile) }}
                     </div>
                     <div class="col-md-2" id="currentDoc">
-                        
+                        {% if form.vars.data.fileName|default %}
+                            <a href="{{asset (vich_uploader_asset (form.vars.data, 'documentFile'))}}" target="_blank" title="{{form.vars.data.fileName}}">
+                                <img class="doc" src="{{  '/images/pdf.png' }}" alt="">
+                            </a>
+                        {% endif %}
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         {{ form_widget(form.name) }}
                         {{ form_errors(form.name) }}
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         {{ form_widget(form.kind) }}
                         {{ form_errors(form.kind) }}
                     </div>
                 </div>
             </div>
-            <div class="col-2">
+            <div class="col-1">
                 <button type="button" data-action="delete" data-target="#block_{{id}}" class="btn btn-danger" title="Supprimer"><i class="fas fa-trash-alt"></i></button>
             </div>
         </div>
@@ -44,3 +49,4 @@
     </div>
 
 {% endblock %}
+

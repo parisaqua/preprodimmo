@@ -86,7 +86,13 @@ class LeaseType extends AbstractType
                 'class' => Property::class,
                 'label' => 'Bien',
                 'required' => true,
-                'choice_label' => 'detailedProperty',     
+                'choice_label' => 'detailedProperty', 
+                // 'query_builder' => function (EntityRepository $er) {
+                //     return $er->createQueryBuilder('p')
+                //         ->andWhere('p.manager LIKE :user')
+                //         ->setParameter('user', 'app.user')
+                //         ;   
+                // },      
             ))
         ;
 

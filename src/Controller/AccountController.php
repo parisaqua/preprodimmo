@@ -122,12 +122,7 @@ class AccountController extends AbstractController
 
             return $this->redirectToRoute("account.bienvenue");
 
-            // $this->addFlash(
-            //     'success',
-            //     "Votre compte a bien été créé. Vous allez recevoir un e-mail afin d'activer votre compte."
-            // );
-
-            // return $this->redirectToRoute('account.login');
+           
         }
 
         return $this->render('account/registration.html.twig', [
@@ -228,7 +223,7 @@ class AccountController extends AbstractController
             'form' => $form->createView()
         ]);
 
-    }
+    } 
 
     /**
      * @return string

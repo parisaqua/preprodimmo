@@ -14,7 +14,10 @@
                 {{property.city}} ({{property.postalCode}})
             </p>
             <p> {{property.surface}} m²</p>
-            <h4 class="text-info font-weight-bold">{{property.formatedPrice}} €</h4>
+            {# <h4 class="text-info font-weight-bold">{{property.formatedPrice}} €</h4> #}
+            {% for lease in property.leases %}
+            <h4 class="text-info font-weight-bold">{{lease.rent}} € + {{lease.charges}} € charges</h4>
+            {% endfor %}
             <p> {{ property.description | nl2br }} </p>
         </div>
     </div>

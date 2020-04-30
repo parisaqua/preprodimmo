@@ -132,6 +132,11 @@ class User implements UserInterface
      */
     private $UserRegistratedAt;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Property", mappedBy="owner")
+     */
+    private $propertiesOwned;
+
     public function __construct()
     {
         $this->properties = new ArrayCollection();
@@ -139,6 +144,7 @@ class User implements UserInterface
         $this->isActive = false;
         $this->ownerLeases = new ArrayCollection();
         $this->tenantLeases = new ArrayCollection();
+        $this->propertiesOwned = new ArrayCollection();
     }
 
     /**
@@ -215,6 +221,10 @@ class User implements UserInterface
 
     public function getFullName() {
         return "{$this->firstName} {$this->lastName}"; 
+    }
+
+    public function getFullId() {
+        return "{$this->firstName} {$this->lastName} (réf.: {$this->id})"; 
     }
 
     public function getEmail(): ?string
@@ -461,6 +471,34 @@ class User implements UserInterface
     public function setUserRegistratedAt(?\DateTimeInterface $UserRegistratedAt): self
     {
         $this->UserRegistratedAt = $UserRegistratedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Property[]
+     */
+    public function getPropertiesOwned(): Collection
+    {
+        return $this->propertiesOwned;
+    }
+
+    public function addPropertiesOwned(Property $propertiesOwned): self
+    {
+        if (!$this->propertiesOwned->contains($propertiesOwned)) {
+            $this->propertiesOwned[] = $propertiesOwned;
+            $propertiesOwned->addOwner($this);
+        }
+
+        return $this;
+    }
+
+    public function removePropertiesOwned(Property $propertiesOwned): self
+    {
+        if ($this->propertiesOwned->contains($propertiesOwned)) {
+            $this->propertiesOwned->removeElement($propertiesOwned);
+            $propertiesOwned->removeOwner($this);
+        }
 
         return $this;
     }

@@ -65,7 +65,7 @@ class Document
      * @var File|null
      * 
      * @Assert\File(
-     *     maxSize = "1024k",
+     *     maxSize = "2M",
      *     mimeTypes = {"application/pdf", "application/x-pdf"},
      *     mimeTypesMessage = "Document PDF uniquement"
      * )

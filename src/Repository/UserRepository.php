@@ -31,18 +31,18 @@ class UserRepository extends ServiceEntityRepository
     }
     
     
-    /**
-     * Liste des individus actifs par ordre alphabetique
-     * 
-     * @return User[]
-     */
-    public function findActive(): array
-    {
-        return $this->findActiveQuery()
-            // ->setMaxResults(4)
-            ->getQuery()
-            ->getResult();
-    }
+    // /**
+    //  * Liste des individus actifs par ordre alphabetique
+    //  * 
+    //  * @return User[]
+    //  */
+    // public function findActive(): array
+    // {
+    //     return $this->findActiveQuery()
+    //         // ->setMaxResults(4)
+    //         ->getQuery()
+    //         ->getResult();
+    // }
     
     /**
      * Fonction des individus actifs par ordre alphabetique
@@ -51,9 +51,55 @@ class UserRepository extends ServiceEntityRepository
      */
     public function findActiveQuery(): QueryBuilder {
         return $this->createQueryBuilder('u')
-        // ->andWhere('u.active = true')
-        ->orderBy('u.lastName', 'ASC');
+        ->andWhere('u.isActive = true')
+        ->orderBy('u.lastName', 'ASC')
+        ;
     }
+
+    /**
+     * @return User[]
+     */
+    public function findAllNameAlphabetical()
+    {
+        return $this->createQueryBuilder('u')
+            ->orderBy('u.lastName', 'ASC')
+            ->getQuery()
+            ->execute()
+        ;
+    }
+
+
+    /**
+     * @return User[]
+     */
+    public function findOwnerAlphabetical()
+    {
+        return $this->findActiveQuery('u')
+            ->andWhere('u.roles LIKE :role')
+            ->setParameter('role', '%'."ROLE_PROPERTYOWNER".'%')
+            ->orderBy('u.lastName', 'ASC')  
+            ->getQuery()
+            ->execute()
+        ;
+    }
+
+    /**
+     * @return User[]
+     */
+    public function findTenantAlphabetical()
+    {
+        return $this->findActiveQuery('u')
+            ->andWhere('u.roles LIKE :role')
+            ->setParameter('role', '%'."ROLE_PROPERTYTENANT".'%')
+            ->orderBy('u.lastName', 'ASC')  
+            ->getQuery()
+            ->execute()
+        ;
+    }
+
+
+           
+    
 
     // /**
     //  * @return User[] Returns an array of User objects

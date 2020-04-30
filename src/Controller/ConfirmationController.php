@@ -71,7 +71,7 @@ class ConfirmationController extends AbstractController
         
         // réinitialisation du token et la date d'enregistrement à null pour qu'il ne soit plus réutilisable
         $user->setToken(null);
-        $user->setUserRegistratedAt(null);
+        // $user->setUserRegistratedAt(null);
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($user);

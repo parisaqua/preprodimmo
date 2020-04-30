@@ -61,7 +61,7 @@
                 {% if property.documents|length > 0 %}
                     <p>Document(s)  : {{ property.documents|length }} </p>
                     {% for document in property.documents %}
-                    <li>{{ document.name }} {% if not loop.last %},{% endif %} </li> 
+                    <li> <a href="{{asset (vich_uploader_asset (document, 'documentFile'))}}" target="_blank">{{ document.name }}</a> {% if not loop.last %},{% endif %} </li> 
                     {% endfor %}
                 {% else %}
                     <p>Pas encore de document associé à ce bien. </p> 

@@ -6,20 +6,32 @@ use App\Entity\User;
 use App\Entity\Option;
 use App\Entity\Property;
 use App\Form\DocumentType;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class PropertyType extends AbstractType
 {
+    private $userRepository;
+    public function __construct(UserRepository $userRepository, Security $security)
+    {
+        $this->userRepository = $userRepository;
+        $this->security = $security;
+    } 
+    
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $user = $this->security->getUser();
+        
         $builder
             ->add('title')
             ->add('description')
@@ -27,7 +39,10 @@ class PropertyType extends AbstractType
             ->add('rooms')
             ->add('bedrooms')
             ->add('floor')
-            ->add('price')
+            ->add('price', MoneyType::class, [
+                'label'=>'Estimation',
+                'required' => false,
+            ])
             ->add('heat', ChoiceType::class, [
                 'choices' => $this->getChoices()
             ])
@@ -35,7 +50,8 @@ class PropertyType extends AbstractType
                 'class' => Option::class,
                 'choice_label' => 'name',
                 'multiple' => true,
-                'required' => false
+                'required' => false,
+                
             ])
             ->add('city')
             ->add('address')
@@ -43,6 +59,9 @@ class PropertyType extends AbstractType
             ->add('lat', HiddenType::class)
             ->add('lng', HiddenType::class)
             ->add('sold')
+            ->add('rented')
+            ->add('landing')
+            ->add('access')
             ->add('pictureFiles', FileType::class, [
                 'required' => false,
                 'multiple' => true
@@ -57,8 +76,17 @@ class PropertyType extends AbstractType
                 'required' => true,
             ])    
 
-          
             
+
+            // ->add('owner', EntityType::class, array(
+            //     'class' => User::class,
+            //     'label' => 'Propiétaire',
+            //     'multiple' => true,
+            //     'required' => true,
+            //     'choice_label' => 'fullId',
+            //     'choices' => $this->userRepository->findOwnerAlphabetical(), 
+            // ))
+
         ;
     }
 

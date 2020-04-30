@@ -5,11 +5,17 @@
         <div class="col-md-4">
             {{ form_row(form.title) }}
         </div>
-        <div class="col-md-4">
+        <div class="col-md-2">
             {{ form_row(form.surface) }}
         </div>
-        <div class="col-md-4">
+        <div class="col-md-2">
             {{ form_row(form.price) }}
+        </div>
+        <div class="col-md-2">
+            {{ form_row(form.sold) }}
+        </div>
+        <div class="col-md-2">
+            {{ form_row(form.rented) }}
         </div>
     </div>
     <div class="row align-items-end">
@@ -19,14 +25,15 @@
          <div class="col-md-2">
             {{ form_row(form.bedrooms) }}
         </div>
-         <div class="col-md-2">
-            {{ form_row(form.heat) }}
-        </div>
+        
         <div class="col-md-2">
             {{ form_row(form.floor) }}
         </div>
-         <div class="col-md-2">
-            {{ form_row(form.sold) }}
+        <div class="col-md-2">
+            {{ form_row(form.landing) }}
+        </div>
+        <div class="col-md-4">
+            {{ form_row(form.heat) }}
         </div>
     </div>
     <div class="row align-items-end">
@@ -41,8 +48,11 @@
         </div>
     </div>
     <div class="row align-items-start">
-        <div class="col-md-8">
+        <div class="col-md-5">
             {{ form_row(form.description) }}
+        </div>
+        <div class="col-md-3">
+            {{ form_row(form.access) }}
         </div>
          <div class="col-md-4">
             {{ form_row(form.options) }}

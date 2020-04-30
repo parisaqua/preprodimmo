@@ -21,7 +21,7 @@ vich_uploader:
             upload_destination: '%kernel.project_dir%/public/media/documents'
             namer: Vich\UploaderBundle\Naming\OrignameNamer
 
-            inject_on_load: false
+            inject_on_load: true
             delete_on_update: true
             delete_on_remove: true
     

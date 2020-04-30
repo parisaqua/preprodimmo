@@ -2,7 +2,7 @@
 
 {% block title %}- Edition d'un bien{% endblock %}
 
-{% form_theme form 'manager/property/_collection.html.twig' %}
+{# {% form_theme form 'manager/property/_collection.html.twig' %} #}
 
 {% block body %}
 
@@ -21,13 +21,39 @@
             {% endif %}
         </div>
     </div>
+
+
+
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#bien">Bien</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#baux">Baux</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#travaux">Travaux</a>
+        </li>
+    </ul>
+
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade active show" id="bien">
+                {% form_theme form 'manager/property/_collection.html.twig' %}
+                {{ include('manager/property/_form.html.twig', {form: form, button: 'Enregistrer les modifications' }) }}
+            </div>
+            <div class="tab-pane fade " id="baux">
+                 
+            </div>
+            <div class="tab-pane fade " id="travaux">
+            
+            </div>
+        </div>
+        
    
     <hr>
  
-   {{ include('manager/property/_form.html.twig', {form: form, button: 'Enregistrer les modifications' }) }}
 
 </div> 
-
 
 
 {% endblock %}
