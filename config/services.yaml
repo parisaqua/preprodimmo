@@ -37,3 +37,6 @@ services:
         arguments: ['@vich_uploader.storage.file_system']
         tags:
             - { name: kernel.event_subscriber }
+
+    App\Naming\MyNamer:
+        public: true

@@ -72,7 +72,6 @@
                     autoclose: true,
                     datesDisable: [],
                     todayHighlight: true,
-
                 });
             })
         </script>
@@ -83,6 +82,9 @@
                     $(inputFile).parent()
                         .find('.custom-file-label')
                         .html(inputFile.files[0].name)
+                        .find('.doc-name')
+                        .html(inputFile.files[0].name)
+
                 });
         </script>
         

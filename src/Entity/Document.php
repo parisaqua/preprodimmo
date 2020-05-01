@@ -70,6 +70,7 @@ class Document
      *     mimeTypesMessage = "Document PDF uniquement"
      * )
      * 
+     * 
      * @Vich\UploadableField(mapping="property_document", fileNameProperty="filename")
      */
     private $documentFile;

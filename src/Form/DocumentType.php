@@ -33,11 +33,10 @@ class DocumentType extends AbstractType
                     'autre' => '3',
                 ],
                 'required' => true,
-                
             ])
 
             ->add('documentFile', VichFileType::class, [
-                'required' => false,
+                'required' => true,
                 'label' => false,
                 'allow_delete' => false,
                 'download_label' => 'Téléchargement',
@@ -45,7 +44,6 @@ class DocumentType extends AbstractType
                 'asset_helper' => true,
                 'delete_label' => 'Supprimer l\'image actuelle ?',
             ]) 
-            
         ;
     }
 

@@ -31,18 +31,18 @@ class UserRepository extends ServiceEntityRepository
     }
     
     
-    // /**
-    //  * Liste des individus actifs par ordre alphabetique
-    //  * 
-    //  * @return User[]
-    //  */
-    // public function findActive(): array
-    // {
-    //     return $this->findActiveQuery()
-    //         // ->setMaxResults(4)
-    //         ->getQuery()
-    //         ->getResult();
-    // }
+    /**
+     * Liste des individus actifs par ordre alphabetique
+     * 
+     * @return User[]
+     */
+    public function findActive(): array
+    {
+        return $this->findActiveQuery()
+            // ->setMaxResults(4)
+            ->getQuery()
+            ->getResult();
+    }
     
     /**
      * Fonction des individus actifs par ordre alphabetique
