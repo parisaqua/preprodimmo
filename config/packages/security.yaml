@@ -54,7 +54,7 @@ security:
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/manager, roles: ROLE_MANAGER }
-        - { path: ^/gestion, roles: ROLE_PROPERTYMANAGER }
+        - { path: ^/portefeuille, roles: ROLE_PROPERTYMANAGER }
         - { path: ^/propriétaire, roles: ROLE_PROPERTYOWNER }
         - { path: ^/occupant, roles: ROLE_PROPERTYTENANT }
         - { path: ^/profile, roles: ROLE_USER }

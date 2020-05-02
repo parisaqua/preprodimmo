@@ -15,17 +15,36 @@
     <body class="bodyimmo">
         <div class="containerfb">
             {% include 'partials/header.html.twig' %}
+
+            {% for label, messages in app.flashes %} 
+                <div class="modal fade" id="flashesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-show="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="alert alert-{{ label }}">
+                        <div class="modal-body">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                            <div id="alert1" class=" m-4 ">
+                                {% for message in messages %}
+                                    {{ message | raw }}
+                                {% endfor %}
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
             
-                {% for label, messages in app.flashes %} {# affichage des message success ou danger#}
+                {# {% for label, messages in app.flashes %} 
                         <div style="display: block; margin: 0px auto; max-width : 800px; ">
                             <div id="alert1" class="alert alert-dismissible alert-{{ label }} m-4 ">
                                 {% for message in messages %}
                                     <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                    {{ message | raw }} {# filtre raw permet la prise en comte du code html documentation dans twig#}
+                                    {{ message | raw }} 
                                 {% endfor %}
                             </div>
                         </div>
-                {% endfor %}
+                {% endfor %} #}
           
             {% block body %}
             
@@ -53,13 +72,13 @@
 
         {{ encore_entry_script_tags('app') }}
 
-        <script>
+        {# <script>
         $("document").ready(function(){
         setTimeout(function(){
         $("div#alert1").remove();
-        }, 4000 ); // 4 secs
+        }, 60000 ); // 4 secs : 4000 ou 60 sec : 60000
         });
-        </script>
+        </script> #}
 
         <script>
             $(document).ready(function() {
@@ -76,15 +95,15 @@
             })
         </script>
 
-        {# <script>
-            $('.custom-file-input').on('change', function(event) {
-                    var inputFile = event.currentTarget;
-                    $(inputFile).parent()
-                        .find('.custom-file-label')
-                        .html(inputFile.files[0].name)
-                });
+        <script>
+        $(document).ready(function() {
+            $('#flashesModal').modal('show')
+            setTimeout(function(){
+            $('#flashesModal').modal('hide')
+            }, 2000 ); // 4 secs : 4000 ou 60 sec : 60000
+        })
+        </script>
 
-        </script> #}
         
         {% endblock %}
 

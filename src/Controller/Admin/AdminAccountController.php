@@ -29,7 +29,7 @@ class AdminAccountController extends AbstractController
     public function index(UserRepository $userRepository, Request $request): Response
     {
         return $this->render('admin/user/index.html.twig', [
-            'users' => $userRepository->findActive(),
+            'users' => $userRepository->findAllNameAlphabetical(),
             'menu' => 'adminUser'
         ]);
     }

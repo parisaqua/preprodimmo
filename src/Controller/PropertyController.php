@@ -30,7 +30,7 @@ class PropertyController extends AbstractController {
     /**
      * Liste des biens Paginés
      * 
-     * @Route("/biens", name="property.index")
+     * @Route("admin/biens", name="property.index")
      *
      * @return Response
      */
@@ -48,7 +48,6 @@ class PropertyController extends AbstractController {
             8
         );
 
-        
         return $this->render('property/index.html.twig', [
             'current_menu' => "properties",
             'properties' => $properties,

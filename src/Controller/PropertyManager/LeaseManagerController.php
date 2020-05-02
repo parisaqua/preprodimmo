@@ -38,6 +38,7 @@ class LeaseManagerController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($lease);
             $entityManager->flush();
+            $this->addFlash('success', 'Bail créé avec succès !');
 
             return $this->redirectToRoute('lease.manager.index');
         }
@@ -68,6 +69,7 @@ class LeaseManagerController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $this->addFlash('success', 'Bail modifié avec succès !');
 
             return $this->redirectToRoute('lease.manager.index');
         }

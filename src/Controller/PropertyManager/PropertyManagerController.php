@@ -44,7 +44,7 @@ class PropertyManagerController extends AbstractController {
     /**
      * Undocumented function
      *
-     * @Route("/gestion/biens", name="property.manager.index")
+     * @Route("admin/gestion/biens", name="property.manager.index")
      * 
      */
     public function index(PaginatorInterface $paginator, Request $request)
@@ -63,7 +63,7 @@ class PropertyManagerController extends AbstractController {
     }
 
     /**
-     * @Route("/gestion/mesbiens", name="myproperty.manager.index")
+     * @Route("/portefeuille/mesbiens", name="myproperty.manager.index")
      *
      * @param PaginatorInterface $paginator
      * @param Request            $request
@@ -127,7 +127,7 @@ class PropertyManagerController extends AbstractController {
     /**
      * Edition d'un bien
      *
-     * @Route("/gestion/biens/{id}", name="property.manager.edit", methods="POST|GET")
+     * @Route("portefeuille/gestion/biens/{id}", name="property.manager.edit", methods="POST|GET")
      * 
      * @Security("property.isManager(user)")
      * 
@@ -140,6 +140,7 @@ class PropertyManagerController extends AbstractController {
         
         $form = $this->createForm(PropertyType::class, $property);
         $form->handleRequest($request);
+        $slug = $property->getSlug();
 
         if($form->isSubmitted() && $form->isValid()) {
 
@@ -150,7 +151,22 @@ class PropertyManagerController extends AbstractController {
             
             $this->em->flush();
             $this->addFlash('success', 'Bien modifié avec succès !');
-            return $this->redirectToRoute('myproperty.manager.index'); 
+
+            if($property->getSlug() !== $slug) {
+
+                return $this->redirectToRoute('manager.property.show', [
+                    'id' => $property->getId(),
+                    'slug' => $property->getSlug()
+                ], 301);
+            }
+    
+            return $this->render('manager/property/show.html.twig', [
+                'property' => $property,
+                'current_menu' => 'properties',
+            ]);
+
+
+           // return $this->redirectToRoute('myproperty.manager.index'); 
         }
 
         return $this->render('manager/property/edit.html.twig', [
@@ -209,6 +225,30 @@ class PropertyManagerController extends AbstractController {
             $this->addFlash('success', 'Bien supprimé avec succès !');
         }
         return $this->redirectToRoute('property.manager.index');
+    }
+
+     /**
+     * Détail d'un bien
+     *
+     * @Route("portefeuille/biens/{slug}-{id}", name="manager.property.show", requirements={"slug"= "[a-z0-9\-]*" })
+     * 
+     * @return Response
+     */
+
+    public function show(Property $property, string $slug, Request $request): Response {
+
+        if($property->getSlug() !== $slug) {
+
+            return $this->redirectToRoute('manager.property.show', [
+                'id' => $property->getId(),
+                'slug' => $property->getSlug()
+            ], 301);
+        }
+
+        return $this->render('manager/property/show.html.twig', [
+            'property' => $property,
+            'current_menu' => 'properties',
+        ]);
     }
 
 }
