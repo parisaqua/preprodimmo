@@ -188,11 +188,6 @@ class Property
     private $leases;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="propertiesOwned")
-     */
-    private $owner;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $landing;
@@ -208,7 +203,6 @@ class Property
         $this->pictures = new ArrayCollection();
         $this->documents = new ArrayCollection();
         $this->leases = new ArrayCollection();
-        $this->owner = new ArrayCollection();
     }
 
     /**
@@ -696,31 +690,6 @@ class Property
         return $this;
     }
 
-    /**
-     * @return Collection|User[]
-     */
-    public function getOwner(): Collection
-    {
-        return $this->owner;
-    }
-
-    public function addOwner(User $owner): self
-    {
-        if (!$this->owner->contains($owner)) {
-            $this->owner[] = $owner;
-        }
-
-        return $this;
-    }
-
-    public function removeOwner(User $owner): self
-    {
-        if ($this->owner->contains($owner)) {
-            $this->owner->removeElement($owner);
-        }
-
-        return $this;
-    }
 
     public function getLanding(): ?string
     {

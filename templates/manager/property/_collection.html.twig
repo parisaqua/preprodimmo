@@ -28,12 +28,12 @@
                             </a>
                         </div>
                     {% else %}
-                        <div class="col-md-4">
+                        <div class="col-md-4 mt-2">
                             {{ form_widget(form.documentFile,  {
-                            attr: {
-                                placeholder: 'Choisissez un PDF'
-                            }
-                        }) }}
+                                attr: {
+                                    placeholder: 'Choisissez un PDF'
+                                }
+                            }) }}
                             {{ form_errors(form.documentFile) }}
                         </div>
                      {% endif %}

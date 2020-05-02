@@ -40,3 +40,4 @@ services:
 
     App\Naming\MyNamer:
         public: true
+

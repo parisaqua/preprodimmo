@@ -132,10 +132,7 @@ class User implements UserInterface
      */
     private $UserRegistratedAt;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Property", mappedBy="owner")
-     */
-    private $propertiesOwned;
+    
 
     public function __construct()
     {

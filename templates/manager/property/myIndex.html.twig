@@ -40,7 +40,7 @@
                 </td>
                 <td><a href=" {{path('property.show', {id: property.id, slug: property.slug})}} ">{{ property.title }}</a> </td>
                 <td>{{ property.rooms }} pièces à {{ property.city }}-{{ property.postalCode }}</td>
-                <td>{# {{ property.owner.fullName}} #}</td>
+                <td></td>
                 
                 <td>
                     {% if app.user and is_granted('ROLE_ADMIN') %}

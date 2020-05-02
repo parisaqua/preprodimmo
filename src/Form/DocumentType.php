@@ -20,10 +20,7 @@ class DocumentType extends AbstractType
     {
         
         $builder
-            ->add('name', TextType::class, [
-                'attr' => [
-                    'placeholder' => 'Nom du document'
-                ],  
+            ->add('name', TextType::class, [ 
                 'required' => true,
             ])
             ->add('kind', ChoiceType::class, [
@@ -32,6 +29,7 @@ class DocumentType extends AbstractType
                     'gestion' => '2',
                     'autre' => '3',
                 ],
+                'placeholder' => 'Choisir un type de document',
                 'required' => true,
             ])
 

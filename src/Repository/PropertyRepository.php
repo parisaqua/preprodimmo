@@ -40,6 +40,7 @@ class PropertyRepository extends ServiceEntityRepository
     ;
     }
 
+
     /**
       * Query pour paginator dans la page d'admin de mes biens
       *
@@ -64,6 +65,20 @@ class PropertyRepository extends ServiceEntityRepository
         ->orderBy('p.updated_at', 'DESC')
         
     ;
+    }
+
+    /**
+     * @return Property
+     */
+    public function findByManager($user)
+    {
+        return $this->createQueryBuilder('p')
+
+            ->andWhere('p.manager = :user')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->execute()
+        ;
     }
 
     /**
