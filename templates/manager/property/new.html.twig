@@ -1,14 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}- Edition d'un bien{% endblock %}
+{% block title %}- Nouveau bien{% endblock %}
 
 {% form_theme form 'manager/property/_collection.html.twig' %}
 
 {% block body %}
 
-<div class="container mt-4">
-    <h1>Créer un nouveau bien</h1>
-    <hr>
+<div class="container mt-5">
+<div class="row">
+    <h2 class="text-primary mb-1"><i class="fas fa-home"></i>&nbsp;Nouveau bien</h2>
+    <hr class="mb-3" style="width: 100%; border-top: 2px solid #446E9B">
+</div>
     {{ include('manager/property/_form.html.twig', {form: form, button: 'Enregistrer le bien' }) }}
 </div> 
 

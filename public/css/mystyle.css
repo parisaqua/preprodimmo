@@ -315,13 +315,13 @@ a.noUnderLigned:hover {
 
 }
 
-hr {
+/* hr {
     border: none;
     border-top: 5px solid white;
     color: white;
     overflow: visible;
     text-align: center;
-}
+} */
 
 .middle {
     padding : -25px 0px;
@@ -385,4 +385,18 @@ a.buttonsub {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+
+.newMessageBackground {
+    display: block;
+    width: 100%;
+    min-height: 200px;
+    background-color: #345578;
+    
+
+}
+
+.newMessage {
+    color: white;
 }

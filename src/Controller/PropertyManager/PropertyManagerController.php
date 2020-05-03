@@ -127,7 +127,7 @@ class PropertyManagerController extends AbstractController {
     /**
      * Edition d'un bien
      *
-     * @Route("portefeuille/gestion/biens/{id}", name="property.manager.edit", methods="POST|GET")
+     * @Route("portefeuille/edition/biens/{id}", name="property.manager.edit", methods="POST|GET")
      * 
      * @Security("property.isManager(user)")
      * 
@@ -159,14 +159,21 @@ class PropertyManagerController extends AbstractController {
                     'slug' => $property->getSlug()
                 ], 301);
             }
-    
-            return $this->render('manager/property/show.html.twig', [
-                'property' => $property,
-                'current_menu' => 'properties',
+
+            return $this->redirectToRoute('manager.property.show', [
+                'id' => $property->getId(),
+                'slug' => $property->getSlug()
             ]);
 
 
-           // return $this->redirectToRoute('myproperty.manager.index'); 
+    
+            // return $this->render('manager/property/show.html.twig', [
+            //     'property' => $property,
+            //     'current_menu' => 'properties',
+            // ]);
+
+
+            
         }
 
         return $this->render('manager/property/edit.html.twig', [

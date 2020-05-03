@@ -2,54 +2,32 @@
 
 {% block title %}- Edition d'un bien{% endblock %}
 
-{# {% form_theme form 'manager/property/_collection.html.twig' %} #}
-
 {% block body %}
 
 <div class="container mt-4">
     <div class="row">
-        <div class="col-md-8">
-            <h1>Editer le bien n° {{ property.id }}</h1>
+        <div class="col-md-{% if app.user and is_granted('ROLE_ADMIN') %}8{% else %}12{% endif %}">
+            <h2 class="text-primary mb-1"><i class="fas fa-home"></i>&nbsp;Edition du bien</h2>
+            <hr class="mb-3" style="width: 100%; border-top: 2px solid #446E9B">
         </div>
+        {% if app.user and is_granted('ROLE_ADMIN') %}
         <div class="col-md-3 text-right">
-            {% if app.user and is_granted('ROLE_ADMIN') %}
                 <form method="post" action="{{ path('property.manager.delete', {id: property.id}) }}" style="display: inline-block; margin-top: 5px" onSubmit="return confirm('Etes-vous certain ?')">
                     <input type="hidden" name="_method" value="DELETE">
                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ property.id )}}">
                     <button class="btn btn-danger">Supprimer le bien</button>
                 </form>
-            {% endif %}
         </div>
+        {% endif %}
     </div>
 
-
-
-    <ul class="nav nav-tabs">
-        <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" href="#bien">Bien</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#baux">Baux</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#travaux">Travaux</a>
-        </li>
-    </ul>
-
-        <div id="myTabContent" class="tab-content">
-            <div class="tab-pane fade active show" id="bien">
-                {% form_theme form 'manager/property/_collection.html.twig' %}
-                {{ include('manager/property/_form.html.twig', {form: form, button: 'Enregistrer les modifications' }) }}
-                
-            </div>
-            <div class="tab-pane fade " id="baux">
-                 
-            </div>
-            <div class="tab-pane fade " id="travaux">
-            
-            </div>
-        </div>
+    <div class="tab-pane fade active show" id="bien">
         
+        {% form_theme form 'manager/property/_collection.html.twig' %}
+        
+        {{ include('manager/property/_form.html.twig', {form: form, button: 'Enregistrer les modifications' }) }}
+        
+    </div>
    
     <hr>
  

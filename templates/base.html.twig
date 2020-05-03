@@ -8,7 +8,8 @@
         <link rel="stylesheet" href="/css/bootstrap.min.css"> {# {{ path('home_page') }} #}
         <link rel="stylesheet" href="/css/select2.min.css">
         <link rel="stylesheet" href="/css/mystyle.css">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+        
+        {# <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> #}
 
         {% block stylesheets %}  {{ encore_entry_link_tags('app') }} {% endblock %}
     </head>
@@ -24,7 +25,7 @@
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                             </button>
-                            <div id="alert1" class=" m-4 ">
+                            <div id="alert1" class="">
                                 {% for message in messages %}
                                     {{ message | raw }}
                                 {% endfor %}
@@ -66,19 +67,13 @@
         <script src="/js/bs-custom-file-input.js"></script>
         <script src="/js/bootstrap-datepicker.min.js" ></script>
         <script src="/js/bootstrap-datepicker.fr.min.js" ></script>
-        
+        <script src="https://kit.fontawesome.com/692cfe4b71.js" crossorigin="anonymous"></script>
 
         {% block javascripts %}
 
         {{ encore_entry_script_tags('app') }}
 
-        {# <script>
-        $("document").ready(function(){
-        setTimeout(function(){
-        $("div#alert1").remove();
-        }, 60000 ); // 4 secs : 4000 ou 60 sec : 60000
-        });
-        </script> #}
+       
 
         <script>
             $(document).ready(function() {
@@ -100,7 +95,7 @@
             $('#flashesModal').modal('show')
             setTimeout(function(){
             $('#flashesModal').modal('hide')
-            }, 2000 ); // 4 secs : 4000 ou 60 sec : 60000
+            }, 2000 ); // 2 secs : 2000 ou 60 sec : 60000
         })
         </script>
 

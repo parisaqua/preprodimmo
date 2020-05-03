@@ -1,13 +1,13 @@
 City: Ville
 Address: Adresse
 Postal code: Code postal
-Title: Titre
+Title: Titre (votre référence unique)
 Price: Prix
-Floor: Etage
+Floor: Etage (0 pour RDC)
 Rooms: Nbre de pièces
 Bedrooms: Nbr de chambres
 Heat : Chauffage
-Sold : Vendu
+Sold : A vendre
 Surface: Surface
 Description: Description
 Electrique: Electrique
@@ -34,7 +34,7 @@ Confirmez votre nouveau mot de passe ...: Confirmez votre nouveau mot de passe .
 Surface maximale: Surface maximale
 Surface minimale: Surface minimale
 Rechercher: Rechercher
-Options: Option
+Options: Caratéristiques / Options
 Image file: Photo du bien
 Décrivez-vous en quelque mots ...: Décrivez-vous en quelque mots ...
 Created at: Created at
@@ -85,3 +85,4 @@ annuelle:	annuelle
 Landing: Palier
 Access: Moyens d'accès
 Rented: Occupé
+

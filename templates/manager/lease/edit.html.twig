@@ -13,3 +13,23 @@
         {{ include('manager/lease/_form.html.twig', {form: form, button: 'Enregistrer les modifications' }) }}
     </div>  
 {% endblock %}
+
+{% block javascripts %}
+
+{{ parent() }}
+
+<script>
+   
+   $('select').select2({
+        templateSelection: function (data) {
+            if (data.id === '') { // adjust for custom placeholder values
+            return 'Custom styled placeholder text';
+            }
+
+            return data.text;
+        }
+    });
+
+</script>
+
+{% endblock %}

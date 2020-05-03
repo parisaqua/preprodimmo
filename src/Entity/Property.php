@@ -26,8 +26,10 @@ class Property
         1 => 'Gaz individuel',
         2 => 'Gaz collectif',
         3 => 'Fuel collectif',
-        4 => 'Cheminée',
-        5 => 'sans'
+        4 => 'Poele',
+        5 => 'CPCU',
+        9 => 'Cheminée',
+        10 => 'sans'
     ];
     
     /**
@@ -196,6 +198,11 @@ class Property
      * @ORM\Column(type="text", nullable=true)
      */
     private $access;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $gender;
 
     public function __construct() {
         $this->createdAt = new \DateTime();
@@ -699,6 +706,18 @@ class Property
     public function setLanding(?string $landing): self
     {
         $this->landing = $landing;
+
+        return $this;
+    }
+
+    public function getGender(): ?string
+    {
+        return $this->gender;
+    }
+
+    public function setGender(?string $gender): self
+    {
+        $this->gender = $gender;
 
         return $this;
     }

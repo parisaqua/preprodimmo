@@ -4,7 +4,7 @@
     {{ form_widget(form) }}
     <input type="hidden" id="widgets-counter" value="0"></input>
     <div class="form-group">
-        <button type="button" id="property-document" class="btn btn-primary">Ajouter un document</button>
+        <button type="button" id="property-document" class="btn btn-primary"><i class="fas fa-plus"></i>&nbsp;Ajouter un document</button>
     </div>
 
 {% endblock %}
@@ -15,49 +15,49 @@
 
 
 {% block _property_documents_entry_widget %}
-
-    <div class="form-group" id="block_{{id}}">
-        <div class="row">
-            <div class="col-md-11">
-                <div class="row">
-                    
-                    {% if form.vars.data.fileName|default %}
-                        <div class="col-md-4 current-doc" id="currentDoc">
-                            <a href="{{asset (vich_uploader_asset (form.vars.data, 'documentFile'))}}" target="_blank" title="{{form.vars.data.fileName}}">
-                                <img class="doc" src="{{  '/images/pdf.png' }}" alt=""> {{form.vars.data.fileName}}
-                            </a>
-                        </div>
-                    {% else %}
+    
+        <div class="form-group" id="block_{{id}}">
+            <div class="row">
+                <div class="col-md-11">
+                    <div class="row">
+                        
+                        {% if form.vars.data.fileName|default %}
+                            <div class="col-md-4 current-doc" id="currentDoc">
+                                <a href="{{asset (vich_uploader_asset (form.vars.data, 'documentFile'))}}" target="_blank" title="{{form.vars.data.fileName}}">
+                                    <img class="doc" src="{{  '/images/pdf.png' }}" alt=""> {{form.vars.data.fileName}}
+                                </a>
+                            </div>
+                        {% else %}
+                            <div class="col-md-4 mt-2">
+                                {{ form_widget(form.documentFile,  {
+                                    attr: {
+                                        placeholder: 'Choisissez un PDF'
+                                    }
+                                }) }}
+                                {{ form_errors(form.documentFile) }}
+                            </div>
+                        {% endif %}
                         <div class="col-md-4 mt-2">
-                            {{ form_widget(form.documentFile,  {
+                            {{ form_widget(form.name,  {
                                 attr: {
-                                    placeholder: 'Choisissez un PDF'
+                                    placeholder: 'Choisissez un nom',
+                                    class: 'doc-name'
                                 }
                             }) }}
-                            {{ form_errors(form.documentFile) }}
+                            {{ form_errors(form.name) }}
                         </div>
-                     {% endif %}
-                    <div class="col-md-4 mt-2">
-                        {{ form_widget(form.name,  {
-                            attr: {
-                                placeholder: 'Choisissez un nom',
-                                class: 'doc-name'
-                            }
-                        }) }}
-                        {{ form_errors(form.name) }}
-                    </div>
-                    <div class="col-md-4 mt-2">
-                        {{ form_widget(form.kind) }}
-                        {{ form_errors(form.kind) }}
+                        <div class="col-md-4 mt-2">
+                            {{ form_widget(form.kind) }}
+                            {{ form_errors(form.kind) }}
+                        </div>
                     </div>
                 </div>
+                <div class="col-md-1 mt-2">
+                    <button type="button" data-action="delete" data-target="#block_{{id}}" class="btn btn-danger" title="Supprimer"><i class="fas fa-trash-alt"></i></button>
+                </div>
             </div>
-            <div class="col-md-1 mt-2">
-                <button type="button" data-action="delete" data-target="#block_{{id}}" class="btn btn-danger" title="Supprimer"><i class="fas fa-trash-alt"></i></button>
-            </div>
+            
         </div>
-        
-    </div>
-
+    
 {% endblock %}
 

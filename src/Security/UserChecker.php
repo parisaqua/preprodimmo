@@ -2,6 +2,7 @@
 namespace App\Security;
 
 use App\Entity\User as AppUser;
+use App\Security\RedirectAfterLogin;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use App\Security\AccountNotActivatedException;
@@ -32,6 +33,10 @@ class UserChecker implements UserCheckerInterface
             throw new AccountNotActivatedException();
         } 
 
+       
+
+        
+
     }
    
     public function checkPostAuth(UserInterface $user)
@@ -40,6 +45,17 @@ class UserChecker implements UserCheckerInterface
         if (!$user instanceof AppUser) {
             return;
         }
+
+        if ($user->getRoles() == '%'."ROLE_PROPERTYOWNER".'%') {
+            throw new RedirectAfterLogin();
+        } 
+
+        // if ($user->hasCompleteProfile() == false) {
+        //     $url = $this->router->generate('edit_profile');
+    
+        //     return new RedirectResponse($url);
+        // }
+    
 
         
 

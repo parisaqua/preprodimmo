@@ -14,9 +14,11 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class PropertyType extends AbstractType
@@ -40,11 +42,22 @@ class PropertyType extends AbstractType
             ->add('bedrooms')
             ->add('floor')
             ->add('price', MoneyType::class, [
-                'label'=>'Estimation',
+                'label'=>'Estimation du prix',
                 'required' => false,
             ])
             ->add('heat', ChoiceType::class, [
                 'choices' => $this->getChoices()
+            ])
+            ->add('gender', ChoiceType::class, [
+                'choices'  => [
+                    'Appartement' => 1,
+                    'Maison' => 2,
+                    'Bureau' => 3,
+                    'Local commercial' => 4,
+                    'Garage' => 5,
+                ],
+                'label' => 'Type',
+                'placeholder' => 'Type de bien ...',
             ])
             ->add('options', EntityType::class, [
                 'class' => Option::class,
@@ -58,10 +71,20 @@ class PropertyType extends AbstractType
             ->add('postalCode')
             ->add('lat', HiddenType::class)
             ->add('lng', HiddenType::class)
-            ->add('sold')
-            ->add('rented')
-            ->add('landing')
-            ->add('access')
+            // ->add('sold')
+            // ->add('rented')
+            ->add('landing', TextType::class, [
+                'required' => false,
+                'attr' => [
+                    'placeholder' => 'Face, Gauche, ...'
+                    ]
+            ])
+            ->add('access', TextareaType::class, [
+                'required' => false,
+                'attr' => [
+                    'placeholder' => 'Code d\'accès, interphone, ...'
+                    ]
+             ])
             ->add('pictureFiles', FileType::class, [
                 'required' => false,
                 'multiple' => true
