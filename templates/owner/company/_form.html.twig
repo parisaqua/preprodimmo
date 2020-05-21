@@ -1,0 +1,48 @@
+{{ form_start(form) }}
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col">
+                    <div class="alert alert-light">
+                        <div class="row align-items-center">
+                            <div class="col-md-12">
+                                {{ form_row(form.name) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                {{ form_row(form.telephone) }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form_row(form.website) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                           
+                            {% if company.member|length > 0 %}
+                             <div class="col-md-12">Collaborateurs : </div>
+                                {% for user in company.member %}
+                                    {# {{user.fullName}} #}
+                                    <div class="col-md-6">
+                                        {% include 'owner/user/_user.card.html.twig' %}
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                <div class="col-md-12 text-center text-warning">Pas de contact identifié pour cette société !</div>
+                            {% endif %}
+                        </div>
+
+
+                        
+                        
+                        <hr>
+                        
+                        <button type="submit" class="btn btn-success btn-center"> <i class="fas fa-check"></i> {{ button|default('Enregistrer') }}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+{{ form_end(form) }}

@@ -81,6 +81,8 @@ class PropertyRepository extends ServiceEntityRepository
         ;
     }
 
+    
+
     /**
      * Liste des derniers biens disponibles
      * 

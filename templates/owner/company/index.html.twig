@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+{% block title %}Les sociétés{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="row align-items-center pt-5 mb-3">
+        <div class="col-md-9">
+            <h1 class="text-primary"><i class="fas fa-users"></i>&nbsp;&nbsp;Sociétés </h1>
+        </div>
+        <div class="col-md-3">
+            <a href="{{ path('company.owner.new')}}" class="btn btn-info btn-right mb-2"><i class="fas fa-user-plus"></i>&nbsp;Ajouter une société</a>
+        </div>
+    </div>
+        
+        
+        <div class="row items-align-center">
+            
+            {% for company in companys %} 
+                <div class="col-md-4">
+                    {{ company.name }}
+                </div>
+                <div class="col-md-2">
+                    <a href="{{ path('company.owner.edit', {id: company.id}) }}" title="Modifier la société ..."><i class="fas fa-edit text-info h5"></i></a>
+                </div>
+                 <div class="col-md-6">
+                    Contacts : {% if company.member is defined %}  {{ company.member|length }} {% endif %}
+                </div>
+            {% endfor %}
+        
+        </div>
+    </div>
+{% endblock %} 

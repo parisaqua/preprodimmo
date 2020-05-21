@@ -14,15 +14,23 @@
         <a class="nav-link {% if current_menu is defined and current_menu == 'properties' %}active{% endif %}" href="{{ path('property.index') }}"><i class="fas fa-city"></i>&nbsp; Les Biens</a>
       </li>
       {% endif %}
-       {% if app.user and is_granted('ROLE_PROPERTYMANAGER') or is_granted('ROLE_ADMIN') %}
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle {% if current_menu is defined and current_menu == 'manager' or current_menu is defined and current_menu == 'mymanager' %}active{% endif %}" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-list-alt"></i>&nbsp;Portefeuille</a>
-        <div class="dropdown-menu" style="">
-          <a class="dropdown-item {% if current_menu is defined and current_menu == 'mymanager' %}active{% endif %}" href="{{ path('myproperty.manager.index') }}">Mon portefeuille</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="{{ path('lease.manager.index') }}">Les baux</a>
-        </div>
-      </li>
+      {% if app.user and is_granted('ROLE_PROPERTYMANAGER') or is_granted('ROLE_ADMIN') %}
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle {% if current_menu is defined and current_menu == 'manager' or current_menu is defined and current_menu == 'mymanager' %}active{% endif %}" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-home"></i>&nbsp;Portefeuille</a>
+          <div class="dropdown-menu" style="">
+            <a class="dropdown-item {% if current_menu is defined and current_menu == 'mymanager' %}active{% endif %}" href="{{ path('myproperty.manager.index') }}">Mon portefeuille</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{{ path('lease.manager.index') }}">Les baux</a>
+          </div>
+        </li>
+          <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle {% if current_menu is defined and current_menu == 'manager' or current_menu is defined and current_menu == 'mymanager' %}active{% endif %}" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-users"></i>&nbsp;Contacts</a>
+          <div class="dropdown-menu" style="">
+            <a class="dropdown-item {% if current_menu is defined and current_menu == 'contacts' %}active{% endif %}" href="{{ path('owner.user.index') }}">Mes contacts</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Autres ...</a>
+          </div>
+        </li>
       {% endif %}
 
       {% if app.user and is_granted('ROLE_ADMIN') %}

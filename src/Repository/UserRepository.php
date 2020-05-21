@@ -56,19 +56,32 @@ class UserRepository extends ServiceEntityRepository
         ;
     }
 
+    //  /**
+    //  * @return User[]
+    //  */
+    // public function findAllNameAlphabetical()
+    // {
+    //     return $this->createQueryBuilder('u')
+    //         ->orderBy('u.lastName', 'ASC')
+    //         ->getQuery()
+    //         ->execute()
+    //     ;
+    // }
+
     /**
      * @return User[]
      */
-    public function findAllNameAlphabetical()
+    public function findByCreator($user)
     {
         return $this->createQueryBuilder('u')
+            ->andWhere('u.creator = :val')
+            ->setParameter('val', $user)
             ->orderBy('u.lastName', 'ASC')
             ->getQuery()
-            ->execute()
-        ;
+            ->execute();
     }
 
-
+    
     /**
      * @return User[]
      */

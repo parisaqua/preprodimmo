@@ -82,8 +82,6 @@ class Profile implements \Serializable
      */
     protected $telephone;
 
-
-
     public function getId(): ?int
     {
         return $this->id;

@@ -33,7 +33,8 @@ class AdminPropertyType extends AbstractType
                 'class' => Option::class,
                 'choice_label' => 'name',
                 'multiple' => true,
-                'required' => false
+                'required' => false,
+                
             ])
             ->add('city')
             ->add('address')

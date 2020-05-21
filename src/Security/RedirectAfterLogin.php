@@ -15,7 +15,7 @@ class RedirectAfterLogin extends AccountStatusException
      */
     public function getMessageKey()
     {
-        return 'Nous essayons de vous reiriger ...  '      
+        return 'Nous essayons de vous rediriger ...  '      
         ;
     }
 

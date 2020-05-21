@@ -52,7 +52,7 @@
             {{ form_row(form.access) }}
         </div>
          <div class="col-md-4">
-            {{ form_row(form.options) }}
+            {{ form_row(form.options, {'attr': {'class': 'selectpicker', 'data-size': '4', 'data-live-search':'true','multiple data-selected-text-format':'count > 1', 'multiple data-max-options': '5'}}) }}
         </div>
     </div>
     <div class="row align-items-top mb-3 mt-4">
@@ -76,6 +76,6 @@
     
   
     {{ form_rest(form) }}
-    <button class="btn btn-success btn-center"> <i class="fas fa-check"></i>&nbsp; {{ button|default('Enregistrer') }} </button>
+    <button class="btn btn-success btn-middle"> <i class="fas fa-check"></i>&nbsp; {{ button|default('Enregistrer') }} </button>
 {{ form_end(form) }}
 

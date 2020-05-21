@@ -34,7 +34,7 @@ Confirmez votre nouveau mot de passe ...: Confirmez votre nouveau mot de passe .
 Surface maximale: Surface maximale
 Surface minimale: Surface minimale
 Rechercher: Rechercher
-Options: Caratéristiques / Options
+Options: Caratéristiques / Options (5 max)
 Image file: Photo du bien
 Décrivez-vous en quelque mots ...: Décrivez-vous en quelque mots ...
 Created at: Created at
@@ -85,4 +85,6 @@ annuelle:	annuelle
 Landing: Palier
 Access: Moyens d'accès
 Rented: Occupé
-
+Company related: Contact lié à une société
+First line: Adresse
+Second line: Adresse complémentaire

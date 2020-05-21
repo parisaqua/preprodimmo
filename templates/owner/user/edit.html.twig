@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification du contact{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    
+    <div class="row mt-5 pt-3 pb-4">
+        <div class="col-md-9">
+            <h1><i class="fas fa-user"></i>&nbsp;Modification de contact</h1>
+        </div>
+        <div class="col-md-3 text-right">
+            {% include 'owner/user/_delete_form.html.twig' %}
+        </div>
+    </div>
+
+        {{ include('owner/user/_form.html.twig', {form: form, button: 'Mettre à jour' }) }}
+           
+       
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+
+     {{ parent() }}
+
+    <script>
+    let checkbox = document.getElementById("owner_account_companyRelated");
+    let champ = document.getElementById("societe");
+    let champ2 = document.getElementById("societeHelp");
+    
+    checkbox.addEventListener("change", function () {
+    if (this.checked) {
+        champ.style.display = "block";
+        champ2.style.display = "block";
+    }
+    else {
+        champ.style.display = "none";
+        champ2.style.display = "none";
+    }
+    });
+    </script>
+
+{% endblock %}

@@ -21,13 +21,16 @@ class DocumentType extends AbstractType
         
         $builder
             ->add('name', TextType::class, [ 
-                'required' => true,
+                'required' => false,
+                'empty_data' => 'document',
+                'label' => 'nom du document'
             ])
             ->add('kind', ChoiceType::class, [
                 'choices'  => [
                     'commercial' => '1',
                     'gestion' => '2',
                     'autre' => '3',
+                    
                 ],
                 'placeholder' => 'Choisir un type de document',
                 'required' => true,

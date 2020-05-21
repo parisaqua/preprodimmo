@@ -5,16 +5,19 @@ namespace App\Controller\PropertyManager;
 use App\Entity\Lease;
 use App\Form\LeaseType;
 use App\Repository\LeaseRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/gestion/baux")
  */
 class LeaseManagerController extends AbstractController
 {
+    
+    
     /**
      * @Route("/", name="lease.manager.index", methods={"GET"})
      */
@@ -33,6 +36,7 @@ class LeaseManagerController extends AbstractController
         $lease = new Lease();
         $form = $this->createForm(LeaseType::class, $lease);
         $form->handleRequest($request);
+
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();

@@ -28,8 +28,12 @@ class AdminAccountController extends AbstractController
      */
     public function index(UserRepository $userRepository, Request $request): Response
     {
+        $user = $this->getUser()->getId();
+       
+        dump($user);
+        
         return $this->render('admin/user/index.html.twig', [
-            'users' => $userRepository->findAllNameAlphabetical(),
+            'users' => $userRepository->findByCreator($user),
             'menu' => 'adminUser'
         ]);
     }
@@ -54,8 +58,12 @@ class AdminAccountController extends AbstractController
      * @return response
      */
     public function register(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder){
-        $user = new User();
         
+        $user = new User();
+
+        $creator = $this->getUser()->getId();
+        dump($creator);
+
         $faker = Factory::create('fr_FR');
 
         $form = $this->createForm(AdminAccountType::class, $user);
@@ -65,12 +73,15 @@ class AdminAccountController extends AbstractController
             $hash =  $encoder->encodePassword($user, $faker->password);
             $user->setHash($hash);
 
+            //obtenir le créateur du user
+            $user->setCreator($creator);
+
             $manager->persist($user);
             $manager->flush();
 
             $this->addFlash(
                 'success',
-                "Votre compte a bien été créé. Vous pouvez maintenant vous connecter."
+                "L'utilisateur a bien été créé."
             );
 
             return $this->redirectToRoute('admin.user.index');

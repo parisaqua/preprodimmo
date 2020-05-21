@@ -1,0 +1,5 @@
+<form method="post" action="{{ path('company.owner.delete', {'id': company.id}) }}" onsubmit="return confirm('Confirmez la suppression d\'une société ?');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ company.id) }}">
+    <button class="btn btn-danger">Supprimer</button>
+</form>

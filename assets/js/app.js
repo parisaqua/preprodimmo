@@ -9,7 +9,6 @@
 import Places from 'places.js';
 import Map from './modules/map';
 import $ from 'jquery';
-import 'select2';  
 import 'slick-carousel';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';  
@@ -41,9 +40,24 @@ $('[data-slider]').slick({
 })
 
 //mise en place de l'autocomplétion des adresses
+let address = document.querySelector('#address_firstLine')
 let inputAddress = document.querySelector('#property_address')
 let adminInputAddress = document.querySelector('#admin_property_address')
 let profileInputAddress = document.querySelector('#profile_address')
+let userInputAddress = document.querySelector('#owner_account_address')
+
+if (address !== null) {
+  let place = Places({
+    container: address
+  })
+  place.on('change', e => {
+    document.querySelector('#address_city').value = e.suggestion.city
+    document.querySelector('#address_postalCode').value = e.suggestion.postcode
+    document.querySelector('#address_lat').value = e.suggestion.latlng.lat
+    document.querySelector('#address_lng').value = e.suggestion.latlng.lng
+  })
+}
+
 if (inputAddress !== null) {
   let place = Places({
     container: inputAddress
@@ -79,6 +93,20 @@ if (profileInputAddress !== null) {
   })
 }
 
+
+
+if (userInputAddress !== null) {
+  let place = Places({
+    container: userInputAddress
+  })
+  place.on('change', e => {
+    document.querySelector('#owner_account_city').value = e.suggestion.city
+    document.querySelector('#owner_account_postalCode').value = e.suggestion.postcode
+    document.querySelector('#owner_account_lat').value = e.suggestion.latlng.lat
+    document.querySelector('#owner_account_lng').value = e.suggestion.latlng.lng
+  })
+}
+
 //Mise en place de la recherche
 let searchAddress = document.querySelector('#search_address')
 if (searchAddress !== null) {
@@ -91,10 +119,7 @@ if (searchAddress !== null) {
   })
 }
 
-// styler les selects de choix multiples avec select 2
-$(() => {
-  $('select').select2();
-});
+
 
 // formulaire de contact Affichage et Annulation
 let $contactButton = $('#contactButton')

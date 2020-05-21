@@ -204,6 +204,16 @@ a.noUnderLigned:hover {
     width: fit-content;
 }
 
+.btn-middle {
+    display: block;
+    position: fixed;
+    bottom: 22%;
+    right : 100px;
+    margin: 0px 0px 0px 0px;
+}
+
+
+
 .alert-base {
     display: block;
     margin : 0 auto;
@@ -400,3 +410,18 @@ a.buttonsub {
 .newMessage {
     color: white;
 }
+
+.property-show .slick-prev, .property-show .slick-next {
+    color: black;
+}
+
+
+.company {
+    margin: 0px 0px -20px 0px;
+    padding: 0px 0px 0px 0px;
+}
+
+.all-fit {
+    width: 100%;
+}
+

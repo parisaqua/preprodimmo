@@ -99,7 +99,6 @@ class LeaseType extends AbstractType
                 'required' => true,
                 'choice_label' => 'detailedProperty', 
                 'choices' => $this->propertyRepository->findByManager($user),
-                'empty_data' => 'John Doe',
             ))
         ;
 

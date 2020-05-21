@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification de la Société{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    
+    <div class="row mt-5 pt-3 pb-4">
+        <div class="col-md-9">
+            <h1>Modification de Société</h1>
+        </div>
+        <div class="col-md-3 text-right">
+            {% include 'owner/company/_delete_form.html.twig' %}
+        </div>
+    </div>
+
+        {{ include('owner/company/_form.html.twig', {form: form, button: 'Mettre à jour' }) }}
+           
+       
+</div>
+
+{% endblock %}

@@ -25,7 +25,7 @@ class Document
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Length(
      *      min = 4,
      *      max = 100,

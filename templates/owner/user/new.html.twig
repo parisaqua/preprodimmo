@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvel contact{% endblock %}
+
+
+{% block body %}
+
+<div class="container">
+    <h1 class="text-primary mt-4 mb-4"><i class="fas fa-users"></i>&nbsp;&nbsp;Nouveau contact</h1>
+
+     {{ include('owner/user/_form.html.twig', {form: form, button: 'Enregistrer' }) }}
+ 
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+
+     {{ parent() }}
+
+    <script>
+    let checkbox = document.getElementById("owner_account_companyRelated");
+    let champ = document.getElementById("societe");
+    let champ2 = document.getElementById("societeHelp");
+    
+    checkbox.addEventListener("change", function () {
+    if (this.checked) {
+        champ.style.display = "block";
+        champ2.style.display = "block";
+    }
+    else {
+        champ.style.display = "none";
+        champ2.style.display = "none";
+    }
+    });
+    </script>
+
+{% endblock %}

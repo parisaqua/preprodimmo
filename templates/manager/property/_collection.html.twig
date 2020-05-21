@@ -24,7 +24,9 @@
                         {% if form.vars.data.fileName|default %}
                             <div class="col-md-4 current-doc" id="currentDoc">
                                 <a href="{{asset (vich_uploader_asset (form.vars.data, 'documentFile'))}}" target="_blank" title="{{form.vars.data.fileName}}">
-                                    <img class="doc" src="{{  '/images/pdf.png' }}" alt=""> {{form.vars.data.fileName}}
+                                    {# <img class="doc" src="{{  '/images/pdf.png' }}" alt=""> #}
+                                    <i class="far fa-file-pdf h1 text-danger"></i>
+                                    {{form.vars.data.fileName}}
                                 </a>
                             </div>
                         {% else %}

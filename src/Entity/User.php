@@ -132,7 +132,48 @@ class User implements UserInterface
      */
     private $UserRegistratedAt;
 
-    
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $creator;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string|null
+     */
+    private $city;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string|null
+     */
+    private $address;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Regex("/^[0-9]{5}$/", message="Le format doit être un nombre de 5 chiffres")
+     * @var string|null
+     */
+    private $postalCode;
+
+
+    /**
+     * @var string
+     * @ORM\Column(name="telephone", type="string", length=35, nullable=true)
+     * 
+     */
+    protected $telephone;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Company", inversedBy="member", cascade={"persist"})
+     * @Assert\Valid()
+     */
+    private $company;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $companyRelated;
 
     public function __construct()
     {
@@ -499,6 +540,102 @@ class User implements UserInterface
 
         return $this;
     }
+
+    public function getCreator(): ?int
+    {
+        return $this->creator;
+    }
+
+    public function setCreator(int $creator): self
+    {
+        $this->creator = $creator;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(?string $city): self
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(?string $address): self
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    public function getPostalCode(): ?string
+    {
+        return $this->postalCode;
+    }
+
+    public function setPostalCode(?string $postalCode): self
+    {
+        $this->postalCode = $postalCode;
+
+        return $this;
+    }
+
+    /**
+     * Set telephone
+     * @param string $telephone
+     * @return User
+     */
+    public function setTelephone($telephone)
+    {
+        $this->telephone = $telephone;
+ 
+        return $this;
+    }
+ 
+    /**
+     * Get telephone
+     *
+     * @return string
+     */
+    public function getTelephone()
+    {
+        return $this->telephone;
+    }
+
+    public function getCompany(): ?Company
+    {
+        return $this->company;
+    }
+
+    public function setCompany(?Company $company): self
+    {
+        $this->company = $company;
+
+        return $this;
+    }
+
+    public function getCompanyRelated(): ?bool
+    {
+        return $this->companyRelated;
+    }
+
+    public function setCompanyRelated(bool $companyRelated): self
+    {
+        $this->companyRelated = $companyRelated;
+
+        return $this;
+    }
+
+   
 
 
 }
