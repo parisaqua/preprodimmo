@@ -15,7 +15,8 @@
         <div class="row items-align-center">
             {% for user in users %} 
                 <div class="col-md-4">
-                    {% include 'admin/user/_user.card.html.twig' %}
+                    {{ user.email }}
+                    {# {% include 'admin/user/_user.card.html.twig' %} #}
                 </div>
             {% endfor %}
         </div>

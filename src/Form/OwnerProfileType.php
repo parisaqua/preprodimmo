@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Profile;
+use App\Form\ProfileType;
 use Symfony\Component\Form\AbstractType;
 use Vich\UploaderBundle\Form\Type\VichFileType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -14,13 +15,25 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
-class ProfileType extends  AbstractType
+class OwnerProfileType extends AbstractType
 {
+    
+    // private $security;
+    // private $companyRepository;
+
+    // public function __construct(Security $security, CompanyRepository $companyRepository)
+    // {
+    //     $this->security = $security;
+    //     $this->companyRepository = $companyRepository;
+    // }
+    
+    
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        
         $gender = ['M.' => 'Monsieur', 'Mme.' => 'Madame'];
 
+        // $user = $this->security->getUser();
+        
         $builder
             ->add('gender', ChoiceType::class, ['choices' => $this->getChoices(),'label' => 'Civilité'])
             ->add('firstName', TextType::class, [
@@ -30,16 +43,21 @@ class ProfileType extends  AbstractType
             ->add('lastName', TextType::class, [
                 'label' => 'Nom',
                 'required' => true
-                ])    
-            ->add('description', TextareaType::class, [
-                    'required' => false,
-                    'label' => "Présentation",
-                    'attr' => [
-                        'placeholder' => 'Présentez-vous en quelques mots...'."\n" .'Seuls les membres d\'Immo Digital pourront voir votre prose.',
-                        'rows' => 6, 
-                        'cols' => 100
-                    ]
                 ])
+            // ->add('email', EmailType::class, ['label' => 'Email'])
+
+
+            
+
+            ->add('description', TextareaType::class, [
+                'required' => false,
+                'label' => "Présentation",
+                'attr' => [
+                    'placeholder' => 'Présentez-vous en quelques mots...'."\n" .'Les visiteurs du site pourront lire votre prose.',
+                    'rows' => 8, 
+                    'cols' => 100
+                ]
+            ])
             ->add('imageFile', VichFileType::class, [
                 'required' => false,
                 'label' => false,
@@ -58,7 +76,6 @@ class ProfileType extends  AbstractType
                 
             ])
             
-           
             ->add('telephoneM', TelType::class, [
                 'required' => false,
                 'label' => 'Téléphone portable'
@@ -74,15 +91,16 @@ class ProfileType extends  AbstractType
                 'label' => 'Téléphone bureau'
                 
             ])
-            
 
-            ;
+        ;
+
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => Profile::class,
+            'translation_domain' => "forms"
         ]);
     }
 
@@ -95,6 +113,4 @@ class ProfileType extends  AbstractType
         }
         return $output;
     }
-
-   
 }

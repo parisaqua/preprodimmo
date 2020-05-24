@@ -14,12 +14,24 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  */
 class Profile implements \Serializable
 {
+    
+    const GENDER = [
+        0 => 'M.',
+        1 => 'Mme'
+    ];
+    
+    
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
     private $id;
+
+     /**
+     * @ORM\Column(type="integer")
+     */
+    private $gender;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -28,9 +40,15 @@ class Profile implements \Serializable
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="profile", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $user;
+
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $creator;
 
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
@@ -55,36 +73,54 @@ class Profile implements \Serializable
      */
     private $updatedAt;
 
-     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @var string|null
-     */
-    private $city;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @var string|null
-     */
-    private $address;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\Regex("/^[0-9]{5}$/", message="Le format doit être un nombre de 5 chiffres")
-     * @var string|null
-     */
-    private $postalCode;
-
-
     /**
      * @var string
-     * @ORM\Column(name="telephone", type="string", length=35, nullable=true)
+     * @ORM\Column(name="telephoneM", type="string", length=35, nullable=true)
      * 
      */
-    protected $telephone;
+    protected $telephoneM;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Vous devez renseigner un prénom")
+     */
+    private $firstName;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Vous devez renseigner un nom")
+     */
+    private $lastName;
+
+    /**
+     * @ORM\Column(type="string", length=35, nullable=true)
+     */
+    private $telephoneH;
+
+    /**
+     * @ORM\Column(type="string", length=35, nullable=true)
+     */
+    private $telephoneO;
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getGender(): ?int
+    {
+        return $this->gender;
+    }
+
+    public function setGender(int $gender): self
+    {
+        $this->gender = $gender;
+
+        return $this;
+    }
+
+    public function getGenderType(): string {
+        return self::GENDER[$this->gender];
     }
 
     public function getDescription(): ?string
@@ -146,62 +182,38 @@ class Profile implements \Serializable
         return $this->imageName;
     }
 
-    public function getCity(): ?string
-    {
-        return $this->city;
-    }
-
-    public function setCity(?string $city): self
-    {
-        $this->city = $city;
-
-        return $this;
-    }
-
-    public function getAddress(): ?string
-    {
-        return $this->address;
-    }
-
-    public function setAddress(?string $address): self
-    {
-        $this->address = $address;
-
-        return $this;
-    }
-
-    public function getPostalCode(): ?string
-    {
-        return $this->postalCode;
-    }
-
-    public function setPostalCode(?string $postalCode): self
-    {
-        $this->postalCode = $postalCode;
-
-        return $this;
-    }
-
     /**
-     * Set telephone
-     * @param string $telephone
+     * Set telephoneM
+     * @param string $telephoneM
      * @return User
      */
-    public function setTelephone($telephone)
+    public function setTelephoneM($telephoneM)
     {
-        $this->telephone = $telephone;
+        $this->telephoneM = $telephoneM;
  
         return $this;
     }
  
     /**
-     * Get telephone
+     * Get telephoneM
      *
      * @return string
      */
-    public function getTelephone()
+    public function getTelephoneM()
     {
-        return $this->telephone;
+        return $this->telephoneM;
+    }
+
+    public function getCreator(): ?int
+    {
+        return $this->creator;
+    }
+
+    public function setCreator(int $creator): self
+    {
+        $this->creator = $creator;
+
+        return $this;
     }
 
     
@@ -234,6 +246,58 @@ class Profile implements \Serializable
             $this->id,
             $this->imageName,
             ) = unserialize($serialized, array('allowed_classes' => false));
+    }
+
+    public function getFirstName(): ?string
+    {
+        return $this->firstName;
+    }
+
+    public function setFirstName(string $firstName): self
+    {
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    public function getLastName(): ?string
+    {
+        return $this->lastName;
+    }
+
+    public function setLastName(string $lastName): self
+    {
+        $this->lastName = $lastName;
+
+        return $this;
+    }
+
+    public function getFullName() {
+        return "{$this->firstName} {$this->lastName}"; 
+    }
+
+    public function getTelephoneH(): ?string
+    {
+        return $this->telephoneH;
+    }
+
+    public function setTelephoneH(?string $telephoneH): self
+    {
+        $this->telephoneH = $telephoneH;
+
+        return $this;
+    }
+
+    public function getTelephoneO(): ?string
+    {
+        return $this->telephoneO;
+    }
+
+    public function setTelephoneO(?string $telephoneO): self
+    {
+        $this->telephoneO = $telephoneO;
+
+        return $this;
     }
 }
 

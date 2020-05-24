@@ -17,16 +17,16 @@
                     <div class="col">
                         <div class="alert alert-light">
                             <div class="row align-items-center">
-                                <div class="col-md-2">{{ form_row(form.gender) }}</div>
-                                <div class="col-md-5">{{ form_row(form.firstName) }}</div>
-                                <div class="col-md-5">{{ form_row(form.lastName) }}</div>
+                                <div class="col-md-2">{{ form_row(form.profile.gender) }}</div>
+                                <div class="col-md-5">{{ form_row(form.profile.firstName) }}</div>
+                                <div class="col-md-5">{{ form_row(form.profile.lastName) }}</div>
                             </div>
                             <div class="row">
                                 <div class="col-md-5">
                                     {{ form_row(form.email) }}
                                 </div>
                                 <div class="col-md-5">
-                                    {{ form_row(form.roles) }}
+                                    {{ form_row(form.roles, {'attr': {'class':'selectpicker'}}) }}
                                 </div>
                                  <div class="col-md-2">
                                     {{ form_row(form.isActive) }}

@@ -18,13 +18,13 @@
         <hr>
         <div class="row">
             <div class="col-md-4 text-center">
-                <a href=" {{ path('address_index') }} " class="btn btn-secondary">Retour à la liste</a>
+                <a href=" {{ path('address_index', {'user': app.user.id}) }} " class="btn btn-secondary">Retour à la liste</a>
             </div>
             <div class="col-md-4 text-center">
-                <a href=" {{ path('address_edit', {id: address.id} ) }} " class="btn btn-info">Editer</a>
+                <a href=" {{ path('address_edit', {id: address.id, 'user': app.user.id} ) }} " class="btn btn-info">Editer</a>
             </div>
             <div class="col-md-4 text-center">
-                <form method="post" action="{{ path('address_delete', {id: address.id}) }}" style="display: inline-block; margin-top: 5px" onSubmit="return confirm('Etes-vous certain ?')">
+                <form method="post" action="{{ path('address_delete', {id: address.id, 'user': app.user.id}) }}" style="display: inline-block; margin-top: 5px" onSubmit="return confirm('Etes-vous certain ?')">
                     <input type="hidden" name="_method" value="DELETE">
                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ address.id )}}">
                     <button class="btn btn-danger">Supprimer l'adresse</button>

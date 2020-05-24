@@ -1,4 +1,4 @@
-{{ form_start(profileForm) }}
+{{ form_start(profileForm, {attr: {'novalidate':'novalidate'}}) }}
    
 
 <div class="container">
@@ -7,17 +7,22 @@
 <div class="container alert alert-light mt-3"> 
     <div class="row pt-3">
         <div class="col-md-12">
-            <p class="text-primary h3">{{app.user.genderType}} {{app.user.firstName}} {{app.user.lastName|upper}}</p>
+            <p class="h3"> {{app.user.profile.fullName}} </p>
             <p class="text-primary h5">{{app.user.email}}&nbsp;&nbsp;<span class="text-info"><a href="{{ path('account.profile') }}" title="Modifier mes informations d'identification ..."><i class="fas fa-edit text-info h5"></i></a></span></p>
         </div>
     </div>
-    
+     <div class="row pt-3">
+        <div class="col-md-2">{{ form_row(profileForm.gender) }}</div>
+        <div class="col-md-5">{{ form_row(profileForm.firstName) }}</div>
+        <div class="col-md-5">{{ form_row(profileForm.lastName) }}</div>
+    </div>
     <div class="row pt-3">
         <div class="col-md-3">
-            {{ form_row(profileForm.telephone, {"id": "telephone"}) }}
+            {{ form_row(profileForm.telephoneM, {"attr": {"class": "tel"} }) }}
+            {{ form_row(profileForm.telephoneH, {"attr": {"class": "tel"} }) }}
+            {{ form_row(profileForm.telephoneO, {"attr": {"class": "tel"} }) }}
         </div>
         <div class="col-md-6">
-             {{ form_row(profileForm.address) }}
             {{ form_row(profileForm.description) }}
         </div>
         <div class="col-md-3">
@@ -26,10 +31,10 @@
                     {% if profile.imageName %}
                         <img alt="photo de {{ profile.user.username }}" class="avatar" src=" {{  vich_uploader_asset(profile.user.profile, 'imageFile') | imagine_filter('avatar') }}">
                     {% else %}
-                        {% if app.user.gender == 0 %}
-                            <img alt="photo de {{ app.user.fullName }}" class="avatar" src=" {{  '/images/male-avatar.png' | imagine_filter('avatar') }}" alt="Avatar">
+                        {% if app.user.profile.gender == 0 %}
+                            <img alt="photo de {{ app.user.profile.fullName }}" class="avatar" src=" {{  '/images/male-avatar.png' | imagine_filter('avatar') }}" alt="Avatar">
                         {% else %}
-                            <img alt="photo de {{ app.user.fullName }}" class="avatar" src=" {{  '/images/woman-avatar.png' | imagine_filter('avatar') }}" alt="Avatar">
+                            <img alt="photo de {{ app.user.profile.fullName }}" class="avatar" src=" {{  '/images/woman-avatar.png' | imagine_filter('avatar') }}" alt="Avatar">
                         {% endif %}
                     {% endif %}
                 </div>

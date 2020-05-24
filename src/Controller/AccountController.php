@@ -97,6 +97,8 @@ class AccountController extends AbstractController
             $user->setToken($tokenGenerator->generateToken());
             // enregistrement de la date de création du token
             $user->setUserRegistratedAt(new \Datetime());
+
+            $user->setCompanyRelated(false);
             
             $manager->persist($user);
             $manager->flush();

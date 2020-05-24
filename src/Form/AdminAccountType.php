@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\User;
+use App\Form\ProfileType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -18,12 +19,10 @@ class AdminAccountType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $gender = ['M.' => 'Monsieur', 'Mme.' => 'Madame'];
+        
         
         $builder
-            ->add('gender', ChoiceType::class, ['choices' => $this->getChoices(),'label' => 'Civilité'])
-            ->add('firstName', TextType::class, ['label' => 'First Name'])
-            ->add('lastName', TextType::class, ['label' => 'Last Name'])
+            ->add('profile', ProfileRegistrationType::class)
             ->add('email', EmailType::class, ['label' => 'Email'])
             ->add('roles', ChoiceType::class, [
                 'choices' => [
@@ -54,13 +53,5 @@ class AdminAccountType extends AbstractType
         ]);
     }
 
-    private function getChoices()
-    {
-        $choices = User::GENDER;
-        $output = [];
-        foreach($choices as $k => $v) {
-            $output[$v] = $k;
-        }
-        return $output;
-    }
+  
 }

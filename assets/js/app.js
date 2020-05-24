@@ -17,7 +17,7 @@ import Inputmask from "inputmask/dist/inputmask";
 
 
 //Numero de telephone
-var selector = document.getElementById("telephone");
+var selector = document.getElementsByClassName("tel")
 
 if (selector !== null) {
 var im = new Inputmask("99-99-99-99-99");

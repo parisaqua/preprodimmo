@@ -37,28 +37,28 @@ class User implements UserInterface
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $gender;
+    // /**
+    //  * @ORM\Column(type="integer")
+    //  */
+    // private $gender;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Vous devez renseigner un prénom")
-     */
-    private $firstName;
+    // /**
+    //  * @ORM\Column(type="string", length=255)
+    //  * @Assert\NotBlank(message="Vous devez renseigner un prénom")
+    //  */
+    // private $firstName;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Vous devez renseigner un nom")
-     */
-    private $lastName;
+    // /**
+    //  * @ORM\Column(type="string", length=255)
+    //  * @Assert\NotBlank(message="Vous devez renseigner un nom")
+    //  */
+    // private $lastName;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     * 
-     */
-    private $slug;
+    // /**
+    //  * @ORM\Column(type="string", length=255)
+    //  * 
+    //  */
+    // private $slug;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -138,33 +138,6 @@ class User implements UserInterface
     private $creator;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @var string|null
-     */
-    private $city;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @var string|null
-     */
-    private $address;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\Regex("/^[0-9]{5}$/", message="Le format doit être un nombre de 5 chiffres")
-     * @var string|null
-     */
-    private $postalCode;
-
-
-    /**
-     * @var string
-     * @ORM\Column(name="telephone", type="string", length=35, nullable=true)
-     * 
-     */
-    protected $telephone;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Company", inversedBy="member", cascade={"persist"})
      * @Assert\Valid()
      */
@@ -185,85 +158,85 @@ class User implements UserInterface
         $this->propertiesOwned = new ArrayCollection();
     }
 
-    /**
-     * Permet d'initialiser le slug
-     * 
-     * @ORM\PrePersist
-     * @ORM\PreUpdate
-     *
-     * @return void
-     */
-    public function initializeSlug(){
-        // if(empty($this->slug)){
-            $slugify = new Slugify();
-            $this->slug = $slugify->slugify($this->firstName. ' ' . $this->lastName.' '.$this->id);
-        // }
-    }
+    // /**
+    //  * Permet d'initialiser le slug
+    //  * 
+    //  * @ORM\PrePersist
+    //  * @ORM\PreUpdate
+    //  *
+    //  * @return void
+    //  */
+    // public function initializeSlug(){
+    //     // if(empty($this->slug)){
+    //         $slugify = new Slugify();
+    //         $this->slug = $slugify->slugify($this->firstName. ' ' . $this->lastName.' '.$this->id);
+    //     // }
+    // }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getGender(): ?int
-    {
-        return $this->gender;
-    }
+    // public function getGender(): ?int
+    // {
+    //     return $this->gender;
+    // }
 
-    public function setGender(int $gender): self
-    {
-        $this->gender = $gender;
+    // public function setGender(int $gender): self
+    // {
+    //     $this->gender = $gender;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function getGenderType(): string {
-        return self::GENDER[$this->gender];
-    }
+    // public function getGenderType(): string {
+    //     return self::GENDER[$this->gender];
+    // }
 
-    public function getFirstName(): ?string
-    {
-        return $this->firstName;
-    }
+    // public function getFirstName(): ?string
+    // {
+    //     return $this->firstName;
+    // }
 
-    public function setFirstName(string $firstName): self
-    {
-        $this->firstName = $firstName;
+    // public function setFirstName(string $firstName): self
+    // {
+    //     $this->firstName = $firstName;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function getLastName(): ?string
-    {
-        return $this->lastName;
-    }
+    // public function getLastName(): ?string
+    // {
+    //     return $this->lastName;
+    // }
 
-    public function setLastName(string $lastName): self
-    {
-        $this->lastName = $lastName;
+    // public function setLastName(string $lastName): self
+    // {
+    //     $this->lastName = $lastName;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function getSlug(): ?string
-    {
-        return $this->slug;
-    }
+    // public function getSlug(): ?string
+    // {
+    //     return $this->slug;
+    // }
 
-    public function setSlug(string $slug): self
-    {
-        $this->slug = $slug;
+    // public function setSlug(string $slug): self
+    // {
+    //     $this->slug = $slug;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function getFullName() {
-        return "{$this->firstName} {$this->lastName}"; 
-    }
+    // public function getFullName() {
+    //     return "{$this->firstName} {$this->lastName}"; 
+    // }
 
-    public function getFullId() {
-        return "{$this->firstName} {$this->lastName} (réf.: {$this->id})"; 
-    }
+    // public function getFullId() {
+    //     return "{$this->firstName} {$this->lastName} (réf.: {$this->id})"; 
+    // }
 
     public function getEmail(): ?string
     {
@@ -551,64 +524,6 @@ class User implements UserInterface
         $this->creator = $creator;
 
         return $this;
-    }
-
-    public function getCity(): ?string
-    {
-        return $this->city;
-    }
-
-    public function setCity(?string $city): self
-    {
-        $this->city = $city;
-
-        return $this;
-    }
-
-    public function getAddress(): ?string
-    {
-        return $this->address;
-    }
-
-    public function setAddress(?string $address): self
-    {
-        $this->address = $address;
-
-        return $this;
-    }
-
-    public function getPostalCode(): ?string
-    {
-        return $this->postalCode;
-    }
-
-    public function setPostalCode(?string $postalCode): self
-    {
-        $this->postalCode = $postalCode;
-
-        return $this;
-    }
-
-    /**
-     * Set telephone
-     * @param string $telephone
-     * @return User
-     */
-    public function setTelephone($telephone)
-    {
-        $this->telephone = $telephone;
- 
-        return $this;
-    }
- 
-    /**
-     * Get telephone
-     *
-     * @return string
-     */
-    public function getTelephone()
-    {
-        return $this->telephone;
     }
 
     public function getCompany(): ?Company

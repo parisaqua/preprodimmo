@@ -17,15 +17,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  */
 class ProfileController extends AbstractController
 {
-    // /**
-    //  * @Route("/", name="profile_index", methods={"GET"})
-    //  */
-    // public function index(ProfileRepository $profileRepository): Response
-    // {
-    //     return $this->render('profile/index.html.twig', [
-    //         'profiles' => $profileRepository->findAll(),
-    //     ]);
-    // }
+    /**
+     * @Route("/", name="profile_index", methods={"GET"})
+     */
+    public function index(ProfileRepository $profileRepository): Response
+    {
+        return $this->render('profile/index.html.twig', [
+            'profiles' => $profileRepository->findAll(),
+        ]);
+    }
 
     /**
      * @Route("/new", name="profile.new", methods={"GET","POST"})
@@ -72,10 +72,10 @@ class ProfileController extends AbstractController
         $form = $this->createForm(ProfileType::class, $profile);
         $form->handleRequest($request);
 
-        if($profile->getAddress() == null ){
-            $profile->setCity(null);
-            $profile->setPostalCode(null);
-        }
+        // if($profile->getAddress() == null ){
+        //     $profile->setCity(null);
+        //     $profile->setPostalCode(null);
+        // }
 
         if ($form->isSubmitted() && $form->isValid()) {
 

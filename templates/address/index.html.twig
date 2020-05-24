@@ -10,8 +10,8 @@
             <thead>
                 <tr>
                     <th>Id</th>
+                    <th>Nom</th>
                     <th>FirstLine</th>
-                    <th>SecondLine</th>
                     <th>PostalCode</th>
                     <th>City</th>
                     <th>Lat</th>
@@ -23,8 +23,8 @@
             {% for address in addresses %}
                 <tr>
                     <td>{{ address.id }}</td>
+                    <td> {{address.name}} </td>
                     <td>{{ address.firstLine }}</td>
-                    <td>{{ address.secondLine }}</td>
                     <td>{{ address.postalCode }}</td>
                     <td>{{ address.city }}</td>
                     <td>{{ address.lat }}</td>

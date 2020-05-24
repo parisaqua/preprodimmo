@@ -5,8 +5,12 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
+
+
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AddressRepository")
+ * 
  */
 class Address
 {
@@ -47,6 +51,18 @@ class Address
      * @ORM\Column(type="float", scale=6, precision=9)
      */
     private $lng;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * 
+     */
+    private $name;
+
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $creator;
 
     public function getId(): ?int
     {
@@ -124,4 +140,32 @@ class Address
 
         return $this;
     }
+
+    public function getCreator(): ?string
+    {
+        return $this->creator;
+    }
+
+    public function setCreator(string $creator): self
+    {
+        $this->creator = $creator;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+   
+
+   
 }

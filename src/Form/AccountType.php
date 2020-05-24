@@ -16,13 +16,12 @@ class AccountType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $gender = ['M.' => 'Monsieur', 'Mme.' => 'Madame'];
+       
         
         $builder
-            ->add('gender', ChoiceType::class, ['choices' => $this->getChoices(),'label' => 'Civilité'])
-            ->add('firstName', TextType::class, ['label' => 'First Name'])
-            ->add('lastName', TextType::class, ['label' => 'Last Name'])
+           
             ->add('email', EmailType::class, ['label' => 'Email'])
+
         ;
     }
 
@@ -34,13 +33,5 @@ class AccountType extends AbstractType
         ]);
     }
 
-    private function getChoices()
-    {
-        $choices = User::GENDER;
-        $output = [];
-        foreach($choices as $k => $v) {
-            $output[$v] = $k;
-        }
-        return $output;
-    }
+   
 }

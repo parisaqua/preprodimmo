@@ -35,7 +35,6 @@ class OwnerCompanyController extends AbstractController
     public function new(Request $request): Response
     {
         $company = new Company();
-
         $creator = $this->getUser()->getId();
 
         $form = $this->createForm(OwnerCompanyType::class, $company);

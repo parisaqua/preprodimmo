@@ -2,7 +2,7 @@
     <div class="card-header">
         <div class="row">
             <div class="col-md-10">
-                  {{user.genderType}} {{user.firstName}} {{user.lastName|upper}} &nbsp; <span class="text-info"><a href="{{ path('admin.user.edit', {id: user.id}) }}" title="Modifier mes informations d'identification ..."><i class="fas fa-edit text-info h5"></i></a></span>
+                  {{user.profile.genderType}} {{user.profile.firstName}} {{user.profile.lastName|upper}} &nbsp; <span class="text-info"><a href="{{ path('admin.user.edit', {id: user.id}) }}" title="Modifier mes informations d'identification ..."><i class="fas fa-edit text-info h5"></i></a></span>
             </div>
             <div class="col-md-2">
                 {% if user.isActive %}<i class="fas fa-toggle-on text-success" title="Compte Actif"></i>{% else %}<i class="fas fa-toggle-off text-danger" title="Compte Inactif"></i>{% endif %}
@@ -17,24 +17,24 @@
                     {% if user.profile.imageName %}
                     <img alt="photo de {{ user.username }}" class="avatar" src=" {{  vich_uploader_asset(user.profile, 'imageFile') | imagine_filter('avatar') }}">
                     {% else %}
-                        {% if user.gender == 0 %}
-                            <img alt="photo de {{ user.fullName }}" class="avatar" src=" {{  '/images/male-avatar.png' | imagine_filter('avatar') }}" alt="Avatar du gestionnaire" title="{{ user.fullName }}">
+                        {% if user.profile.gender == 0 %}
+                            <img alt="photo de {{ user.profile.fullName }}" class="avatar" src=" {{  '/images/male-avatar.png' | imagine_filter('avatar') }}" alt="Avatar du gestionnaire" title="{{ user.profile.fullName }}">
                         {% else %}
-                            <img alt="photo de {{ user.fullName }}" class="avatar" src=" {{  '/images/woman-avatar.png' | imagine_filter('avatar') }}" alt="Avatar du gestionnaire" title="{{ user.fullName }}">
+                            <img alt="photo de {{ user.profile.fullName }}" class="avatar" src=" {{  '/images/woman-avatar.png' | imagine_filter('avatar') }}" alt="Avatar du gestionnaire" title="{{ user.profile.fullName }}">
                         {% endif %}
                     {% endif %}
                 {% else %}
-                {% if user.gender == 0 %}
-                    <img alt="photo de {{ user.fullName }}" class="avatar" src=" {{  '/images/male-avatar.png' | imagine_filter('avatar') }}" alt="Avatar du gestionnaire" title="{{ user.fullName }}">
+                {% if user.profile.gender == 0 %}
+                    <img alt="photo de {{ user.profile.fullName }}" class="avatar" src=" {{  '/images/male-avatar.png' | imagine_filter('avatar') }}" alt="Avatar du gestionnaire" title="{{ user.profile.fullName }}">
                     {% else %}
-                        <img alt="photo de {{ user.fullName }}" class="avatar" src=" {{  '/images/woman-avatar.png' | imagine_filter('avatar') }}" alt="Avatar du gestionnaire" title="{{ user.fullName }}">
+                        <img alt="photo de {{ user.profile.fullName }}" class="avatar" src=" {{  '/images/woman-avatar.png' | imagine_filter('avatar') }}" alt="Avatar du gestionnaire" title="{{ user.profile.fullName }}">
                     {% endif %}
                 {% endif %}
             </div>
         </div>
         <div class="col-md-8">
-            <p class="card-title"><i class="fas fa-envelope text-info"></i>&nbsp;&nbsp; <a href="mailto:{{user.email}} " title="E-mail: {{user.email}}"> Ecrire à {{user.firstName}}</a></p>
-            <p class="card-title"><i class="fas fa-phone text-info"></i>&nbsp;&nbsp;{% if user.profile %} {% if user.profile.telephone %} {{user.profile.telephone}} {% else %} <span class="text-warning">A compléter</span> {% endif %} {% else %} <span class="text-warning">A compléter</span> {% endif %}</p>
+            <p class="card-title"><i class="fas fa-envelope text-info"></i>&nbsp;&nbsp; <a href="mailto:{{user.email}} " title="E-mail: {{user.email}}"> Ecrire à {{user.profile.firstName}}</a></p>
+            <p class="card-title"><i class="fas fa-phone text-info"></i>&nbsp;&nbsp;{% if user.profile %} {% if user.profile.telephoneM %} {{user.profile.telephoneM}} {% else %} <span class="text-warning">A compléter</span> {% endif %} {% else %} <span class="text-warning">A compléter</span> {% endif %}</p>
             <p class="card-title"><i class="fas fa-home text-info"></i>&nbsp;&nbsp;{% if user.profile %} {% if user.profile.city %} {{user.profile.city}}{% else %} <span class="text-warning">A compléter</span> {% endif %} {% else %} <span class="text-warning">A compléter</span> {% endif %}</p>
             <p class="card-text mt-2">
                 <i class="fas fa-user text-info pr-3"></i>

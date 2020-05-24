@@ -1,0 +1,56 @@
+{{ form_start(form, {attr: {'novalidate':'novalidate'}}) }}
+   
+
+<div class="container alert alert-light mt-3"> 
+    <div class="row align-items-center">
+        <div class="col-md-2">{{ form_row(form.gender) }}</div>
+        <div class="col-md-5">{{ form_row(form.firstName) }}</div>
+        <div class="col-md-5">{{ form_row(form.lastName) }}</div>
+    </div>
+    <div class="row pt-3">
+        <div class="col-md-3">
+            {{ form_row(form.telephoneM, {"attr": {"class": "tel"} }) }}
+            {{ form_row(form.telephoneH, {"attr": {"class": "tel"} }) }}
+            {{ form_row(form.telephoneO, {"attr": {"class": "tel"} }) }}
+        </div>
+        <div class="col-md-6">
+            {{ form_row(form.description) }}
+        </div>
+        <div class="col-md-3">
+            <div style="display: block; margin: 0 auto;">
+                <div id="currentAvatar" style="max-width: 200px; dislpay:block; margin: 0 auto;">
+                    {% if profile.imageName is defined and profile.imageName != ""%}
+                        <img alt="photo de NAME " class="avatar" src=" {{  vich_uploader_asset(profile.user.profile, 'imageFile') | imagine_filter('avatar') }}">
+                    {% else %}
+                        {% if profile.gender is defined %}
+                            {% if profile.gender == 0 %}
+                                <img alt="photo de {{ profile.fullName }}" class="avatar" src=" {{  '/images/male-avatar.png' | imagine_filter('avatar') }}" alt="Avatar">
+                            {% else %}
+                                <img alt="photo de {{ profile.fullName }}" class="avatar" src=" {{  '/images/woman-avatar.png' | imagine_filter('avatar') }}" alt="Avatar">
+                            {% endif %}
+                        {% else %}
+                            <img alt="photo" class="avatar" src=" {{  '/images/male-avatar.png' | imagine_filter('avatar') }}" alt="Avatar">
+                        {% endif %}
+                    {% endif %}
+                </div>
+                <div id="previewAvatar" class="preview-frame" style="display: none;"><span class="preview-helper"></span><img src="" alt="" id="avatar" class="preview-image"></div>
+                <div class="pt-2">
+                    {{ form_row(form.imageFile) }}
+                </div>
+            </div>
+        </div>
+    </div>
+   
+       
+
+
+    {{ form_widget(form) }}
+    <div class="row">
+        <div class="col-md-12">
+            <button type="submit" class="btn btn-success btn-center"> <i class="fas fa-check"></i> Enregistrer les modifications</button>
+        </div>
+    </div>
+    
+    {{ form_end(form) }}
+
+</div>

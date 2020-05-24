@@ -3,8 +3,10 @@
 namespace App\Form;
 
 use App\Entity\User;
+use App\Form\ProfileRegistrationType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -12,7 +14,6 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Validator\Constraints\IsTrue;
 
 class RegistrationType extends AbstractType
 {
@@ -24,20 +25,8 @@ class RegistrationType extends AbstractType
 
         $builder
 
-            ->add('gender', ChoiceType::class, [
-                'choices' => $this->getChoices(),'label' => 'Civilité'
-                ])
+            ->add('profile', ProfileRegistrationType::class)
 
-            ->add('firstName', TextType:: class, [
-                'attr' => [
-                    'placeholder' => 'Votre prénom ...'
-                    ]
-            ])
-            ->add('lastName', TextType:: class, [
-                'attr' => [
-                    'placeholder' => 'Votre nom ...'
-                    ]
-            ])
             ->add('email', EmailType:: class, [
                 'attr' => [
                     'placeholder' => 'Votre adresse e-mail ...'

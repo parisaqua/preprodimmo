@@ -221,6 +221,7 @@ class PropertyManagerController extends AbstractController {
      * Supprimer un bien
      * 
      * @Route("/admin/biens/{id}", name="property.manager.delete", methods="DELETE")
+     * @Security("property.isManager(user)")
      * 
      */
 
@@ -238,6 +239,7 @@ class PropertyManagerController extends AbstractController {
      * Détail d'un bien
      *
      * @Route("portefeuille/biens/{slug}-{id}", name="manager.property.show", requirements={"slug"= "[a-z0-9\-]*" })
+     * @Security("property.isManager(user)")
      * 
      * @return Response
      */
