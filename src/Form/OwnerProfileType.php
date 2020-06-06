@@ -90,7 +90,7 @@ class OwnerProfileType extends AbstractType
                 'label' => 'Téléphone bureau'  
             ])
             ->add('locations', CollectionType::class, [
-                'label' => 'Mes adresses',
+                'label' => 'Adresses du contact',
                 'entry_type' => LocationType::class,
                 // 'entry_options' =>  ['label' => false],
                 'prototype' => true,
@@ -110,7 +110,7 @@ class OwnerProfileType extends AbstractType
                 'required' => true,
                 'choice_label' => 'name',
                 'attr' => [
-                    'class' => 'societe'
+                    'class' => 'societe',
                 ]
                 // 'query_builder' => function (EntityRepository $er) {
                 //     return $er->createQueryBuilder('u')
