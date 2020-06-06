@@ -96,7 +96,7 @@ class PropertyType extends AbstractType
                 'by_reference' => false,
                 'allow_delete' => true,
                 'prototype' => true,
-                'required' => true,
+                //'required' => true,
             ])    
 
             

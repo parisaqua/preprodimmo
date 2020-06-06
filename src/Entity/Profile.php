@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Serializable;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
@@ -101,6 +103,29 @@ class Profile implements \Serializable
      * @ORM\Column(type="string", length=35, nullable=true)
      */
     private $telephoneO;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Location", mappedBy="profile",  cascade={"persist", "remove"}, orphanRemoval=true)
+     * @Assert\Valid()
+     */
+    private $locations;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Company", inversedBy="member", cascade={"persist"})
+     * @Assert\Valid()
+     */
+    private $company;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $companyRelated;
+
+    public function __construct()
+    {
+        $this->locations = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -299,6 +324,65 @@ class Profile implements \Serializable
 
         return $this;
     }
+
+    /**
+     * @return Collection|Location[]
+     */
+    public function getLocations(): Collection
+    {
+        return $this->locations;
+    }
+
+    public function addLocation(Location $location): self
+    {
+        if (!$this->locations->contains($location)) {
+            $this->locations[] = $location;
+            $location->setProfile($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLocation(Location $location): self
+    {
+        if ($this->locations->contains($location)) {
+            $this->locations->removeElement($location);
+            // set the owning side to null (unless already changed)
+            if ($location->getProfile() === $this) {
+                $location->setProfile(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getCompany(): ?Company
+    {
+        return $this->company;
+    }
+
+    public function setCompany(?Company $company): self
+    {
+        $this->company = $company;
+
+        return $this;
+    }
+
+    public function getCompanyRelated(): ?bool
+    {
+        return $this->companyRelated;
+    }
+
+    public function setCompanyRelated(bool $companyRelated): self
+    {
+        $this->companyRelated = $companyRelated;
+
+        return $this;
+    }
+
+   
+     
+    
 }
 
 

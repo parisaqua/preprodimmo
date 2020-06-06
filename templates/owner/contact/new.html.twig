@@ -2,6 +2,7 @@
 
 {% block title %}Nouvel contact{% endblock %}
 
+{% form_theme form _self %}
 
 {% block body %}
 
@@ -9,16 +10,22 @@
     <h1 class="text-primary mt-4 mb-4"><i class="fas fa-users"></i>&nbsp;&nbsp;Nouveau contact</h1>
 
      {{ include('owner/contact/_form.html.twig', {form: form, button: 'Enregistrer' }) }}
- 
+
 </div>
 
 {% endblock %}
+
+{% form_theme form 'owner/contact/_formAddress.html.twig' %}
+
+
+
+
 
 {% block javascript %}
 
      {{ parent() }}
 
-    <script>
+    {# <script>
     let checkbox = document.getElementById("owner_account_companyRelated");
     let champ = document.getElementById("societe");
     let champ2 = document.getElementById("societeHelp");
@@ -33,6 +40,6 @@
         champ2.style.display = "none";
     }
     });
-    </script>
+    </script> #}
 
 {% endblock %}

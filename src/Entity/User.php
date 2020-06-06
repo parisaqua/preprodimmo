@@ -137,16 +137,7 @@ class User implements UserInterface
      */
     private $creator;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Company", inversedBy="member", cascade={"persist"})
-     * @Assert\Valid()
-     */
-    private $company;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $companyRelated;
+    
 
     public function __construct()
     {
@@ -526,29 +517,7 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getCompany(): ?Company
-    {
-        return $this->company;
-    }
-
-    public function setCompany(?Company $company): self
-    {
-        $this->company = $company;
-
-        return $this;
-    }
-
-    public function getCompanyRelated(): ?bool
-    {
-        return $this->companyRelated;
-    }
-
-    public function setCompanyRelated(bool $companyRelated): self
-    {
-        $this->companyRelated = $companyRelated;
-
-        return $this;
-    }
+   
 
    
 

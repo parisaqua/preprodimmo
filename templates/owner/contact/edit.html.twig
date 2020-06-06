@@ -4,6 +4,8 @@
 
 {% block body %}
 
+
+
 <div class="container">
     
     <div class="row mt-5 pt-3 pb-4">
@@ -15,30 +17,35 @@
         </div>
     </div>
 
+    <div class="tab-pane fade active show" id="contact">
+        {# {% form_theme form 'owner/contact/_locationCollection.html.twig' %} #}
         {{ include('owner/contact/_form.html.twig', {form: form, button: 'Mettre à jour' }) }}
-           
+        {# {{dump(form)}} #}
+    </div>  
        
 </div>
 
 {% endblock %}
+
+{% form_theme form 'owner/contact/_formAddress.html.twig' %}
 
 {% block javascript %}
 
      {{ parent() }}
 
     <script>
-    let checkbox = document.getElementById("owner_account_companyRelated");
-    let champ = document.getElementById("societe");
-    let champ2 = document.getElementById("societeHelp");
+    let checkbox = document.getElementById("owner_profile_companyRelated");
+    let champ = document.getElementById("owner_profile_company");
+   // let champ2 = document.getElementById("societeHelp");
     
     checkbox.addEventListener("change", function () {
     if (this.checked) {
         champ.style.display = "block";
-        champ2.style.display = "block";
+        //champ2.style.display = "block";
     }
     else {
         champ.style.display = "none";
-        champ2.style.display = "none";
+        //champ2.style.display = "none";
     }
     });
     </script>

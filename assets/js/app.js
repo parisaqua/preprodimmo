@@ -39,24 +39,9 @@ $('[data-slider]').slick({
   cssEase: 'linear'
 })
 
-//mise en place de l'autocomplétion des adresses
-let address = document.querySelector('#address_firstLine')
-let inputAddress = document.querySelector('#property_address')
-let adminInputAddress = document.querySelector('#admin_property_address')
-let profileInputAddress = document.querySelector('#profile_address')
-let userInputAddress = document.querySelector('#owner_account_address')
+//mise en place de l'autocomplétion des adresses création du bien
 
-if (address !== null) {
-  let place = Places({
-    container: address
-  })
-  place.on('change', e => {
-    document.querySelector('#address_city').value = e.suggestion.city
-    document.querySelector('#address_postalCode').value = e.suggestion.postcode
-    document.querySelector('#address_lat').value = e.suggestion.latlng.lat
-    document.querySelector('#address_lng').value = e.suggestion.latlng.lng
-  })
-}
+let inputAddress = document.querySelector('#property_address')
 
 if (inputAddress !== null) {
   let place = Places({
@@ -69,45 +54,9 @@ if (inputAddress !== null) {
     document.querySelector('#property_lng').value = e.suggestion.latlng.lng
   })
 }
-if (adminInputAddress !== null) {
-  let place = Places({
-    container: adminInputAddress
-  })
-  place.on('change', e => {
-    document.querySelector('#admin_property_city').value = e.suggestion.city
-    document.querySelector('#admin_property_postalCode').value = e.suggestion.postcode
-    document.querySelector('#admin_property_lat').value = e.suggestion.latlng.lat
-    document.querySelector('#admin_property_lng').value = e.suggestion.latlng.lng
-  })
-}
-
-if (profileInputAddress !== null) {
-  let place = Places({
-    container: profileInputAddress
-  })
-  place.on('change', e => {
-    document.querySelector('#profile_city').value = e.suggestion.city
-    document.querySelector('#profile_postalCode').value = e.suggestion.postcode
-    document.querySelector('#profile_lat').value = e.suggestion.latlng.lat
-    document.querySelector('#profile_lng').value = e.suggestion.latlng.lng
-  })
-}
 
 
-
-if (userInputAddress !== null) {
-  let place = Places({
-    container: userInputAddress
-  })
-  place.on('change', e => {
-    document.querySelector('#owner_account_city').value = e.suggestion.city
-    document.querySelector('#owner_account_postalCode').value = e.suggestion.postcode
-    document.querySelector('#owner_account_lat').value = e.suggestion.latlng.lat
-    document.querySelector('#owner_account_lng').value = e.suggestion.latlng.lng
-  })
-}
-
-//Mise en place de la recherche
+//Mise en place de la recherche par distance
 let searchAddress = document.querySelector('#search_address')
 if (searchAddress !== null) {
   let place = Places({
@@ -187,23 +136,17 @@ window.previewFile  = function ()
 
 // Gestion des documents dans l'entité des biens (property)
 
-$('#property-document').click(function() {
+$('#property-document').click(function() { //id du boutton
   // récupération des numéros des champs
   const index = +$('#widgets-counter').val();
-
   // récupération du prototype des entrées
   const tmpl = $('#property_documents').data('prototype').replace(/__name__/g, index);
-
   // injection de ce code dans la div
   $('#property_documents').append(tmpl);
-
   $('#widgets-counter').val(index + 1);
-
   showDoc();
-
   // gestion du boutton supprimer
   handleDeleteButton();
-
 });
 
 function handleDeleteButton() {
@@ -225,10 +168,92 @@ function showDoc() {
 }
 
 updateCounter();
-
 showDoc();
-
 handleDeleteButton();
+
+
+
+
+// Gestion des adresses dans l'entité des contacts (profile)
+
+$('#add-location').click(function() { //id du boutton
+  // récupération des numéros des champs
+  const index = +$('#locations-counter').val();
+  // récupération du prototype des entrées
+  const tmpl = $('#owner_profile_locations').data('prototype').replace(/__name__/g, index);
+  // injection de ce code dans la div
+  $('#owner_profile_locations').append(tmpl);
+  $('#locations-counter').val(index + 1);
+  showLocation();
+  // gestion du boutton supprimer
+  handleDeleteButtons();
+});
+
+function handleDeleteButtons() {
+  $('button[data-action="delete"]').click(function() {
+    const target = this.dataset.target;
+    $(target).remove();
+  })
+}
+
+function updateLocationCounter() {
+  const count = +$('#owner_profile_locations div.form-group').length;
+  $('#locations-counter').val(count);
+}
+
+function showLocation() {
+  $(document).ready(function () {
+    bsCustomFileInput.init()
+  })
+}
+
+updateLocationCounter();
+showLocation();
+handleDeleteButtons();
+
+
+
+
+
+
+// $('#add-location').click(function() {
+//   //je récupérer le numéro des champs
+//   const index = +$('#locations-counter').val();
+
+//   //console.log(index);
+
+//   // je récupère le prototype des entrées
+//   const proto = $('#owner_profile_locations').data('prototype').replace(/__name__/g, index);
+
+//   // je récupère le champs d'adresse
+  
+  
+//   //console.log(proto);
+
+//   // J'injecte ce code dans la div
+
+//   $('#owner_profile_locations').append(proto);
+
+//   $('#locations-counter').val(index + 1); 
+
+//   // Ajout du boutton supprimer
+
+//   handleDeleteButtons();
+// });
+
+
+// //fonction de supprimer une ligne
+
+// function handleDeleteButtons() {
+//   $('button[data-action="delete"]').click(function(){
+//       const target = this.dataset.target;
+//       //console.log(target);
+//       $(target).remove();
+//   })
+// }
+
+// handleDeleteButtons();
+
 
 
 

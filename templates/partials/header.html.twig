@@ -27,7 +27,7 @@
           <a class="nav-link dropdown-toggle {% if current_menu is defined and current_menu == 'manager' or current_menu is defined and current_menu == 'mymanager' %}active{% endif %}" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-users"></i>&nbsp;Contacts</a>
           <div class="dropdown-menu" style="">
             <a class="dropdown-item {% if current_menu is defined and current_menu == 'contacts' %}active{% endif %}" href="{{ path('owner.contact.index') }}">Mes contacts</a>
-            <a class="dropdown-item {% if current_menu is defined and current_menu == 'contacts' %}active{% endif %}" href="{{ path('address_index') }}">Mes adresses</a>
+            <a class="dropdown-item {% if current_menu is defined and current_menu == 'contacts' %}active{% endif %}" href="#">Autre ...</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#">Autres ...</a>
           </div>

@@ -56,7 +56,7 @@
             <p class="text-center">{{ property.address }}</p>
             </div>
             <div class="col-md-4 h6 text-info font-weight-bold">
-                Gestionnaire : {{ property.manager.genderType}} {{ property.manager.fullName}}
+                Gestionnaire : {{ property.manager.profile.genderType}} {{ property.manager.profile.fullName}}
                 <hr>
                 {% if property.documents|length > 0 %}
                     <p>Document(s)  : {{ property.documents|length }} </p>

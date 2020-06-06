@@ -36,7 +36,7 @@ class Company
     private $telephone;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="company")
+     * @ORM\OneToMany(targetEntity="App\Entity\Profile", mappedBy="company")
      */
     private $member;
 
@@ -94,14 +94,14 @@ class Company
     }
 
     /**
-     * @return Collection|User[]
+     * @return Collection|Profile[]
      */
     public function getMember(): Collection
     {
         return $this->member;
     }
 
-    public function addMember(User $member): self
+    public function addMember(Profile $member): self
     {
         if (!$this->member->contains($member)) {
             $this->member[] = $member;
@@ -111,7 +111,7 @@ class Company
         return $this;
     }
 
-    public function removeMember(User $member): self
+    public function removeMember(Profile $member): self
     {
         if ($this->member->contains($member)) {
             $this->member->removeElement($member);

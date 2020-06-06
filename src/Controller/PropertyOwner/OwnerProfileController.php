@@ -4,6 +4,7 @@ namespace App\Controller\PropertyOwner;
 
 use Faker\Factory;
 use App\Entity\Profile;
+use App\Entity\Location;
 use App\Form\AccountType;
 use App\Form\ProfileType;
 use App\Entity\PasswordUpdate;
@@ -45,12 +46,18 @@ class OwnerProfileController extends AbstractController
         
         $profile = new Profile();
         $creator = $this->getUser()->getId();
-
+  
         $form = $this->createForm(OwnerProfileType::class, $profile);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid() ){
 
+            foreach($profile->getLocations() as $location) {
+                $location->setProfile($profile);
+                $location->setCreator($creator);
+                $manager->persist($location);
+            }
+            
             $profile->setCreator($creator);
 
             $manager->persist($profile);
@@ -76,12 +83,22 @@ class OwnerProfileController extends AbstractController
      * @Route("owner/contact/{id}/edition", name="owner.contact.edit", methods={"GET","POST"})
      * 
      */
-    public function edit(Request $request, Profile $profile): Response
+    public function edit(Request $request, Profile $profile, EntityManagerInterface $manager): Response
     {
+        $creator = $this->getUser()->getId();
+        
         $form = $this->createForm(OwnerProfileType::class, $profile);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            
+            foreach($profile->getLocations() as $location) {
+                $location->setProfile($profile);
+                $location->setCreator($creator);
+                $manager->persist($location);
+            }
+            
             $this->getDoctrine()->getManager()->flush();
 
             $this->addFlash(
@@ -110,6 +127,11 @@ class OwnerProfileController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($profile);
             $entityManager->flush();
+
+            $this->addFlash(
+                'success',
+                "Le contact a bien été supprimé !"
+            );
         }
         return $this->redirectToRoute('owner.contact.index');
     }

@@ -12,7 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="App\Repository\AddressRepository")
  * 
  */
-class Address
+class Location
 {
     /**
      * @ORM\Id()
@@ -34,27 +34,30 @@ class Address
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Veuillez renseigner un code postal.")
+     * @Assert\Regex("/^[0-9]{5}$/", message="Le format doit être un nombre de 5 chiffres")
      */
     private $postalCode;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Veuillez renseigner une ville.")
      */
     private $city;
 
     /**
-     * @ORM\Column(type="float", scale=6, precision=8)
+     * @ORM\Column(type="float", scale=6, precision=8, nullable=true)
      */
     private $lat;
 
     /**
-     * @ORM\Column(type="float", scale=6, precision=9)
+     * @ORM\Column(type="float", scale=6, precision=9, nullable=true)
      */
     private $lng;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * 
+     * @Assert\NotBlank(message="Veuillez renseigner un nom pour cette adresse.")
      */
     private $name;
 
@@ -63,6 +66,13 @@ class Address
      * @ORM\Column(type="string", length=255)
      */
     private $creator;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Profile", inversedBy="locations")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $profile;
+
 
     public function getId(): ?int
     {
@@ -165,7 +175,19 @@ class Address
         return $this;
     }
 
-   
+    public function getProfile(): ?Profile
+    {
+        return $this->profile;
+    }
 
-   
+    public function setProfile(?Profile $profile): self
+    {
+        $this->profile = $profile;
+
+        return $this;
+    }
+
+
+
+  
 }
