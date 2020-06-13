@@ -23,23 +23,33 @@
 
 {% block javascript %}
 
-     {{ parent() }}
+    {{ parent() }}
 
-    {# <script>
-    let checkbox = document.getElementById("owner_account_companyRelated");
-    let champ = document.getElementById("societe");
-    let champ2 = document.getElementById("societeHelp");
+      <script>
+    let checkbox = document.getElementById("owner_profile_companyRelated");
+    let champ = document.getElementById("owner_profile_company");
+   // let champ2 = document.getElementById("societeHelp");
     
+    function isChecked () {
+        if (checkbox.checked){
+            champ.style.display = "block";
+        } else {
+            champ.style.display = "none";
+        }
+    }
+
+    isChecked();
+
     checkbox.addEventListener("change", function () {
     if (this.checked) {
         champ.style.display = "block";
-        champ2.style.display = "block";
+        //champ2.style.display = "block";
     }
     else {
         champ.style.display = "none";
-        champ2.style.display = "none";
+        //champ2.style.display = "none";
     }
     });
-    </script> #}
+    </script>
 
 {% endblock %}

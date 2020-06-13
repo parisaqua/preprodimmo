@@ -49,16 +49,16 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col"><i class="fas fa-expand h3"></i></div>
+                <div class="col-2 text-left"><i class="fas fa-expand h3"></i></div>
                 <div class="col-10 text-left"> <h4>{{ property.surface | number_format(2,',', ' ') }} m²</h4></div>
             </div>
             <div class="row">
-                <div class="col"><i class="fas fa-door-open h3"></i></div>
+                <div class="col-2 text-left"><i class="fas fa-door-open h3"></i></div>
                 <div class="col-10 text-left"> <h4>{% if property.rooms == 1 %}Studio{% else %}{{ property.rooms }} pièces{% endif %}</h4></div>
             </div>
             {% if property.bedrooms > 0 %}
                 <div class="row">
-                    <div class="col"><i class="fas fa-bed h3"></i></i></div>
+                    <div class="col-2 text-left"><i class="fas fa-bed h3"></i></i></div>
                     <div class="col-10 text-left"> <h4>{{ property.bedrooms }} chambre{% if property.bedrooms > 1 %}s{% endif %}</h4></div>
                 </div>
             {% endif %}
