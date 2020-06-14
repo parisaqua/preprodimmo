@@ -111,7 +111,8 @@ class OwnerProfileType extends AbstractType
                 'choice_label' => 'name',
                 'attr' => [
                     'class' => 'societe',
-                ]
+                ],
+                
                 // 'query_builder' => function (EntityRepository $er) {
                 //     return $er->createQueryBuilder('u')
                 //         ->andWhere('u.roles LIKE :role')

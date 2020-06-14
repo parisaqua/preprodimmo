@@ -22,10 +22,10 @@
                            
                             {% if company.member|length > 0 %}
                              <div class="col-md-12">Collaborateurs : </div>
-                                {% for user in company.member %}
+                                {% for profile in company.member %}
                                     {# {{user.fullName}} #}
                                     <div class="col-md-6">
-                                        {% include 'owner/user/_user.card.html.twig' %}
+                                        {% include 'owner/contact/_contact.card.html.twig' %}
                                     </div>
                                 {% endfor %}
                             {% else %}

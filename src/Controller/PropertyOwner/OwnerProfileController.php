@@ -52,6 +52,10 @@ class OwnerProfileController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid() ){
 
+            if($profile->getCompanyRelated() == false) {
+                $profile->setCompany(null);
+            }
+            
             foreach($profile->getLocations() as $location) {
                 $location->setProfile($profile);
                 $location->setCreator($creator);
@@ -92,6 +96,9 @@ class OwnerProfileController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            if($profile->getCompanyRelated() == false) {
+                $profile->setCompany(null);
+            }
             
             foreach($profile->getLocations() as $location) {
                 $location->setProfile($profile);

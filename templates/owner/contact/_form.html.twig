@@ -19,7 +19,11 @@
             </div>
             <div class="row align-items-center">
                 <div class="col pt-2">{{ form_row(form.companyRelated) }}</div>
-                <div class="col pt-2"> <div id="company"> {{ form_row(form.company, {"attr": {"class": "selectpicker show-tick", "title": "Choisissez ..."}} ) }}</div></div>  {# , {"attr": {"class": "selectpicker show-tick", "title": "Choisissez ..."}} #}
+                <div class="col pt-2"> <div id="company"> {{ form_row(form.company, {"attr": {"class": "selectpicker show-tick",
+                
+                "required": "required",
+                "data-live-search": "true"
+                }} ) }} </div></div>  {# , {"attr": {"class": "selectpicker show-tick", "title": "Choisissez ..."}} #}
             </div>
         </div>
         <div class="col-md-3">
