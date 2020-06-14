@@ -35,8 +35,7 @@
 
     <script>
     let checkbox = document.getElementById("owner_profile_companyRelated");
-    let champ = document.getElementById("owner_profile_company");
-   // let champ2 = document.getElementById("societeHelp");
+    let champ = document.getElementById("company");
     
     function isChecked () {
         if (checkbox.checked){
@@ -50,12 +49,10 @@
 
     checkbox.addEventListener("change", function () {
     if (this.checked) {
-        champ.style.display = "block";
-        //champ2.style.display = "block";
+        champ.style.cssText = "display: block !important;"; 
     }
     else {
-        champ.style.display = "none";
-        //champ2.style.display = "none";
+        champ.style.cssText = "display: none !important;"; 
     }
     });
     </script>
