@@ -425,3 +425,7 @@ a.buttonsub {
     width: 100%;
 }
 
+.highlighted {
+    background-color: #36a41e;
+}
+
